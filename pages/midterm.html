@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Midterm Prep · ME 332</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+</head>
+<!-- data-page must match the page's id in assets/js/site.js -->
+<body data-page="midterm">
+  <header class="topbar">
+    <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
+    <div class="spacer"></div>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
+  </header>
+
+  <div class="layout">
+    <nav id="site-nav" class="sidebar"></nav>
+
+    <main>
+      <div class="content">
+        <h1>Midterm Prep</h1>
+        <p class="lead">Everything for the Ch 7, 8, 9 and 11 midterm: what the HW tested, a solving checklist, common mistakes, and a full practice exam.</p>
+
+        <p class="jump">Jump to: <a href="#map">HW problem map</a><a href="#method">Solving checklist</a><a href="#mistakes">Common mistakes</a><a href="#partA">Practice exam: short</a><a href="#partB">Practice exam: long</a></p>
+
+        <div class="callout">
+          <strong>How to use this page</strong>
+          Your professor said the HW problems from Chapters 7, 8, 9 and 11 are what matters. The problem map below sorts every assigned problem by the <em>method</em> it tests and links to practice problems that use the same method with new numbers. Work the practice midterm under time pressure first, then check the solutions.
+        </div>
+
+        <h2 id="map">HW Problem Map</h2>
+        <p>⚑ = your Ch 6 &amp; 7 HW doc says 7.68 and 7.79 are on <strong>exam 2, not exam 1</strong>. Check which exam this is.</p>
+        <table>
+          <tr><th>HW</th><th>What it tests</th><th>Key tools</th><th>Practice here</th></tr>
+          <tr><td>6.29</td><td>Similarity scaling of $\bar h$ with $V$ and $L$</td><td>$\overline{Nu} = CRe^mPr^n \Rightarrow \bar h \propto V^mL^{m-1}$</td><td><a href="ch07.html#short">Ch 7 S5</a></td></tr>
+          <tr><td>7.20</td><td>Turbulent plate + solar absorption + emission + conduction through a composite roof</td><td>$0.037Re^{4/5}Pr^{1/3}$, surface energy balance, resistances</td><td><a href="ch07.html#long">Ch 7 L1</a>, <a href="#partB">M1</a></td></tr>
+          <tr><td>7.24</td><td>Plate cooled in parallel flow: $q$ and $dT/dt$</td><td>Flat plate correlation, $dT/dt = -q/(\rho Vc)$</td><td><a href="#partB">M1</a>, <a href="#partA">A2</a></td></tr>
+          <tr><td>7.26</td><td>Heat removal per unit width, turbulent plate (fin)</td><td>$q' = \bar hL\Delta T$, both sides</td><td><a href="ch07.html#long">Ch 7 L1(d)</a></td></tr>
+          <tr><td>7.41</td><td>Unheated starting length: local and average $h$</td><td>Eqs. 7.42, 7.44</td><td><a href="ch07.html#long">Ch 7 L2</a></td></tr>
+          <tr><td>7.68 ⚑</td><td>Cylinder in cross flow, then insulated</td><td>Churchill–Bernstein, $R'_{ins} + R'_{conv}$</td><td><a href="ch07.html#long">Ch 7 L3</a>, <a href="#partB">M2</a></td></tr>
+          <tr><td>7.79 ⚑</td><td>Sphere: steady temperature with convection in, radiation out</td><td>Whitaker, $\bar h(T_\infty - T_s) = \varepsilon\sigma(T_s^4 - T_{sur}^4)$</td><td><a href="ch07.html#long">Ch 7 L4</a></td></tr>
+          <tr><td>8.18</td><td>Uniform $q_s''$ and linearly varying $q_s''(x)$; sketch $T_m$, $T_s$</td><td>$T_m(x)$ by integration, $T_s = T_m + q''/h$</td><td><a href="ch08.html#long">Ch 8 L1, L4</a></td></tr>
+          <tr><td>8.19</td><td>Constant $T_s$ tube: heat rate</td><td>Exponential $T_m$, LMTD</td><td><a href="ch08.html#long">Ch 8 L2</a></td></tr>
+          <tr><td>8.23</td><td>Sinusoidal flux: derive $q$, $T_{m,o}$, $T_s(x)$, max $T_s$</td><td>Integrate, set $dT_s/dx = 0$</td><td><a href="ch08.html#long">Ch 8 L4</a></td></tr>
+          <tr><td>8.25</td><td>Engine oil, constant $T_s$ (laminar, long entry)</td><td>Hausen (8.57), $Gz_D$</td><td><a href="#partB">M3</a></td></tr>
+          <tr><td>8.44</td><td>Duct in a cross wind: insulation thickness for a minimum outlet temperature</td><td>$\exp(-UA/\dot mc_p)$, resistance network</td><td><a href="ch08.html#long">Ch 8 L3</a></td></tr>
+          <tr><td>8.49</td><td>Condenser tubes: outlet temperature, property iteration</td><td>Dittus–Boelter, check $\bar T_m$</td><td><a href="ch08.html#long">Ch 8 L2</a></td></tr>
+          <tr><td>8.56</td><td>Cold plates: tube flow (constant $T_s$) + flat plate parallel flow</td><td>Ch 8 + Ch 7 together</td><td><a href="ch08.html#long">Ch 8 L2</a> + <a href="ch07.html#long">Ch 7 L1</a></td></tr>
+          <tr><td>9.9</td><td>Optimum vertical fin spacing; array heat rate</td><td>$S_{opt} \approx 2\delta$, vertical plate $\bar h$</td><td><a href="ch09.html#long">Ch 9 L4</a></td></tr>
+          <tr><td>9.13</td><td>Vertical plate: similarity solution vs. correlation</td><td>$g(Pr)$, eq. 9.27</td><td><a href="ch09.html#long">Ch 9 L1</a></td></tr>
+          <tr><td>9.19</td><td>Window glass: free convection on both sides + radiation</td><td>Set up the balance and iterate for $T$</td><td><a href="ch09.html#long">Ch 9 L1</a></td></tr>
+          <tr><td>9.39</td><td>Measuring $k$ and $\varepsilon$ with a heated horizontal sample</td><td>Hot surface up: $0.54Ra^{1/4}$, $L = A_s/P$</td><td><a href="#partB">M4</a>, <a href="ch09.html#long">Ch 9 L2</a></td></tr>
+          <tr><td>11.17</td><td>Concentric tube: $U$ from $h_i$, $h_o$; outlets in counterflow and parallel flow</td><td>Internal flow + annulus $D_h$, ε–NTU</td><td><a href="#partB">M5</a>, <a href="ch11.html#long">Ch 11 L2</a></td></tr>
+          <tr><td>11.18</td><td>Size with LMTD; fouling after service</td><td>$\Delta T_{lm}$, $R_f'' = 1/U_d - 1/U_c$</td><td><a href="ch11.html#long">Ch 11 L1, L3</a></td></tr>
+          <tr><td>11.20</td><td>Energy balance, identify the arrangement, $U$, $\varepsilon$, $\varepsilon$ as $L \to \infty$</td><td>$T_{c,o} \gt T_{h,o}$ means counterflow</td><td><a href="ch11.html#short">Ch 11 S7</a>, <a href="ch11.html#long">L2</a></td></tr>
+          <tr><td>11.24</td><td>Has fouling occurred?</td><td>$U_{test} = q/(A\Delta T_{lm})$ vs. design</td><td><a href="ch11.html#long">Ch 11 L3</a></td></tr>
+          <tr><td>11.39</td><td>Cross flow, both unmixed: $q$, flow rate, area</td><td>Eq. 11.32 or Fig. 11.14</td><td><a href="ch11.html#long">Ch 11 L4</a></td></tr>
+          <tr><td>11.57</td><td>Counterflow concentric tube with given $h$'s</td><td>$U$ from $h_h$, $h_c$, ε–NTU</td><td><a href="#partB">M5</a></td></tr>
+          <tr><td>11.58</td><td>Shell-and-tube: back out the shell-side $h_o$</td><td>Eq. 11.30b, $1/UA$ network</td><td><a href="#partB">M6</a></td></tr>
+        </table>
+
+        <h2 id="method">Solving Checklist (any convection problem)</h2>
+        <ol>
+          <li><strong>Sketch</strong> it and write Known / Find. Label every temperature.</li>
+          <li><strong>Classify:</strong> external or internal? Forced or free? Which geometry? Plates, cylinders and spheres are Ch 7; tubes and ducts are Ch 8; buoyancy is Ch 9; two fluids are Ch 11.</li>
+          <li><strong>Property temperature:</strong> $T_f$ for external flow and free convection, $\bar T_m$ for internal flow, $T_\infty$ for Zukauskas and Whitaker. Guess if it's unknown.</li>
+          <li><strong>Compute the regime number:</strong> $Re$ (compare with $5\times10^5$ for a plate, 2300 for a tube) or $Ra$ (compare with $10^9$ for a vertical plate).</li>
+          <li><strong>Pick the correlation</strong> and check its validity limits. Get $\overline{Nu}$, then $\bar h = \overline{Nu}\,k/L_c$. Use the right characteristic length ($L$, $D$, $D_h$, $A_s/P$).</li>
+          <li><strong>Energy balance:</strong> $q = \bar hA\Delta T$, plus radiation if a surface is exposed. Use $q = \dot mc_p\Delta T_m$ with the exponential or LMTD for tubes. Use LMTD or ε–NTU for exchangers.</li>
+          <li><strong>Check:</strong> go back and test the assumed temperature, the regime, and whether the answer makes physical sense ($T_{c,o} \lt T_{h,i}$, $\varepsilon \le 1$, $h$ in the expected range).</li>
+        </ol>
+        <table>
+          <tr><th>Typical $h$ (W/m²·K)</th><th>Range</th></tr>
+          <tr><td>Free convection, gases</td><td>2–25</td></tr>
+          <tr><td>Free convection, liquids</td><td>50–1000</td></tr>
+          <tr><td>Forced convection, gases</td><td>25–250</td></tr>
+          <tr><td>Forced convection, liquids</td><td>100–20,000</td></tr>
+        </table>
+
+        <h2 id="mistakes">Common Mistakes</h2>
+        <ul class="two-col">
+          <li>Using °C in $\beta = 1/T$ or in radiation ($T^4$). Always use kelvin.</li>
+          <li>Using laminar correlations without checking $Re$ (or using the mixed one when the problem says "assume turbulent").</li>
+          <li>Forgetting that a plate in parallel flow loses heat from <em>both</em> sides.</li>
+          <li>Measuring $x$ from the start of heating instead of the plate's leading edge (unheated starting length).</li>
+          <li>Multiplying $\bar h$ by the whole plate area when only part of it is heated.</li>
+          <li>Evaluating tube properties at $T_f$ instead of $\bar T_m$, and not iterating.</li>
+          <li>Using the arithmetic mean $\Delta T$ in place of the LMTD.</li>
+          <li>Mixing up $\Delta T_1$ and $\Delta T_2$ for counterflow vs. parallel flow.</li>
+          <li>Using $C_{max}$ in $q_{max}$ or NTU.</li>
+          <li>Dittus–Boelter: $n = 0.4$ for heating and $0.3$ for cooling the fluid.</li>
+          <li>Annulus: $D_h = D_o - D_i$ in $Re$ and $Nu$, but the heat transfer area is still $\pi D_iL$.</li>
+          <li>Horizontal plates: $L = A_s/P$, not the side length.</li>
+          <li>Leaving radiation out when a surface sees large surroundings (it's often as big as free convection).</li>
+          <li>Getting $Re_D = 4\dot m/(\pi D\mu)$ wrong for an annulus. There you use $\dot mD_h/(A_c\mu)$.</li>
+        </ul>
+
+        <h2 id="partA">Practice Midterm, Part A: Short Questions</h2>
+        <p>Aim for about 3 minutes each.</p>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#partA-list">Show all answers</button></div>
+        <div id="partA-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A1</span> Laminar or mixed? <span class="chip">Ch 7</span></p>
+          <p>Air ($\nu = 1.6\times10^{-5}$ m²/s) flows at 5 m/s over a 1.5 m plate. Which correlation do you use for $\bar h$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$Re_L = 5(1.5)/1.6\times10^{-5} = 4.69\times10^5 \lt 5\times10^5$</p>
+            <div class="answer">Laminar over the whole plate: $\overline{Nu}_L = 0.664Re_L^{1/2}Pr^{1/3}$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A2</span> Cooling rate of a plate <span class="chip">Ch 7</span></p>
+          <p>A 5-mm steel plate ($\rho = 7850$ kg/m³, $c = 460$ J/kg·K) at 220°C is cooled on both faces by 20°C air with $\bar h = 20$ W/m²·K. Neglecting radiation, find the initial $dT/dt$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\rho(A\delta)c\,\dfrac{dT}{dt} = -2\bar hA(T - T_\infty)$, so $\dfrac{dT}{dt} = -\dfrac{2(20)(200)}{7850(460)(0.005)}$.</p>
+            <div class="answer">$dT/dt \approx -0.44$ K/s</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A3</span> Unheated starting length bookkeeping <span class="chip">Ch 7</span></p>
+          <p>A 1 m plate is heated only over its last 0.6 m. When you compute $Re_x$ at the trailing edge, what is $x$? What area goes in $q = \bar hA\Delta T$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">$x = 1$ m (from the plate's leading edge, where the velocity boundary layer starts); $A = 0.6W$ (heated part only)</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A4</span> Bigger cylinder <span class="chip">Ch 7</span></p>
+          <p>A cylinder in cross flow has $Re_D \approx 10^4$ (Hilpert $m = 0.618$). If $D$ doubles at the same velocity, by what factor do $\bar h$ and $q'$ change?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\bar h \propto D^{m-1}$ and $q' = \bar h\pi D\Delta T \propto D^m$.</p>
+            <div class="answer">$\bar h$: $2^{-0.382} = 0.77\times$; $q'$: $2^{0.618} = 1.53\times$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A5</span> Fully developed? <span class="chip">Ch 8</span></p>
+          <p>Turbulent water flows through a 15 mm tube 3 m long. Can you use a fully developed correlation for the whole tube?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">Yes. $L/D = 200$, and turbulent entry lengths are about $10D$, so entry effects are small.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A6</span> Constant wall temperature <span class="chip">Ch 8</span></p>
+          <p>$T_s = 100^\circ$C, $T_{m,i} = 20^\circ$C, $\bar hPL/(\dot mc_p) = 0.5$. Find $T_{m,o}$. What if the flow rate is halved (assume $\bar h$ unchanged)?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$T_{m,o} = 100 - 80e^{-0.5} = 51.5^\circ$C. Halving $\dot m$ doubles the exponent: $100 - 80e^{-1} = 70.6^\circ$C.</p>
+            <div class="answer">51.5°C → 70.6°C. In reality $\bar h$ also drops when the flow is halved (turbulent), so the outlet ends up a bit lower.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A7</span> Linearly increasing flux <span class="chip">Ch 8</span></p>
+          <p>For $q_s'' = ax$ with constant $h$, what shapes do $T_m(x)$ and $T_s(x) - T_m(x)$ have?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\dot mc_p\,dT_m/dx = a x P$, so $T_m = T_{m,i} + \dfrac{aP}{2\dot mc_p}x^2$ (a parabola). $T_s - T_m = ax/h$ is linear and grows along the tube, so the hottest wall is at the outlet.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A8</span> Oil entry length <span class="chip">Ch 8</span></p>
+          <p>Oil ($Pr = 1000$) flows at $Re_D = 100$ in a 20 mm tube 10 m long with constant $T_s$. Which correlation do you use?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$x_{fd,t} = 0.05(100)(1000)(0.02) = 100$ m, which is far longer than the tube.</p>
+            <div class="answer">The whole tube is in the thermal entry region. Use Hausen (8.57), not $Nu = 3.66$.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A9</span> Horizontal plate length scale <span class="chip">Ch 9</span></p>
+          <p>A 0.5 m × 0.5 m horizontal hot plate faces up. What characteristic length goes in $Ra_L$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">$L = A_s/P = 0.25/2 = 0.125$ m</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A10</span> Forced, free, or mixed? <span class="chip">Ch 9</span></p>
+          <p>A vertical plate 0.5 m tall is 30 K above the air temperature ($T_f \approx 300$ K, $\nu = 15.89\times10^{-6}$ m²/s). A gentle upward draft of 0.3 m/s flows along it. Which regime is it?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$Gr_L = \dfrac{9.8(1/300)(30)(0.5)^3}{(15.89\times10^{-6})^2} = 4.9\times10^8$ and $Re_L = 0.3(0.5)/15.89\times10^{-6} = 9440$, so $Gr_L/Re_L^2 = 5.4$.</p>
+            <div class="answer">$Gr/Re^2 \approx 5$: buoyancy dominates, but this is close to mixed. Free convection can't be ignored.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A11</span> Quick effectiveness <span class="chip">Ch 11</span></p>
+          <p>A counterflow exchanger has $C_{min} = 500$ W/K, $C_{max} = 1000$ W/K and $UA = 500$ W/K. Inlets are 100°C and 20°C. Find $\varepsilon$ and $q$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$NTU = 1$ and $C_r = 0.5$, so $\varepsilon = \dfrac{1 - e^{-0.5}}{1 - 0.5e^{-0.5}} = 0.565$.</p>
+            <div class="answer">$\varepsilon = 0.565$; $q = 0.565(500)(80) = 22.6$ kW</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">A12</span> Same temperatures, two arrangements <span class="chip">Ch 11</span></p>
+          <p>Hot fluid 80 → 50°C, cold fluid 20 → 40°C. Find $\Delta T_{lm}$ for counterflow and for parallel flow. Which needs less area?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Counterflow: $\Delta T_1 = 80 - 40 = 40$ and $\Delta T_2 = 50 - 20 = 30$, so $\Delta T_{lm} = 34.8$ K.</p>
+            <p>Parallel: $\Delta T_1 = 80 - 20 = 60$ and $\Delta T_2 = 50 - 40 = 10$, so $\Delta T_{lm} = 27.9$ K.</p>
+            <div class="answer">Counterflow (larger $\Delta T_{lm}$ means less area for the same $q$ and $U$): about 20% less</div>
+          </div></details>
+        </div>
+        </div>
+
+        <h2 id="partB">Practice Midterm, Part B: Long Problems</h2>
+        <p>Aim for 20–25 minutes each. Look up air in Table A.4, water in A.6 and oil in A.5. The values used are in each solution.</p>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#partB-list">Show all solutions</button></div>
+        <div id="partB-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">M1</span> Hot steel sheet cooled by air and radiation <span class="chip">Ch 7</span> <span class="chip">like 7.24, 7.20</span></p>
+          <p>A steel sheet 0.8 m × 0.8 m × 4 mm ($\rho = 7830$ kg/m³, $c = 560$ J/kg·K, $\varepsilon = 0.7$) leaves a furnace at 400°C. Air at 25°C blows over both faces in parallel flow at 8 m/s. The surroundings are at 25°C.</p>
+          <ol type="a">
+            <li>Find the convection coefficient and the initial heat loss by convection and by radiation.</li>
+            <li>Find the initial cooling rate $dT/dt$.</li>
+            <li>Which mode dominates? Will that change as the sheet cools?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>$T_f = (673 + 298)/2 = 485.5$ K: $\nu = 36.93\times10^{-6}$ m²/s, $k = 0.0397$ W/m·K, $Pr = 0.685$.</p>
+            <h4>(a) Coefficient and heat loss</h4>
+            <p>$Re_L = 8(0.8)/36.93\times10^{-6} = 1.73\times10^5$, so laminar.</p>
+            $$\overline{Nu}_L = 0.664(1.73\times10^5)^{1/2}(0.685)^{1/3} = 244 \Rightarrow \bar h = \frac{244(0.0397)}{0.8} = 12.1\ \text{W/m}^2\text{K}$$
+            <p>Both faces: $A = 2(0.64) = 1.28$ m².</p>
+            <p>Convection: $q_{conv} = 12.1(1.28)(375) = 5.80$ kW</p>
+            <p>Radiation: $q_{rad} = 0.7(5.67\times10^{-8})(1.28)(673^4 - 298^4) = 10.0$ kW</p>
+            <h4>(b) Cooling rate</h4>
+            <p>Mass: $m = 7830(0.64)(0.004) = 20.0$ kg</p>
+            $$\frac{dT}{dt} = -\frac{q_{conv} + q_{rad}}{mc} = -\frac{15{,}830}{20.0(560)} = -1.41\ \text{K/s}$$
+            <div class="answer">$\bar h = 12.1$ W/m²·K; $q_{conv} = 5.8$ kW, $q_{rad} = 10.0$ kW; $dT/dt \approx -1.4$ K/s; radiation dominates at first, but since it scales with $T^4$ it falls off faster, and convection takes over at lower temperatures</div>
+            <p><em>Comment:</em> lumped capacitance holds because $Bi = \bar h(\delta/2)/k_{steel} \approx 10^{-3}$.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">M2</span> Heating wire: find the surface temperature <span class="chip">Ch 7</span> <span class="chip">cylinder ⚑</span></p>
+          <p>An electric wire of diameter 3 mm dissipates 100 W per meter. Air at 20°C flows across it at 10 m/s. Find the wire's surface temperature. (Properties depend on the answer, so iterate.)</p>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Pass 1: guess $T_s = 60^\circ$C, so $T_f = 313$ K</h4>
+            <p>$\nu = 17.20\times10^{-6}$, $k = 0.0273$, $Pr = 0.705$</p>
+            <p>$Re_D = 10(0.003)/17.20\times10^{-6} = 1744$. Churchill–Bernstein gives $\overline{Nu}_D = 21.2$, so $\bar h = 193$ W/m²·K.</p>
+            <p>$T_s = T_\infty + \dfrac{q'}{\bar h\pi D} = 20 + \dfrac{100}{193\pi(0.003)} = 75.0^\circ$C</p>
+            <h4>Pass 2: $T_f = (75 + 20)/2 = 47.5^\circ$C $\approx 320.5$ K</h4>
+            <p>$\nu = 17.95\times10^{-6}$, $k = 0.0278$, $Pr = 0.704$</p>
+            <p>$Re_D = 1671$, $\overline{Nu}_D = 20.7$, $\bar h = 192$ W/m²·K, so $T_s = 75.2^\circ$C.</p>
+            <div class="answer">$T_s \approx 75^\circ$C (converged after one update)</div>
+            <p><em>Comment:</em> $\bar h$ barely changes with property temperature for gases, so one iteration is usually enough. Say so on the exam.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">M3</span> Engine oil heated in a tube (laminar entry) <span class="chip">Ch 8</span> <span class="chip">like 8.25</span></p>
+          <p>Engine oil at 0.1 kg/s enters a 25-mm-diameter, 10-m-long tube at 30°C. The tube wall is held at 110°C.</p>
+          <ol type="a">
+            <li>Is the flow laminar? Is it thermally fully developed?</li>
+            <li>Find the outlet temperature and heat rate.</li>
+            <li>If the flow rate were raised to 0.4 kg/s, would $q$ go up or down? Would $T_{m,o}$?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Pass 1: guess $T_{m,o} \approx 60^\circ$C, so $\bar T_m \approx 320$ K</h4>
+            <p>$c_p = 1993$, $\mu = 0.141$, $k = 0.143$, $Pr = 1965$. This gives $Re_D = 36$, $\overline{Nu}_D = 8.9$ and $T_{m,o} = 44.5^\circ$C, so the guess was too high.</p>
+            <h4>Pass 2: $\bar T_m \approx 37^\circ$C $\approx 310$ K</h4>
+            <p>$c_p = 1951$ J/kg·K, $\mu = 0.253$ N·s/m², $k = 0.145$ W/m·K, $Pr = 3400$</p>
+            <h4>(a) Regime and entry length</h4>
+            <p>$Re_D = \dfrac{4(0.1)}{\pi(0.025)(0.253)} = 20.1$, very laminar.</p>
+            <p>$x_{fd,h} = 0.05Re_DD = 0.025$ m, so the velocity profile develops almost immediately. But $x_{fd,t} = 0.05Re_DPr\,D = 86$ m $\gg 10$ m: the tube is entirely in the thermal entry region. That calls for Hausen.</p>
+            <h4>(b) Outlet temperature and heat rate</h4>
+            $$Gz_D = \frac{D}{L}Re_DPr = \frac{0.025}{10}(20.1)(3400) = 171$$
+            $$\overline{Nu}_D = 3.66 + \frac{0.0668(171)}{1 + 0.04(171)^{2/3}} = 8.78 \Rightarrow \bar h = \frac{8.78(0.145)}{0.025} = 50.9\ \text{W/m}^2\text{K}$$
+            $$T_{m,o} = 110 - 80\exp\left[-\frac{50.9\pi(0.025)(10)}{0.1(1951)}\right] = 110 - 80e^{-0.205} = 44.8^\circ\text{C}$$
+            <p>$q = 0.1(1951)(44.8 - 30) = 2.89$ kW</p>
+            <h4>(c) Four times the flow rate</h4>
+            <p>$Gz$ rises to 684, giving $\overline{Nu} = 14.8$, $\bar h = 86$ W/m²·K and $T_{m,o} = 36.6^\circ$C. Then $q = 0.4(1951)(6.6) = 5.2$ kW.</p>
+            <div class="answer">(a) laminar ($Re \approx 20$), with the whole tube in the thermal entry region; (b) $T_{m,o} \approx 45^\circ$C, $q \approx 2.9$ kW; (c) $q$ rises (to about 5.2 kW) but $T_{m,o}$ falls (to about 37°C)</div>
+            <p><em>Comment:</em> this trade-off is exactly what HW 8.25(b) asks you to explain. More flow means a higher $h$ and a larger average $\Delta T$, but less time in the tube for each kilogram of oil.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">M4</span> Measuring $k$ and $\varepsilon$ <span class="chip">Ch 9</span> <span class="chip">like 9.39</span></p>
+          <p>A sample 20 mm thick with a 0.2 m × 0.2 m square face sits on a heater. The sides and bottom are insulated. The top face is exposed to quiescent air and large surroundings, both at 20°C. At steady state with 32 W of heater power, the bottom of the sample is at 120°C and the top at 80°C. Find the sample's thermal conductivity and its top-surface emissivity.</p>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Conduction through the sample</h4>
+            <p>All of the heater power conducts through the sample:</p>
+            $$k = \frac{P\,t}{A(T_1 - T_2)} = \frac{32(0.02)}{0.04(40)} = 0.40\ \text{W/m}\cdot\text{K}$$
+            <h4>Free convection from the top (hot surface facing up)</h4>
+            <p>$L = A_s/P = 0.04/0.8 = 0.05$ m. Properties at $T_f = 50^\circ$C (323 K): $\nu = 18.20\times10^{-6}$, $\alpha = 25.9\times10^{-6}$, $k = 0.0280$, $Pr = 0.704$.</p>
+            $$Ra_L = \frac{9.8(1/323)(60)(0.05)^3}{(18.20\times10^{-6})(25.9\times10^{-6})} = 4.83\times10^5$$
+            <p>$\overline{Nu}_L = 0.54Ra_L^{1/4} = 14.2$, so $\bar h = 14.2(0.028)/0.05 = 7.97$ W/m²·K.</p>
+            <p>$q_{conv} = 7.97(0.04)(60) = 19.1$ W</p>
+            <h4>Radiation gets the rest</h4>
+            <p>$q_{rad} = 32 - 19.1 = 12.9$ W</p>
+            $$\varepsilon = \frac{q_{rad}}{\sigma A(T_2^4 - T_{sur}^4)} = \frac{12.9}{5.67\times10^{-8}(0.04)(353^4 - 293^4)} = \frac{12.9}{18.5}$$
+            <div class="answer">$k = 0.40$ W/m·K; $\varepsilon \approx 0.70$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">M5</span> Concentric tube exchanger from scratch <span class="chip">Ch 8 + 11</span> <span class="chip">like 11.17, 11.57</span></p>
+          <p>A concentric tube exchanger is 6 m long. The inner tube is thin-walled with $D_i = 20$ mm; the outer tube has $D_o = 40$ mm and is insulated outside. Cold water (0.1 kg/s, 15°C) flows in the inner tube. Hot water (0.15 kg/s, 80°C) flows in the annulus.</p>
+          <ol type="a">
+            <li>Find $h$ for each stream and the overall $U$. Assume fully developed flow; evaluate properties at about 30°C (cold) and 70°C (hot).</li>
+            <li>Find the outlet temperatures and $q$ for counterflow.</li>
+            <li>Repeat (b) for parallel flow.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>Cold water (303 K): $c_p = 4178$, $\mu = 803\times10^{-6}$, $k = 0.617$, $Pr = 5.45$</p>
+            <p>Hot water (343 K): $c_p = 4190$, $\mu = 401\times10^{-6}$, $k = 0.662$, $Pr = 2.53$</p>
+            <h4>(a) Inner tube</h4>
+            <p>$Re_D = \dfrac{4(0.1)}{\pi(0.02)(803\times10^{-6})} = 7930$, turbulent but below $10^4$, so use Gnielinski: $f = (0.790\ln7930 - 1.64)^{-2} = 0.0336$, giving $Nu_D = 58.2$ and $h_c = 58.2(0.617)/0.02 = 1800$ W/m²·K.</p>
+            <h4>(a) Annulus</h4>
+            <p>$D_h = D_o - D_i = 0.02$ m and $A_c = \frac{\pi}{4}(0.04^2 - 0.02^2) = 9.42\times10^{-4}$ m².</p>
+            <p>$Re_{D_h} = \dfrac{\dot mD_h}{A_c\mu} = \dfrac{0.15(0.02)}{9.42\times10^{-4}(401\times10^{-6})} = 7940$. Gnielinski with $D_h$ (an approximation for turbulent annuli) gives $Nu = 43.3$, so $h_h = 43.3(0.662)/0.02 = 1430$ W/m²·K.</p>
+            <h4>(a) Overall coefficient</h4>
+            <p>$U = (1/1800 + 1/1430)^{-1} = 797$ W/m²·K</p>
+            <p>$A = \pi D_iL = 0.377$ m², so $UA = 300$ W/K</p>
+            <h4>(b) Counterflow</h4>
+            <p>$C_c = 418$ W/K ($= C_{min}$) and $C_h = 629$ W/K, so $C_r = 0.665$ and $NTU = 300/418 = 0.719$.</p>
+            <p>$\varepsilon_{CF} = 0.448$, so $q = 0.448(418)(65) = 12.2$ kW.</p>
+            <p>$T_{c,o} = 15 + 12200/418 = 44.2^\circ$C and $T_{h,o} = 80 - 12200/629 = 60.6^\circ$C.</p>
+            <h4>(c) Parallel flow</h4>
+            <p>$\varepsilon_{PF} = 0.419$, so $q = 11.4$ kW, $T_{c,o} = 42.2^\circ$C and $T_{h,o} = 61.9^\circ$C.</p>
+            <p>Check property temperatures: $\bar T_c = (15 + 44)/2 \approx 30^\circ$C ✓ and $\bar T_h = (80 + 61)/2 \approx 70^\circ$C ✓</p>
+            <div class="answer">$h_c \approx 1800$, $h_h \approx 1430$, $U \approx 800$ W/m²·K; counterflow: $q = 12.2$ kW, cold out at 44.2°C, hot out at 60.6°C; parallel: $q = 11.4$ kW, cold out at 42.2°C, hot out at 61.9°C</div>
+            <p><em>Comment:</em> at $NTU \approx 0.7$ the two arrangements are close (7% apart). The counterflow advantage grows with NTU.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">M6</span> Shell-and-tube: back out the shell-side coefficient <span class="chip">Ch 11</span> <span class="chip">like 11.58</span></p>
+          <p>A shell-and-tube exchanger has one shell pass and 8 tube passes of a single copper tube ($D_i = 20$ mm, $D_o = 24$ mm, 3 m per pass, $k = 400$ W/m·K). Hot water at 0.25 kg/s is cooled from 90°C to 50°C in the tube. Oil ($\dot m = 0.8$ kg/s, $c_p = 2100$ J/kg·K) on the shell side enters at 15°C. Find the oil outlet temperature, $UA$, and the shell-side convection coefficient $h_o$.</p>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Energy balance</h4>
+            <p>$C_h = 0.25(4195) = 1049$ W/K ($= C_{min}$) and $C_c = 1680$ W/K.</p>
+            <p>$q = 1049(40) = 41.95$ kW, so $T_{c,o} = 15 + 41950/1680 = 40.0^\circ$C.</p>
+            <h4>ε–NTU for one shell pass</h4>
+            <p>$C_r = 0.624$ and $\varepsilon = 41950/[1049(75)] = 0.533$.</p>
+            $$E = \frac{2/\varepsilon - (1 + C_r)}{(1 + C_r^2)^{1/2}} = 1.803,\qquad NTU = -(1 + C_r^2)^{-1/2}\ln\frac{E - 1}{E + 1} = 1.060$$
+            <p>$UA = 1.060(1049) = 1112$ W/K</p>
+            <h4>Tube-side coefficient</h4>
+            <p>Water at about 70°C: $\mu = 401\times10^{-6}$, $k = 0.662$, $Pr = 2.53$.</p>
+            <p>$Re_D = \dfrac{4(0.25)}{\pi(0.02)(401\times10^{-6})} = 39{,}700$. Dittus–Boelter with $n = 0.3$ (water is cooling) gives $Nu = 145$, so $h_i = 4800$ W/m²·K.</p>
+            <h4>Resistance network</h4>
+            <p>Total tube length is 24 m, so $A_i = \pi(0.02)(24) = 1.508$ m² and $A_o = \pi(0.024)(24) = 1.810$ m².</p>
+            $$\frac{1}{UA} = \frac{1}{h_iA_i} + \frac{\ln(D_o/D_i)}{2\pi kL} + \frac{1}{h_oA_o}$$
+            $$8.99\times10^{-4} = 1.38\times10^{-4} + 3.0\times10^{-6} + \frac{1}{h_o(1.810)}$$
+            <div class="answer">$T_{c,o} = 40^\circ$C; $UA \approx 1110$ W/K; $h_o \approx 730$ W/m²·K</div>
+            <p><em>Check with LMTD:</em> $\Delta T_{lm,CF} = 42.1$ K, so $F = q/(UA\,\Delta T_{lm,CF}) = 0.90$. That's consistent with Fig. 11.10 for $P = 0.33$, $R = 1.6$. The wall resistance is negligible, and the shell side controls.</p>
+          </div></details>
+        </div>
+        </div>
+
+        <footer>ME 332 · Oregon State University · Personal study notes</footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

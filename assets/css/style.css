@@ -39,7 +39,10 @@ a { color: var(--accent); }
   background: var(--panel); border-bottom: 1px solid var(--border);
 }
 .brand { font-weight: 700; color: var(--text); text-decoration: none; }
+.brand { white-space: nowrap; }
 .brand span { color: var(--accent); }
+.brand span.brand-sub { color: inherit; }
+#theme-toggle { white-space: nowrap; }
 .spacer { flex: 1; }
 .icon-btn {
   background: none; border: 1px solid var(--border); border-radius: 8px;
@@ -96,16 +99,48 @@ h3 { margin-top: 1.6em; }
 }
 .eq .label { font-size: 13px; color: var(--muted); }
 
-details.problem {
+/* Practice problems: statement always visible, solution behind a toggle */
+.problem {
   border: 1px solid var(--border); border-radius: var(--radius);
-  background: var(--panel); margin: 16px 0; padding: 0 16px;
+  background: var(--panel); margin: 16px 0; padding: 14px 18px;
 }
-details.problem > summary {
-  cursor: pointer; padding: 12px 0; font-weight: 600; list-style: none;
+.problem > h3, .problem > .q-title { margin: 0 0 6px; font-size: 1.02rem; }
+.problem p { margin: 6px 0; }
+.problem ol, .problem ul { margin: 6px 0; padding-left: 22px; }
+.qnum {
+  display: inline-block; min-width: 2.2em; margin-right: 6px; padding: 1px 7px;
+  border-radius: 6px; background: var(--accent-soft); color: var(--accent);
+  font-size: 13px; font-weight: 700; text-align: center;
 }
-details.problem > summary::before { content: "▸ "; color: var(--accent); }
-details.problem[open] > summary::before { content: "▾ "; }
-details.problem .solution { border-top: 1px dashed var(--border); padding: 8px 0 12px; }
+.chip {
+  display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--muted); font-size: 12px; font-weight: 600;
+  vertical-align: middle;
+}
+details.reveal { margin-top: 8px; }
+details.reveal > summary {
+  cursor: pointer; color: var(--accent); font-weight: 600; font-size: 14px; list-style: none;
+}
+details.reveal > summary::-webkit-details-marker { display: none; }
+details.reveal > summary::before { content: "▸ "; }
+details.reveal[open] > summary::before { content: "▾ "; }
+details.reveal .solution {
+  border-top: 1px dashed var(--border); margin-top: 8px; padding-top: 6px;
+}
+.solution h4 {
+  margin: 12px 0 2px; font-size: 13px; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--muted);
+}
+.answer {
+  background: var(--accent-soft); border-radius: 8px; padding: 8px 12px; margin: 10px 0 4px;
+}
+.answer::before { content: "Answer  "; font-weight: 700; color: var(--accent); }
+
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 4px; }
+.jump { font-size: 14px; color: var(--muted); }
+.jump a { margin-right: 10px; }
+.two-col { columns: 2 280px; column-gap: 28px; }
+.two-col li { break-inside: avoid; }
 
 table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 15px; }
 th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
@@ -118,8 +153,17 @@ th { background: var(--code-bg); }
 
 footer { margin-top: 60px; color: var(--muted); font-size: 13px; }
 
+/* Long equations and tables scroll inside their own box instead of widening the page */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.katex-display > .katex { white-space: nowrap; }
+
 /* Mobile */
 @media (max-width: 800px) {
+  .topbar { padding: 0 12px; }
+  #theme-toggle { font-size: 13px; padding: 5px 8px; }
+  table { display: block; overflow-x: auto; }
+  .eq { padding: 8px 10px; }
+  .problem { padding: 12px 14px; }
   #menu-toggle { display: inline-block; }
   .sidebar {
     position: fixed; left: 0; top: 56px; z-index: 9;
@@ -127,4 +171,16 @@ footer { margin-top: 60px; color: var(--muted); font-size: 13px; }
   }
   body.nav-open .sidebar { transform: none; box-shadow: 4px 0 20px rgba(0,0,0,.15); }
   main { padding: 24px 18px 60px; }
+}
+
+@media (max-width: 420px) { .brand span.brand-sub { display: none; } }
+
+/* Print: hide chrome, show everything */
+@media print {
+  .topbar, .sidebar, .toolbar, .jump, footer { display: none !important; }
+  main { padding: 0; }
+  .content { max-width: none; }
+  details.reveal { display: none; }
+  .eq, .problem, table { break-inside: avoid; }
+  body { background: #fff; color: #000; font-size: 11pt; }
 }

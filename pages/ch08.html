@@ -13,9 +13,9 @@
 <body data-page="ch08">
   <header class="topbar">
     <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
-    <a class="brand" href="../index.html">ME <span>332</span> Heat Transfer</a>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
     <div class="spacer"></div>
-    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Light / Dark</button>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
   </header>
 
   <div class="layout">
@@ -24,31 +24,257 @@
     <main>
       <div class="content">
         <h1>Ch 8: Internal Flow</h1>
-        <p class="lead">Pipe and duct flow, mean temperature, and entry-length effects.</p>
+        <p class="lead">Flow in tubes and ducts: mean temperature, energy balances, and the two classic surface conditions.</p>
 
-        <h2>Key Concepts</h2>
-        <div class="placeholder">Concept summary coming soon.</div>
+        <p class="jump">Jump to: <a href="#concepts">Concepts</a><a href="#equations">Equations</a><a href="#short">Short questions</a><a href="#long">Long problems</a></p>
 
-        <h2>Key Equations</h2>
-        <!-- Example equation block:
-        <div class="eq">
-          <div class="label">Newton's law of cooling</div>
-          $$q'' = h\,(T_s - T_\infty)$$
+        <h2 id="concepts">Key Concepts</h2>
+        <ul>
+          <li><strong>Internal flow</strong> is confined by the walls, so the boundary layers eventually meet and the flow becomes <em>fully developed</em>. There's no free stream, so the reference temperature is the <strong>mean (bulk) temperature $T_m$</strong>. That's the temperature tied to the fluid's energy transport, $q = \dot m c_p\,\Delta T_m$.</li>
+          <li><strong>Laminar or turbulent?</strong> Use $Re_D = \rho u_m D/\mu = 4\dot m/(\pi D\mu)$. Laminar if $Re_D \lt 2300$. Correlations for turbulent flow typically want $Re_D \gtrsim 10{,}000$ (Dittus–Boelter) or $\gtrsim 3000$ (Gnielinski).</li>
+          <li><strong>Entry lengths:</strong> laminar $x_{fd,h} \approx 0.05Re_D D$ and $x_{fd,t} \approx 0.05Re_D Pr\,D$. For oils ($Pr \gg 1$) the thermal entry length can be longer than the tube. For turbulent flow both are short, about $10D$, so if $L/D \gt 10$ you can usually treat the tube as fully developed.</li>
+          <li><strong>$h$ along the tube:</strong> $h$ is very large at the entrance and decays to the fully developed value. So the average $\overline{Nu}$ over a tube is $\geq$ the fully developed $Nu$.</li>
+          <li><strong>Fully developed laminar flow:</strong> $Nu_D$ is a constant: 4.36 for uniform $q_s''$, 3.66 for uniform $T_s$. It doesn't depend on $Re$ or $Pr$. Then $h = Nu\,k/D$ depends only on $D$, not on the flow rate.</li>
+          <li><strong>Uniform surface heat flux:</strong> $T_m$ rises <em>linearly</em> with $x$. In the fully developed region $T_s - T_m = q_s''/h$ is constant, so $T_s$ is parallel to $T_m$. The maximum wall temperature is at the outlet.</li>
+          <li><strong>Uniform surface temperature:</strong> $T_s - T_m$ decays <em>exponentially</em> with $x$. That's why you use the <strong>log mean temperature difference</strong>, not the arithmetic mean.</li>
+          <li><strong>External fluid instead of a fixed wall temperature:</strong> use the same exponential with $T_s \to T_\infty$ and $\bar h \to \bar U$ (or $1/R_{tot}$).</li>
+          <li><strong>Non-uniform flux $q_s''(x)$:</strong> integrate $\dot m c_p\,dT_m = q_s''(x)\,P\,dx$ to get $T_m(x)$, then $T_s(x) = T_m(x) + q_s''(x)/h$. Find the maximum $T_s$ by setting $dT_s/dx = 0$.</li>
+          <li><strong>Properties</strong> are evaluated at $\bar T_m = (T_{m,i}+T_{m,o})/2$. Since you often don't know $T_{m,o}$ yet, <em>guess, solve, check, iterate</em>.</li>
+          <li><strong>Noncircular ducts:</strong> use the hydraulic diameter $D_h = 4A_c/P$. For an annulus, $D_h = D_o - D_i$.</li>
+        </ul>
+
+        <h2 id="equations">Key Equations</h2>
+        <div class="eq"><div class="label">Flow</div>
+          $$Re_D = \frac{\rho u_m D}{\mu} = \frac{4\dot m}{\pi D\mu},\qquad \dot m = \rho u_m A_c,\qquad D_h = \frac{4A_c}{P}$$</div>
+        <div class="eq"><div class="label">Overall energy balance (any surface condition)</div>
+          $$q = \dot m c_p (T_{m,o} - T_{m,i}),\qquad \frac{dT_m}{dx} = \frac{q_s''(x)P}{\dot m c_p}$$</div>
+        <div class="eq"><div class="label">Uniform surface heat flux</div>
+          $$T_m(x) = T_{m,i} + \frac{q_s''P}{\dot m c_p}x,\qquad q = q_s''PL,\qquad T_s(x) = T_m(x) + \frac{q_s''}{h}$$</div>
+        <div class="eq"><div class="label">Uniform surface temperature</div>
+          $$\frac{T_s - T_{m,o}}{T_s - T_{m,i}} = \exp\left(-\frac{PL\bar h}{\dot m c_p}\right),\qquad q = \bar h A_s \Delta T_{lm},\qquad \Delta T_{lm} = \frac{\Delta T_o - \Delta T_i}{\ln(\Delta T_o/\Delta T_i)}$$</div>
+        <div class="eq"><div class="label">External fluid at $T_\infty$</div>
+          $$\frac{T_\infty - T_{m,o}}{T_\infty - T_{m,i}} = \exp\left(-\frac{\bar U A_s}{\dot m c_p}\right) = \exp\left(-\frac{1}{\dot m c_p R_{tot}}\right),\qquad q = \frac{\Delta T_{lm}}{R_{tot}}$$</div>
+        <div class="eq"><div class="label">Laminar, fully developed (circular tube)</div>
+          $$Nu_D = 4.36\ (\text{uniform } q_s'') \qquad Nu_D = 3.66\ (\text{uniform } T_s) \qquad f = 64/Re_D$$</div>
+        <div class="eq"><div class="label">Laminar thermal entry, uniform $T_s$ (Hausen; also combined entry if $Pr \gtrsim 5$)</div>
+          $$\overline{Nu}_D = 3.66 + \frac{0.0668\,Gz_D}{1 + 0.04\,Gz_D^{2/3}},\qquad Gz_D = \frac{D}{L}Re_D Pr$$</div>
+        <div class="eq"><div class="label">Turbulent, fully developed (properties at $\bar T_m$)</div>
+          $$Nu_D = 0.023Re_D^{4/5}Pr^n\quad (n = 0.4 \text{ heating},\ 0.3 \text{ cooling};\ Re_D \gtrsim 10^4)$$
+          $$Nu_D = \frac{(f/8)(Re_D - 1000)Pr}{1 + 12.7(f/8)^{1/2}(Pr^{2/3}-1)},\quad f = (0.790\ln Re_D - 1.64)^{-2}\quad (3000 \lesssim Re_D \lesssim 5\times10^6)$$</div>
+        <div class="eq"><div class="label">Annulus, laminar fully developed, one surface insulated (Table 8.2)</div>
+          <table>
+            <tr><th>$D_i/D_o$</th><td>0.05</td><td>0.10</td><td>0.25</td><td>0.50</td><td>≈1.00</td></tr>
+            <tr><th>$Nu_i$</th><td>17.46</td><td>11.56</td><td>7.37</td><td>5.74</td><td>4.86</td></tr>
+            <tr><th>$Nu_o$</th><td>4.06</td><td>4.11</td><td>4.23</td><td>4.43</td><td>4.86</td></tr>
+          </table></div>
+
+        <h2 id="short">Short Questions</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>
+        <div id="short-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S1</span> Laminar or turbulent?</p>
+          <p>Water ($\mu = 855\times10^{-6}$ N·s/m²) flows at 0.03 kg/s through a 12 mm tube. Laminar or turbulent?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$Re_D = \dfrac{4\dot m}{\pi D\mu} = \dfrac{4(0.03)}{\pi(0.012)(855\times10^{-6})} = 3720$</p>
+            <div class="answer">$Re_D \approx 3700 \gt 2300$: turbulent (low end, so Gnielinski fits better than Dittus–Boelter)</div>
+          </div></details>
         </div>
-        -->
-        <div class="placeholder">Equations coming soon.</div>
 
-        <h2>Practice Problems</h2>
-        <!-- Example problem with hidden solution:
-        <details class="problem">
-          <summary>Problem 1 — Short title</summary>
-          <p>Problem statement…</p>
-          <div class="solution">
-            <p><strong>Solution:</strong> …</p>
-          </div>
-        </details>
-        -->
-        <div class="placeholder">Practice problems coming soon.</div>
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S2</span> Entry lengths</p>
+          <p>Water ($Pr = 6$) flows at $Re_D = 1000$ in a 10 mm tube. Estimate the hydrodynamic and thermal entry lengths.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$x_{fd,h} = 0.05(1000)(0.01) = 0.5$ m and $x_{fd,t} = x_{fd,h}Pr = 3$ m.</p>
+            <div class="answer">0.5 m and 3 m. Unless the tube is much longer than 3 m, entry effects matter.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S3</span> Laminar: does flow rate matter?</p>
+          <p>In fully developed laminar flow with uniform $T_s$, what happens to $h$ if (a) the flow rate doubles, (b) the diameter is halved?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$Nu_D = 3.66$ is fixed, so $h = 3.66k/D$.</p>
+            <div class="answer">(a) no change; (b) $h$ doubles</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S4</span> Turbulent: does flow rate matter?</p>
+          <p>Same question for turbulent fully developed flow (Dittus–Boelter): what happens to $h$ if $\dot m$ doubles in the same tube?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$h \propto Re_D^{0.8} \propto \dot m^{0.8}$.</p>
+            <div class="answer">$h$ increases by $2^{0.8} = 1.74\times$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S5</span> Sketch: uniform heat flux</p>
+          <p>Sketch $T_m(x)$ and $T_s(x)$ for uniform $q_s''$, including the entrance region. Where is the wall hottest?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$T_m$ is a straight line. Near the inlet $h$ is very large, so $T_s$ starts close to $T_m$. The gap $T_s - T_m = q_s''/h$ grows through the entry region and becomes constant once fully developed, so the two lines are parallel there.</p>
+            <div class="answer">The wall is hottest at the outlet</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S6</span> Why LMTD?</p>
+          <p>For uniform $T_s$, why is $q = \bar hA_s\Delta T_{lm}$ and not $\bar hA_s(T_s - \bar T_m)$ with the arithmetic mean?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\Delta T = T_s - T_m$ decays exponentially with $x$, not linearly. Integrating $\bar h P\Delta T\,dx$ over the length gives exactly the log mean. The arithmetic mean overestimates the average $\Delta T$, badly when $\Delta T_o \ll \Delta T_i$.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S7</span> Exponential approach</p>
+          <p>For a tube with uniform $T_s = 100^\circ$C and $T_{m,i} = 20^\circ$C, $\bar hPL/(\dot mc_p) = 0.5$. Find $T_{m,o}$. What if the tube is twice as long?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$T_{m,o} = 100 - 80e^{-0.5} = 100 - 80(0.607) = 51.5^\circ$C. Twice as long: $100 - 80e^{-1} = 70.6^\circ$C.</p>
+            <div class="answer">51.5°C, then 70.6°C. Doubling length does <em>not</em> double the temperature rise.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S8</span> Hydraulic diameter</p>
+          <p>Find $D_h$ for (a) a 20 mm × 40 mm rectangular duct, (b) an annulus with $D_i = 25$ mm, $D_o = 50$ mm.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>(a) $D_h = 4(20\times40)/(2(20+40)) = 26.7$ mm. (b) $D_h = D_o - D_i = 25$ mm.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S9</span> Dittus–Boelter exponent</p>
+          <p>Engine coolant is cooled as it flows through a radiator tube. Which $n$ do you use in $Nu = 0.023Re^{0.8}Pr^n$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">$n = 0.3$, because the fluid is being cooled ($T_s \lt T_m$). Use 0.4 for heating.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S10</span> Which equation for $q$?</p>
+          <p>Name the two equations that give the total heat rate for (a) uniform $q_s''$ and (b) uniform $T_s$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>(a) $q = q_s''PL$ and $q = \dot mc_p(T_{m,o}-T_{m,i})$. (b) $q = \bar hA_s\Delta T_{lm}$ and $q = \dot mc_p(T_{m,o}-T_{m,i})$.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S11</span> Average vs. fully developed</p>
+          <p>Is the average $\overline{Nu}_D$ for a short tube larger or smaller than the fully developed $Nu_D$? Why?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p><strong>Larger.</strong> In the entry region the boundary layers are thin and $h$ is high, so averaging over the tube includes those high values.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S12</span> Hot gas in a duct, cold outside</p>
+          <p>Hot air flows through a thin metal duct with cold wind outside. Which equation gives the outlet temperature, and what goes in the exponent?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            $$\frac{T_\infty - T_{m,o}}{T_\infty - T_{m,i}} = \exp\left(-\frac{1}{\dot mc_pR_{tot}}\right),\quad R_{tot} = \frac{1}{\bar h_i\pi D_iL} + R_{wall} + R_{ins} + \frac{1}{\bar h_o\pi D_oL}$$
+          </div></details>
+        </div>
+        </div>
+
+        <h2 id="long">Long Problems</h2>
+        <p>Water properties come from Table A.6 and air from Table A.4. The values used are listed in each solution.</p>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#long-list">Show all solutions</button></div>
+        <div id="long-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L1</span> Electrically heated tube (uniform flux) <span class="chip">like 8.18</span></p>
+          <p>Water at 0.2 kg/s is heated from 15°C to 45°C in a 25-mm-diameter tube 8 m long. A heater tape wrapped around the tube supplies a uniform heat flux.</p>
+          <ol type="a">
+            <li>What heat flux is required?</li>
+            <li>Is the flow turbulent? Can you assume fully developed conditions?</li>
+            <li>Estimate the surface temperature at the outlet. Where is the wall hottest?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>Water at $\bar T_m = 30^\circ$C (303 K): $c_p = 4178$ J/kg·K, $\mu = 803\times10^{-6}$ N·s/m². At the outlet, $T_m = 45^\circ$C (318 K): $\mu = 599\times10^{-6}$, $k = 0.638$ W/m·K, $Pr = 3.93$.</p>
+            <h4>(a) Heat flux</h4>
+            $$q = \dot mc_p\Delta T_m = 0.2(4178)(30) = 25{,}070\ \text{W}$$
+            $$q_s'' = \frac{q}{\pi DL} = \frac{25070}{\pi(0.025)(8)} = 39{,}900\ \text{W/m}^2$$
+            <h4>(b) Flow regime</h4>
+            <p>$Re_D = \dfrac{4(0.2)}{\pi(0.025)(803\times10^{-6})} = 12{,}700$, so turbulent. $L/D = 320 \gg 10$, so fully developed conditions are a good assumption over most of the tube.</p>
+            <h4>(c) Outlet wall temperature</h4>
+            <p>Local $h$ at the outlet uses properties at $T_{m,o}$: $Re_D = 4(0.2)/[\pi(0.025)(599\times10^{-6})] = 17{,}000$.</p>
+            $$Nu_D = 0.023(17000)^{0.8}(3.93)^{0.4} = 96.4\ \ (n = 0.4,\ \text{heating}) \Rightarrow h = \frac{96.4(0.638)}{0.025} = 2460\ \text{W/m}^2\text{K}$$
+            $$T_{s,o} = T_{m,o} + \frac{q_s''}{h} = 45 + \frac{39900}{2460} = 61.2^\circ\text{C}$$
+            <div class="answer">$q_s'' \approx 39.9$ kW/m²; $Re_D \approx 12{,}700$, turbulent and fully developed; $T_{s,o} \approx 61^\circ$C, and the wall is hottest at the outlet</div>
+            <p><em>Comment:</em> Gnielinski gives $h = 2600$ W/m²·K and $T_{s,o} = 60.3^\circ$C, so the two agree within the correlations' uncertainty. A fully developed estimate at the inlet gives $T_s \approx 37^\circ$C, but the real inlet wall is cooler because $h$ is higher in the entry region.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L2</span> Constant wall temperature with property iteration <span class="chip">like 8.19, 8.49</span></p>
+          <p>Water at 0.25 kg/s enters a 20-mm-diameter, 4-m-long tube at 20°C. Condensing vapor keeps the wall at 90°C. Find the water outlet temperature and the heat rate. Make sure your property temperature is consistent.</p>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Pass 1: guess $\bar T_m = 40^\circ$C (313 K)</h4>
+            <p>$c_p = 4179$, $\mu = 657\times10^{-6}$, $k = 0.632$, $Pr = 4.34$</p>
+            <p>$Re_D = \dfrac{4(0.25)}{\pi(0.02)(657\times10^{-6})} = 24{,}200$, turbulent. $L/D = 200$, so treat the flow as fully developed.</p>
+            <p>$Nu_D = 0.023(24200)^{0.8}(4.34)^{0.4} = 133$, giving $\bar h = 4205$ W/m²·K.</p>
+            $$\frac{\bar hPL}{\dot mc_p} = \frac{4205\,\pi(0.02)(4)}{0.25(4179)} = 1.012 \Rightarrow T_{m,o} = 90 - 70e^{-1.012} = 64.6^\circ\text{C}$$
+            <h4>Pass 2: update $\bar T_m = (20+64.6)/2 \approx 42.6^\circ$C (316 K)</h4>
+            <p>$\mu = 625\times10^{-6}$, $k = 0.635$, $Pr = 4.11$. This gives $Re_D = 25{,}500$, $Nu_D = 135.5$, $\bar h = 4300$ W/m²·K, and an exponent of 1.035.</p>
+            $$T_{m,o} = 90 - 70e^{-1.035} = 65.1^\circ\text{C},\qquad q = 0.25(4179)(65.1-20) = 47.2\ \text{kW}$$
+            <p>Check with the LMTD: $\Delta T_{lm} = (70-24.9)/\ln(70/24.9) = 43.6$ K, so $q = \bar hA_s\Delta T_{lm} = 4300\pi(0.02)(4)(43.6) = 47.2$ kW ✓</p>
+            <div class="answer">$T_{m,o} \approx 65^\circ$C, $q \approx 47$ kW. The first guess was already within 0.5°C.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L3</span> Hot-air duct in a cross wind <span class="chip">like 8.44</span></p>
+          <p>Hot air (0.15 kg/s, 400 K inlet) flows through a thin-walled, uninsulated metal duct ($D = 0.3$ m, $L = 20$ m). Outside air at 280 K blows across the duct at 5 m/s.</p>
+          <ol type="a">
+            <li>Find the outlet temperature and the heat loss.</li>
+            <li>What thickness of insulation ($k = 0.05$ W/m·K) keeps the outlet at 380 K or above? As a first estimate, neglect the effect of the insulation on the outside convection resistance.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Inside coefficient</h4>
+            <p>Air at $\bar T_m \approx 370$ K (after one iteration): $c_p = 1011$, $\mu = 216.9\times10^{-7}$, $k = 0.0315$, $Pr = 0.696$.</p>
+            <p>$Re_D = \dfrac{4(0.15)}{\pi(0.3)(216.9\times10^{-7})} = 29{,}400$, turbulent. $L/D = 67$.</p>
+            <p>$Nu_D = 0.023Re_D^{0.8}Pr^{0.3} = 77.4$ ($n = 0.3$ because the gas is cooling), giving $\bar h_i = 77.4(0.0315)/0.3 = 8.12$ W/m²·K.</p>
+            <h4>Outside coefficient (cylinder in cross flow)</h4>
+            <p>The duct surface averages about 308 K, so $T_f \approx 294$ K: $\nu = 15.34\times10^{-6}$, $k = 0.0258$, $Pr = 0.709$. $Re_D = 5(0.3)/15.34\times10^{-6} = 97{,}800$. Churchill–Bernstein gives $\overline{Nu}_D = 212$, so $\bar h_o = 18.2$ W/m²·K.</p>
+            <h4>(a) Outlet temperature</h4>
+            <p>For a thin wall, $U = (1/8.12 + 1/18.2)^{-1} = 5.62$ W/m²·K, so $UA = 5.62\pi(0.3)(20) = 106$ W/K. Also $\dot mc_p = 0.15(1011) = 151.7$ W/K.</p>
+            $$T_{m,o} = 280 + (400-280)\exp(-106/151.7) = 280 + 120(0.498) = 339.7\ \text{K}$$
+            $$q = 151.7(400 - 339.7) = 9.15\ \text{kW}$$
+            <h4>(b) Insulation for $T_{m,o} \geq 380$ K</h4>
+            <p>Required: $\dfrac{UA}{\dot mc_p} = \ln\dfrac{400-280}{380-280} = 0.182$. With $\dot m c_p = 151.9$ W/K at 390 K, $UA = 27.7$ W/K.</p>
+            <p>Per unit length, $R'_{tot} = L/UA = 20/27.7 = 0.722$ m·K/W. Then:</p>
+            <p>$R'_i = 1/(\bar h_i\pi D) = 0.129$, $R'_o = 1/(\bar h_o\pi D) = 0.058$, so $R'_{ins} = 0.722 - 0.129 - 0.058 = 0.535$ m·K/W.</p>
+            $$\ln(D_o/D) = 2\pi k R'_{ins} = 2\pi(0.05)(0.535) = 0.168 \Rightarrow D_o = 1.183D = 0.355\ \text{m}$$
+            <div class="answer">(a) $T_{m,o} \approx 340$ K, $q \approx 9.2$ kW; (b) $t = (D_o - D)/2 \approx 27$ mm</div>
+            <p><em>Comment:</em> without insulation, the inside resistance (low-velocity gas, $h_i \approx 8$) is larger than the outside one. Both are small next to a few centimeters of insulation.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L4</span> Non-uniform heat flux: find the hottest point <span class="chip">like 8.18b, 8.23</span></p>
+          <p>A tube of diameter $D$ and length $L$ is heated with a flux that tapers linearly to zero: $q_s''(x) = q_o''(1 - x/L)$. Fluid enters at $T_{m,i}$ with flow rate $\dot m$. Take $h$ as constant (fully developed).</p>
+          <ol type="a">
+            <li>Derive $q$, $T_{m,o}$, $T_m(x)$ and $T_s(x)$.</li>
+            <li>Find where the wall temperature is highest.</li>
+            <li>Evaluate for $D = 30$ mm, $L = 3$ m, $q_o'' = 8000$ W/m², $\dot m = 0.04$ kg/s, $c_p = 4180$ J/kg·K, $h = 1200$ W/m²·K, $T_{m,i} = 20^\circ$C.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>(a) Derivation</h4>
+            $$q = \int_0^L q_s''\,\pi D\,dx = \pi Dq_o''\int_0^L\left(1-\frac{x}{L}\right)dx = \frac{\pi Dq_o''L}{2},\qquad T_{m,o} = T_{m,i} + \frac{q}{\dot mc_p}$$
+            $$\dot mc_p\frac{dT_m}{dx} = \pi Dq_o''\left(1-\frac{x}{L}\right) \Rightarrow T_m(x) = T_{m,i} + \frac{\pi Dq_o''}{\dot mc_p}\left(x - \frac{x^2}{2L}\right)$$
+            $$T_s(x) = T_m(x) + \frac{q_o''}{h}\left(1 - \frac{x}{L}\right)$$
+            <h4>(b) Hottest point</h4>
+            $$\frac{dT_s}{dx} = \frac{\pi Dq_o''}{\dot mc_p}\left(1-\frac{x}{L}\right) - \frac{q_o''}{hL} = 0 \Rightarrow x^* = L\left(1 - \frac{\dot mc_p}{\pi DhL}\right)$$
+            <p>This is valid when $\dot mc_p/(\pi DhL) \lt 1$. Otherwise $T_s$ only decreases and the wall is hottest at $x = 0$.</p>
+            <h4>(c) Numbers</h4>
+            <p>$q = \pi(0.03)(8000)(3)/2 = 1131$ W. With $\dot mc_p = 167.2$ W/K, $T_{m,o} = 20 + 1131/167.2 = 26.8^\circ$C.</p>
+            <p>$\dot mc_p/(\pi DhL) = 167.2/[\pi(0.03)(1200)(3)] = 0.493$, so $x^* = 3(1 - 0.493) = 1.52$ m.</p>
+            <p>$T_m(1.52) = 25.1^\circ$C and $T_s(1.52) = 25.1 + (8000/1200)(1 - 0.507) = 28.4^\circ$C. For comparison, $T_s(0) = 26.7^\circ$C and $T_s(L) = T_{m,o} = 26.8^\circ$C.</p>
+            <div class="answer">$q = 1131$ W, $T_{m,o} = 26.8^\circ$C; the wall peaks at $x^* \approx 1.52$ m with $T_{s,max} \approx 28.4^\circ$C</div>
+            <p><em>Comment:</em> the same steps (integrate the flux, add $q''/h$, differentiate) solve the sinusoidal case in HW 8.23.</p>
+          </div></details>
+        </div>
+        </div>
 
         <footer>ME 332 · Oregon State University · Personal study notes</footer>
       </div>

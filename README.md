@@ -29,14 +29,28 @@ The sidebar and home page pick it up automatically.
 
 ## Writing content
 
-- **Math:** write LaTeX inline with `$...$` or as a block with `$$...$$` (rendered by KaTeX).
+- **Math:** write LaTeX inline with `$...$` or as a block with `$$...$$` (rendered by KaTeX). Inside math, write `\lt` / `\gt` instead of `<` / `>`.
 - **Equation box:** `<div class="eq"><div class="label">Name</div>$$...$$</div>`
 - **Callout:** `<div class="callout"><strong>Tip</strong> text…</div>`
-- **Practice problem with hidden solution:**
+- **Practice problem** (statement visible, solution hidden):
   ```html
-  <details class="problem">
-    <summary>Problem 1 — Title</summary>
+  <div class="problem">
+    <p class="q-title"><span class="qnum">L1</span> Title <span class="chip">like 7.41</span></p>
     <p>Statement…</p>
-    <div class="solution"><p>Solution…</p></div>
-  </details>
+    <details class="reveal"><summary>Show solution</summary>
+      <div class="solution">
+        <h4>Properties</h4><p>…</p>
+        <div class="answer">Final answers…</div>
+      </div>
+    </details>
+  </div>
   ```
+- **Show/hide all button:** `<button class="icon-btn toggle-all" data-scope="#long-list">Show all solutions</button>` toggles every solution inside the element with that id.
+
+## Pages
+
+| Page | Contents |
+| --- | --- |
+| `midterm.html` | HW problem map, solving checklist, common mistakes, practice midterm (12 short + 6 long) |
+| `equations.html` | "Which correlation?" table and all Ch 7–11 equations (printable) |
+| `ch07.html` – `ch11.html` | Concepts, key equations, 12 short questions, 4 long worked problems each |

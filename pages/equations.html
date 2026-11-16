@@ -13,9 +13,9 @@
 <body data-page="equations">
   <header class="topbar">
     <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
-    <a class="brand" href="../index.html">ME <span>332</span> Heat Transfer</a>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
     <div class="spacer"></div>
-    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Light / Dark</button>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
   </header>
 
   <div class="layout">
@@ -24,31 +24,82 @@
     <main>
       <div class="content">
         <h1>Equation Sheet</h1>
-        <p class="lead">Key relations from every chapter, collected in one place.</p>
+        <p class="lead">Ch 7–11 correlations on one page, plus the basics from the class equation sheet that these problems keep using. Prints cleanly.</p>
 
-        <h2>Key Concepts</h2>
-        <div class="placeholder">Concept summary coming soon.</div>
+        <p class="jump">Jump to: <a href="#pick">Which correlation?</a><a href="#basics">Basics</a><a href="#ch7">Ch 7</a><a href="#ch8">Ch 8</a><a href="#ch9">Ch 9</a><a href="#ch11">Ch 11</a></p>
+        <div class="toolbar"><button class="icon-btn" onclick="window.print()">Print this sheet</button></div>
 
-        <h2>Key Equations</h2>
-        <!-- Example equation block:
-        <div class="eq">
-          <div class="label">Newton's law of cooling</div>
-          $$q'' = h\,(T_s - T_\infty)$$
-        </div>
-        -->
-        <div class="placeholder">Equations coming soon.</div>
+        <h2 id="pick">Which Correlation Do I Use?</h2>
+        <table>
+          <tr><th>Situation</th><th>Check</th><th>Use</th><th>Properties at</th></tr>
+          <tr><td>Flat plate, parallel flow</td><td>$Re_L \lt 5\times10^5$</td><td>$0.664Re_L^{1/2}Pr^{1/3}$</td><td>$T_f$</td></tr>
+          <tr><td></td><td>$Re_L \gt 5\times10^5$</td><td>$(0.037Re_L^{4/5} - 871)Pr^{1/3}$</td><td>$T_f$</td></tr>
+          <tr><td></td><td>"assume turbulent"</td><td>$0.037Re_L^{4/5}Pr^{1/3}$</td><td>$T_f$</td></tr>
+          <tr><td>Plate with unheated start</td><td>laminar or turbulent</td><td>Eq. 7.42/7.43 (local), 7.44 (average)</td><td>$T_f$</td></tr>
+          <tr><td>Cylinder in cross flow</td><td>$Re_DPr \gtrsim 0.2$</td><td>Churchill–Bernstein (or Hilpert)</td><td>$T_f$</td></tr>
+          <tr><td>Sphere</td><td>$3.5 \lesssim Re_D \lesssim 7.6\times10^4$</td><td>Whitaker</td><td>$T_\infty$, $\mu_s$ at $T_s$</td></tr>
+          <tr><td>Tube, laminar, fully developed</td><td>$Re_D \lt 2300$, $L \gg x_{fd,t}$</td><td>$Nu = 4.36$ ($q''$) or $3.66$ ($T_s$)</td><td>$\bar T_m$</td></tr>
+          <tr><td>Tube, laminar, thermal entry</td><td>$x_{fd,t} = 0.05Re_DPr\,D \gtrsim L$</td><td>Hausen (8.57)</td><td>$\bar T_m$</td></tr>
+          <tr><td>Tube, turbulent</td><td>$Re_D \gtrsim 10^4$, $L/D \gt 10$</td><td>Dittus–Boelter ($n = 0.4$ heat, $0.3$ cool)</td><td>$\bar T_m$</td></tr>
+          <tr><td></td><td>$3000 \lesssim Re_D \lesssim 10^4$</td><td>Gnielinski</td><td>$\bar T_m$</td></tr>
+          <tr><td>Annulus or noncircular duct</td><td>—</td><td>$D_h = 4A_c/P$; Table 8.1/8.2 if laminar</td><td>$\bar T_m$</td></tr>
+          <tr><td>Vertical plate, free</td><td>$Ra_L \lesssim 10^9$</td><td>Eq. 9.27 (or similarity)</td><td>$T_f$</td></tr>
+          <tr><td></td><td>any $Ra_L$</td><td>Churchill–Chu 9.26</td><td>$T_f$</td></tr>
+          <tr><td>Horizontal plate, free</td><td>hot up / cold down</td><td>$0.54Ra^{1/4}$ or $0.15Ra^{1/3}$, $L = A_s/P$</td><td>$T_f$</td></tr>
+          <tr><td></td><td>hot down / cold up</td><td>$0.52Ra^{1/5}$, $L = A_s/P$</td><td>$T_f$</td></tr>
+          <tr><td>Horizontal cylinder, free</td><td>$Ra_D \lesssim 10^{12}$</td><td>Churchill–Chu 9.34</td><td>$T_f$</td></tr>
+          <tr><td>Heat exchanger: size it</td><td>temperatures known</td><td>LMTD ($\times F$ if multipass)</td><td>—</td></tr>
+          <tr><td>Heat exchanger: rate it</td><td>outlets unknown</td><td>ε–NTU</td><td>—</td></tr>
+        </table>
 
-        <h2>Practice Problems</h2>
-        <!-- Example problem with hidden solution:
-        <details class="problem">
-          <summary>Problem 1 — Short title</summary>
-          <p>Problem statement…</p>
-          <div class="solution">
-            <p><strong>Solution:</strong> …</p>
-          </div>
-        </details>
-        -->
-        <div class="placeholder">Practice problems coming soon.</div>
+        <h2 id="basics">Basics (from the class sheet)</h2>
+        <div class="eq"><div class="label">Convection, radiation, resistances</div>
+          $$q = hA(T_s - T_\infty),\qquad q = \varepsilon\sigma A(T_s^4 - T_{sur}^4) = h_rA(T_s - T_{sur}),\qquad h_r = \varepsilon\sigma(T_s + T_{sur})(T_s^2 + T_{sur}^2)$$
+          $$R_{conv} = \frac{1}{hA},\quad R_{plane} = \frac{L}{kA},\quad R_{cyl} = \frac{\ln(r_o/r_i)}{2\pi kL},\quad q = \frac{T_H - T_C}{\sum R},\quad \sigma = 5.67\times10^{-8}\ \text{W/m}^2\text{K}^4$$</div>
+        <div class="eq"><div class="label">Lumped capacitance ($Bi = hL_c/k \lt 0.1$, $L_c = V/A_s$)</div>
+          $$\frac{T - T_\infty}{T_i - T_\infty} = \exp\left(-\frac{hA_s}{\rho Vc}t\right),\qquad \tau = \frac{\rho Vc}{hA_s},\qquad \rho Vc\frac{dT}{dt} = q_s''A_{s,h} + \dot E_g - hA_s(T - T_\infty) - \varepsilon\sigma A_s(T^4 - T_{sur}^4)$$</div>
+
+        <h2 id="ch7">Ch 7: External Flow</h2>
+        <div class="eq"><div class="label">Flat plate (properties at $T_f$, $Re_{x,c} = 5\times10^5$)</div>
+          $$\text{Lam: } Nu_x = 0.332Re_x^{1/2}Pr^{1/3},\ \ \overline{Nu}_L = 0.664Re_L^{1/2}Pr^{1/3},\ \ \delta = 5xRe_x^{-1/2},\ \ \delta/\delta_t \approx Pr^{1/3}$$
+          $$\text{Turb: } Nu_x = 0.0296Re_x^{4/5}Pr^{1/3},\ \ \overline{Nu}_L = 0.037Re_L^{4/5}Pr^{1/3}\qquad \text{Mixed: } \overline{Nu}_L = (0.037Re_L^{4/5} - 871)Pr^{1/3}$$
+          $$\text{Uniform } q_s'': Nu_x = 0.453Re_x^{1/2}Pr^{1/3}\ (\text{lam}),\ \ 0.0308Re_x^{4/5}Pr^{1/3}\ (\text{turb})$$</div>
+        <div class="eq"><div class="label">Unheated starting length</div>
+          $$Nu_x = \frac{Nu_x|_{\xi=0}}{[1 - (\xi/x)^{3/4}]^{1/3}}\ (\text{lam}),\qquad Nu_x = \frac{Nu_x|_{\xi=0}}{[1 - (\xi/x)^{9/10}]^{1/9}}\ (\text{turb})$$
+          $$\overline{Nu}_L = \overline{Nu}_L|_{\xi=0}\frac{L}{L - \xi}[1 - (\xi/L)^{(p+1)/(p+2)}]^{p/(p+1)},\quad p = 2\ (\text{lam}),\ 8\ (\text{turb}),\quad q = \bar h(L - \xi)W\Delta T$$</div>
+        <div class="eq"><div class="label">Cylinder and sphere</div>
+          $$\overline{Nu}_D = 0.3 + \frac{0.62Re_D^{1/2}Pr^{1/3}}{[1 + (0.4/Pr)^{2/3}]^{1/4}}\left[1 + \left(\frac{Re_D}{282{,}000}\right)^{5/8}\right]^{4/5}\qquad \overline{Nu}_D = CRe_D^mPr^{1/3}\ (\text{Hilpert})$$
+          $$\overline{Nu}_D = 2 + (0.4Re_D^{1/2} + 0.06Re_D^{2/3})Pr^{0.4}(\mu/\mu_s)^{1/4}\ (\text{sphere})$$</div>
+
+        <h2 id="ch8">Ch 8: Internal Flow</h2>
+        <div class="eq"><div class="label">Flow and entry lengths</div>
+          $$Re_D = \frac{4\dot m}{\pi D\mu}\ (\text{lam} \lt 2300),\quad x_{fd,h} \approx 0.05Re_DD,\quad x_{fd,t} \approx 0.05Re_DPr\,D,\quad \text{turb: } \approx 10D,\quad D_h = \frac{4A_c}{P}$$</div>
+        <div class="eq"><div class="label">Energy balance and surface conditions</div>
+          $$q = \dot mc_p(T_{m,o} - T_{m,i})\qquad \text{uniform } q_s'': T_m(x) = T_{m,i} + \frac{q_s''P}{\dot mc_p}x,\ \ T_s = T_m + \frac{q_s''}{h}$$
+          $$\text{uniform } T_s: \frac{T_s - T_{m,o}}{T_s - T_{m,i}} = e^{-\bar hPL/\dot mc_p},\ \ q = \bar hA_s\Delta T_{lm}\qquad \text{external fluid: } \frac{T_\infty - T_{m,o}}{T_\infty - T_{m,i}} = e^{-\bar UA_s/\dot mc_p}$$</div>
+        <div class="eq"><div class="label">Correlations</div>
+          $$Nu_D = 4.36\ (q''),\ \ 3.66\ (T_s)\qquad \overline{Nu}_D = 3.66 + \frac{0.0668Gz_D}{1 + 0.04Gz_D^{2/3}},\ \ Gz_D = \frac{D}{L}Re_DPr$$
+          $$Nu_D = 0.023Re_D^{4/5}Pr^n\qquad Nu_D = \frac{(f/8)(Re_D - 1000)Pr}{1 + 12.7(f/8)^{1/2}(Pr^{2/3} - 1)},\ \ f = (0.790\ln Re_D - 1.64)^{-2}$$</div>
+
+        <h2 id="ch9">Ch 9: Free Convection</h2>
+        <div class="eq"><div class="label">Groups ($\beta = 1/T_f$ in K, transition $Ra \approx 10^9$)</div>
+          $$Gr_L = \frac{g\beta\Delta TL^3}{\nu^2},\quad Ra_L = \frac{g\beta\Delta TL^3}{\nu\alpha},\quad \text{mixed if } Gr/Re^2 \approx 1$$
+          $$\overline{Nu}_L = \tfrac{4}{3}(Gr_L/4)^{1/4}g(Pr),\ \ g(Pr) = \frac{0.75Pr^{1/2}}{(0.609 + 1.221Pr^{1/2} + 1.238Pr)^{1/4}},\ \ \delta \approx 6x(Gr_x/4)^{-1/4}$$</div>
+        <div class="eq"><div class="label">Correlations</div>
+          $$\text{Vertical: } \overline{Nu}_L = \left\{0.825 + \frac{0.387Ra_L^{1/6}}{[1 + (0.492/Pr)^{9/16}]^{8/27}}\right\}^2,\qquad \overline{Nu}_L = 0.68 + \frac{0.670Ra_L^{1/4}}{[1 + (0.492/Pr)^{9/16}]^{4/9}}\ (Ra \lesssim 10^9)$$
+          $$\text{Horizontal } (L = A_s/P): 0.54Ra^{1/4}\ (10^4\text{–}10^7),\ \ 0.15Ra^{1/3}\ (10^7\text{–}10^{11})\ \text{[hot up]};\ \ 0.52Ra^{1/5}\ \text{[hot down]}$$
+          $$\text{Cylinder: } \overline{Nu}_D = \left\{0.60 + \frac{0.387Ra_D^{1/6}}{[1 + (0.559/Pr)^{9/16}]^{8/27}}\right\}^2\qquad \text{Sphere: } 2 + \frac{0.589Ra_D^{1/4}}{[1 + (0.469/Pr)^{9/16}]^{4/9}}$$
+          $$\text{Fin spacing: } S_{opt} \approx 2\delta(L)\quad \text{or}\quad S_{opt} = 2.71(Ra_S/S^3L)^{-1/4}$$</div>
+
+        <h2 id="ch11">Ch 11: Heat Exchangers</h2>
+        <div class="eq"><div class="label">$U$, energy balance, LMTD</div>
+          $$\frac{1}{UA} = \frac{1}{(hA)_c} + \frac{R''_{f,c}}{A_c} + R_w + \frac{R''_{f,h}}{A_h} + \frac{1}{(hA)_h},\qquad q = C_h(T_{h,i} - T_{h,o}) = C_c(T_{c,o} - T_{c,i})$$
+          $$q = UAF\Delta T_{lm},\quad \Delta T_{lm} = \frac{\Delta T_2 - \Delta T_1}{\ln(\Delta T_2/\Delta T_1)},\quad \text{CF: } \Delta T_1 = T_{h,i} - T_{c,o},\ \Delta T_2 = T_{h,o} - T_{c,i};\ \ \text{PF: inlets/outlets}$$</div>
+        <div class="eq"><div class="label">ε–NTU</div>
+          $$\varepsilon = \frac{q}{C_{min}(T_{h,i} - T_{c,i})},\quad NTU = \frac{UA}{C_{min}},\quad C_r = \frac{C_{min}}{C_{max}}$$
+          $$\text{PF: } \varepsilon = \frac{1 - e^{-NTU(1 + C_r)}}{1 + C_r}\qquad \text{CF: } \varepsilon = \frac{1 - e^{-NTU(1 - C_r)}}{1 - C_re^{-NTU(1 - C_r)}}\ \ (C_r = 1: \tfrac{NTU}{1 + NTU})\qquad C_r = 0: \varepsilon = 1 - e^{-NTU}$$
+          $$\text{Cross, both unmixed: } \varepsilon = 1 - \exp\left[\frac{NTU^{0.22}}{C_r}(e^{-C_rNTU^{0.78}} - 1)\right]$$
+          $$\text{1 shell pass: } NTU = -(1 + C_r^2)^{-1/2}\ln\frac{E - 1}{E + 1},\ \ E = \frac{2/\varepsilon - (1 + C_r)}{(1 + C_r^2)^{1/2}}\qquad \text{CF: } NTU = \frac{1}{C_r - 1}\ln\frac{\varepsilon - 1}{\varepsilon C_r - 1}$$</div>
 
         <footer>ME 332 · Oregon State University · Personal study notes</footer>
       </div>

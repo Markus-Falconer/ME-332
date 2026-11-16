@@ -13,9 +13,9 @@
 <body data-page="{{ID}}">
   <header class="topbar">
     <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
-    <a class="brand" href="../index.html">ME <span>332</span> Heat Transfer</a>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
     <div class="spacer"></div>
-    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Light / Dark</button>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
   </header>
 
   <div class="layout">
@@ -26,11 +26,13 @@
         <h1>{{TITLE}}</h1>
         <p class="lead">{{SUBTITLE}}</p>
 
-        <h2>Key Concepts</h2>
+        <p class="jump">Jump to: <a href="#concepts">Concepts</a><a href="#equations">Equations</a><a href="#short">Short questions</a><a href="#long">Long problems</a></p>
+
+        <h2 id="concepts">Key Concepts</h2>
         <div class="placeholder">Concept summary coming soon.</div>
 
-        <h2>Key Equations</h2>
-        <!-- Example equation block:
+        <h2 id="equations">Key Equations</h2>
+        <!-- Equation block:
         <div class="eq">
           <div class="label">Newton's law of cooling</div>
           $$q'' = h\,(T_s - T_\infty)$$
@@ -38,17 +40,24 @@
         -->
         <div class="placeholder">Equations coming soon.</div>
 
-        <h2>Practice Problems</h2>
-        <!-- Example problem with hidden solution:
-        <details class="problem">
-          <summary>Problem 1 — Short title</summary>
-          <p>Problem statement…</p>
-          <div class="solution">
-            <p><strong>Solution:</strong> …</p>
-          </div>
-        </details>
+        <h2 id="short">Short Questions</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>
+        <div id="short-list">
+        <!-- Problem card (statement visible, solution hidden):
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S1</span> Short title</p>
+          <p>Question text…</p>
+          <details class="reveal"><summary>Show answer</summary>
+            <div class="solution"><p>…</p><div class="answer">…</div></div>
+          </details>
+        </div>
         -->
-        <div class="placeholder">Practice problems coming soon.</div>
+        </div>
+
+        <h2 id="long">Long Problems</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#long-list">Show all solutions</button></div>
+        <div id="long-list">
+        </div>
 
         <footer>ME 332 · Oregon State University · Personal study notes</footer>
       </div>

@@ -13,9 +13,9 @@
 <body data-page="ch09">
   <header class="topbar">
     <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
-    <a class="brand" href="../index.html">ME <span>332</span> Heat Transfer</a>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
     <div class="spacer"></div>
-    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Light / Dark</button>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
   </header>
 
   <div class="layout">
@@ -24,31 +24,254 @@
     <main>
       <div class="content">
         <h1>Ch 9: Free Convection</h1>
-        <p class="lead">Buoyancy-driven flow on plates, cylinders, and in enclosures.</p>
+        <p class="lead">Buoyancy-driven flow: Grashof and Rayleigh numbers, plates, cylinders, fin spacing, and when free convection matters.</p>
 
-        <h2>Key Concepts</h2>
-        <div class="placeholder">Concept summary coming soon.</div>
+        <p class="jump">Jump to: <a href="#concepts">Concepts</a><a href="#equations">Equations</a><a href="#short">Short questions</a><a href="#long">Long problems</a></p>
 
-        <h2>Key Equations</h2>
-        <!-- Example equation block:
-        <div class="eq">
-          <div class="label">Newton's law of cooling</div>
-          $$q'' = h\,(T_s - T_\infty)$$
+        <h2 id="concepts">Key Concepts</h2>
+        <ul>
+          <li><strong>Free (natural) convection</strong> is driven by density differences from temperature differences in a gravity field. The fluid velocity is <em>zero at the wall and zero far away</em>, with a peak inside the boundary layer. Velocities and $h$ are small: typically $h \approx 2$–$10$ W/m²·K in air.</li>
+          <li><strong>Boussinesq approximation:</strong> density only varies in the buoyancy term, through $\beta(T - T_\infty)$. For an ideal gas $\beta = 1/T$, with <strong>$T$ in kelvin</strong> (use $T_f$).</li>
+          <li><strong>Grashof number</strong> $Gr_L = g\beta(T_s - T_\infty)L^3/\nu^2$ is the ratio of buoyancy to viscous forces. It plays the role $Re^2$ plays in forced convection. The <strong>Rayleigh number</strong> is $Ra_L = Gr_L Pr$.</li>
+          <li><strong>Transition</strong> on a vertical plate happens at $Ra_{x,c} \approx 10^9$. In the turbulent regime $\overline{Nu} \propto Ra^{1/3} \propto L$, so <strong>$\bar h$ doesn't depend on $L$</strong>.</li>
+          <li><strong>Laminar vertical plate</strong> (similarity solution): $\delta \propto x^{1/4}$, $h_x \propto x^{-1/4}$, and $\overline{Nu}_L = \frac{4}{3}Nu_L$. The boundary layer edge is near $\eta \approx 6$, so $\delta \approx 6x(Gr_x/4)^{-1/4}$.</li>
+          <li><strong>Cold plates</strong> work the same way flipped: the boundary layer starts at the top and the flow goes down.</li>
+          <li><strong>Horizontal plates:</strong> heat transfer is much better for the <em>upper surface of a hot plate</em> or the <em>lower surface of a cold plate</em>, because fluid can rise or sink away freely. It's weaker for the lower surface of a hot plate and the upper surface of a cold plate. Use $L = A_s/P$.</li>
+          <li><strong>Vertical channels / fin arrays:</strong> narrower spacing means more fins but less flow between them, so there is an <strong>optimum spacing</strong>. A quick estimate is $S_{opt} \approx 2\delta$ at the top of the fin, where the boundary layers just meet (HW 9.9 method using Fig. 9.4).</li>
+          <li><strong>Mixed convection:</strong> compare $Gr_L/Re_L^2$. If it's $\ll 1$, forced convection dominates. If $\gg 1$, free convection dominates. If $\approx 1$, consider both.</li>
+          <li><strong>Radiation is often as large as free convection</strong> in air at moderate temperatures ($h_r \approx 5$–$7$ W/m²·K near room temperature with $\varepsilon \approx 0.9$). Most HW problems (9.19, 9.39) include it.</li>
+          <li>All properties are evaluated at the film temperature $T_f = (T_s + T_\infty)/2$.</li>
+        </ul>
+
+        <h2 id="equations">Key Equations</h2>
+        <div class="eq"><div class="label">Dimensionless groups ($\beta = 1/T_f$ for an ideal gas)</div>
+          $$Gr_L = \frac{g\beta(T_s - T_\infty)L^3}{\nu^2},\qquad Ra_L = Gr_L Pr = \frac{g\beta(T_s - T_\infty)L^3}{\nu\alpha}$$</div>
+        <div class="eq"><div class="label">Similarity solution, laminar vertical plate</div>
+          $$Nu_x = \left(\frac{Gr_x}{4}\right)^{1/4}g(Pr),\quad \overline{Nu}_L = \frac{4}{3}\left(\frac{Gr_L}{4}\right)^{1/4}g(Pr),\quad g(Pr) = \frac{0.75Pr^{1/2}}{(0.609 + 1.221Pr^{1/2} + 1.238Pr)^{1/4}}$$
+          $$\delta \approx 6x\left(\frac{Gr_x}{4}\right)^{-1/4}$$</div>
+        <div class="eq"><div class="label">Vertical plate: Churchill–Chu (all $Ra_L$), and the more accurate laminar form ($Ra_L \lesssim 10^9$)</div>
+          $$\overline{Nu}_L = \left\{0.825 + \frac{0.387Ra_L^{1/6}}{[1 + (0.492/Pr)^{9/16}]^{8/27}}\right\}^2 \qquad \overline{Nu}_L = 0.68 + \frac{0.670Ra_L^{1/4}}{[1 + (0.492/Pr)^{9/16}]^{4/9}}$$</div>
+        <div class="eq"><div class="label">Horizontal plates ($L = A_s/P$)</div>
+          <p>Upper surface of a hot plate, or lower surface of a cold plate:</p>
+          $$\overline{Nu}_L = 0.54Ra_L^{1/4}\ (10^4 \lesssim Ra_L \lesssim 10^7),\qquad \overline{Nu}_L = 0.15Ra_L^{1/3}\ (10^7 \lesssim Ra_L \lesssim 10^{11})$$
+          <p>Lower surface of a hot plate, or upper surface of a cold plate:</p>
+          $$\overline{Nu}_L = 0.52Ra_L^{1/5}\ (10^4 \lesssim Ra_L \lesssim 10^9)$$</div>
+        <div class="eq"><div class="label">Long horizontal cylinder (Churchill–Chu, $Ra_D \lesssim 10^{12}$) and sphere ($Ra_D \lesssim 10^{11}$, $Pr \gtrsim 0.7$)</div>
+          $$\overline{Nu}_D = \left\{0.60 + \frac{0.387Ra_D^{1/6}}{[1 + (0.559/Pr)^{9/16}]^{8/27}}\right\}^2 \qquad \overline{Nu}_D = 2 + \frac{0.589Ra_D^{1/4}}{[1 + (0.469/Pr)^{9/16}]^{4/9}}$$</div>
+        <div class="eq"><div class="label">Vertical parallel plates, symmetric isothermal (Table 9.3)</div>
+          $$S_{opt} = 2.71\left(\frac{Ra_S}{S^3L}\right)^{-1/4}\qquad \text{quick estimate: } S_{opt} \approx 2\delta(L)$$</div>
+        <div class="eq"><div class="label">Mixed convection check</div>
+          $$\frac{Gr_L}{Re_L^2} \ll 1:\ \text{forced}\qquad \frac{Gr_L}{Re_L^2} \gg 1:\ \text{free}\qquad \frac{Gr_L}{Re_L^2} \approx 1:\ \text{mixed}$$</div>
+
+        <h2 id="short">Short Questions</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>
+        <div id="short-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S1</span> Expansion coefficient</p>
+          <p>A plate at 60°C is in 20°C air. What value of $\beta$ do you use? What's the common mistake?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$T_f = 40^\circ$C $= 313$ K, so $\beta = 1/313 = 3.19\times10^{-3}$ K⁻¹.</p>
+            <div class="answer">$\beta = 3.19\times10^{-3}$ K⁻¹. The mistake is using $1/40$ (°C), which is about 8× too large.</div>
+          </div></details>
         </div>
-        -->
-        <div class="placeholder">Equations coming soon.</div>
 
-        <h2>Practice Problems</h2>
-        <!-- Example problem with hidden solution:
-        <details class="problem">
-          <summary>Problem 1 — Short title</summary>
-          <p>Problem statement…</p>
-          <div class="solution">
-            <p><strong>Solution:</strong> …</p>
-          </div>
-        </details>
-        -->
-        <div class="placeholder">Practice problems coming soon.</div>
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S2</span> Laminar or turbulent?</p>
+          <p>A 1-m-tall vertical wall is 40 K warmer than the surrounding air ($T_f = 300$ K: $\nu = 15.89\times10^{-6}$, $\alpha = 22.5\times10^{-6}$ m²/s). Laminar or turbulent?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            $$Ra_L = \frac{9.8(1/300)(40)(1)^3}{(15.89\times10^{-6})(22.5\times10^{-6})} = 3.7\times10^9$$
+            <div class="answer">$Ra_L \gt 10^9$: turbulent over the upper part. Use the full Churchill–Chu correlation.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S3</span> Turbulent free convection and length</p>
+          <p>Why is $\bar h$ for turbulent free convection on a vertical plate independent of the plate height?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\overline{Nu}_L \propto Ra_L^{1/3} \propto (L^3)^{1/3} = L$, so $\bar h = \overline{Nu}_Lk/L$ has no $L$ left in it.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S4</span> Hot vs. cold horizontal plates</p>
+          <p>(a) For a hot horizontal plate, which surface has the larger $h$? (b) For a cold plate (say a chilled shelf), which surface behaves like the "good" case?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>(a) The <strong>top</strong>: warm fluid rises straight off it. On the bottom, warm fluid is trapped and has to flow out to the edges.</p>
+            <p>(b) The <strong>bottom</strong> of the cold plate: cool fluid sinks straight off it. Use $0.54Ra^{1/4}$ or $0.15Ra^{1/3}$ there, and $0.52Ra^{1/5}$ on top.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S5</span> Characteristic length</p>
+          <p>Find $L$ for free convection from (a) a 0.6 m × 0.3 m horizontal plate, (b) a horizontal disk of diameter $D$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>(a) $L = A_s/P = 0.18/1.8 = 0.1$ m. (b) $L = (\pi D^2/4)/(\pi D) = D/4$.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S6</span> Temperature scaling</p>
+          <p>For laminar free convection from a vertical plate, how does the heat rate scale with $\Delta T$? What happens if $\Delta T$ doubles?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\bar h \propto Ra^{1/4} \propto \Delta T^{1/4}$, so $q = \bar hA\Delta T \propto \Delta T^{5/4}$.</p>
+            <div class="answer">$q \propto \Delta T^{5/4}$; doubling $\Delta T$ multiplies $q$ by $2^{1.25} = 2.38$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S7</span> Mixed convection</p>
+          <p>For a heated plate in a slow air stream, $Gr_L/Re_L^2 = 0.01$ in case A and 50 in case B. Which correlations do you use?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">A: forced convection (Ch. 7); buoyancy is negligible. B: free convection (Ch. 9); the imposed flow is negligible.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S8</span> Window on a winter night</p>
+          <p>On the room side of a cold window, which way does the boundary layer flow, and where does it start?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Air next to the glass is cooled, gets denser, and sinks. The boundary layer starts at the <strong>top</strong> and flows <strong>down</strong>, which is the cold draft you feel near windows. Treat it as a vertical plate with $T_s \lt T_\infty$ (same correlation).</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S9</span> Why an optimum fin spacing?</p>
+          <p>Explain briefly why an array of vertical fins in still air has an optimum spacing $S$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Smaller $S$ means more fins and more area. But if $S$ is less than about $2\delta$, neighboring boundary layers merge, flow between the fins is choked by viscous drag, and $\bar h$ falls. The product $\bar hA$ peaks at an intermediate $S$.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S10</span> Local vs. average</p>
+          <p>For the laminar similarity solution, how does $\overline{Nu}_L$ compare with the local $Nu_L$ at the trailing edge?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$h_x \propto x^{-1/4}$, so $\bar h_L = \frac{1}{L}\int_0^L h_x\,dx = \frac{4}{3}h_L$.</p>
+            <div class="answer">$\overline{Nu}_L = \frac{4}{3}Nu_L$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S11</span> Don't forget radiation</p>
+          <p>A painted surface ($\varepsilon = 0.9$) at 50°C sits in a 20°C room. Estimate $h_r$ and compare with a typical free convection $h$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$h_r = \varepsilon\sigma(T_s + T_{sur})(T_s^2 + T_{sur}^2) = 0.9(5.67\times10^{-8})(616)(323^2 + 293^2) = 6.0$ W/m²·K</p>
+            <div class="answer">$h_r \approx 6$ W/m²·K, about the same as free convection ($h \approx 3$–$6$). Radiation can't be neglected.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S12</span> Vertical cylinder</p>
+          <p>When can a vertical cylinder be treated with the vertical plate correlation?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>When the boundary layer is thin compared with the diameter: $D/L \gtrsim 35/Gr_L^{1/4}$.</p>
+          </div></details>
+        </div>
+        </div>
+
+        <h2 id="long">Long Problems</h2>
+        <p>Air properties come from Table A.4, evaluated at $T_f$. Use $\beta = 1/T_f$ and $g = 9.8$ m/s².</p>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#long-list">Show all solutions</button></div>
+        <div id="long-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L1</span> Vertical plate: similarity vs. correlations, plus radiation <span class="chip">like 9.13, 9.19</span></p>
+          <p>A vertical plate 0.5 m tall and 0.4 m wide is held at 60°C in quiescent air at 20°C. Both faces are exposed. The surroundings are also at 20°C, and the plate has $\varepsilon = 0.85$.</p>
+          <ol type="a">
+            <li>Find $Ra_L$. Is the flow laminar?</li>
+            <li>Find $\bar h$ using (i) the similarity solution, (ii) the laminar correlation (9.27), (iii) Churchill–Chu (9.26).</li>
+            <li>Find the total heat loss by convection and radiation.</li>
+            <li>How thick is the boundary layer at the top of the plate?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>$T_f = 313$ K: $\nu = 17.20\times10^{-6}$ m²/s, $\alpha = 24.4\times10^{-6}$ m²/s, $k = 0.0273$ W/m·K, $Pr = 0.705$, $\beta = 3.195\times10^{-3}$ K⁻¹.</p>
+            <h4>(a) Rayleigh number</h4>
+            $$Gr_L = \frac{9.8(3.195\times10^{-3})(40)(0.5)^3}{(17.20\times10^{-6})^2} = 5.29\times10^8,\qquad Ra_L = Gr_LPr = 3.73\times10^8$$
+            <p>$Ra_L \lt 10^9$, so the flow is laminar over the whole plate.</p>
+            <h4>(b) Three ways to get $\bar h$</h4>
+            <p>(i) $g(0.705) = 0.5005$, so $\overline{Nu}_L = \frac{4}{3}(5.29\times10^8/4)^{1/4}(0.5005) = 71.6$ and $\bar h = 3.91$ W/m²·K.</p>
+            <p>(ii) $\overline{Nu}_L = 0.68 + \dfrac{0.670(3.73\times10^8)^{1/4}}{[1+(0.492/0.705)^{9/16}]^{4/9}} = 72.1$, so $\bar h = 3.94$ W/m²·K.</p>
+            <p>(iii) $\overline{Nu}_L = \{0.825 + 0.387Ra_L^{1/6}/[\ldots]^{8/27}\}^2 = 90.7$, so $\bar h = 4.95$ W/m²·K.</p>
+            <h4>(c) Total heat loss (both faces, $A = 2(0.5)(0.4) = 0.4$ m²)</h4>
+            <p>Convection: $q_{conv} = 3.94(0.4)(40) = 63$ W</p>
+            <p>Radiation: $q_{rad} = 0.85(5.67\times10^{-8})(0.4)(333^4 - 293^4) = 95$ W</p>
+            <h4>(d) Boundary layer thickness</h4>
+            <p>$\delta_L \approx 6L(Gr_L/4)^{-1/4} = 6(0.5)/(1.32\times10^8)^{1/4} = 0.028$ m</p>
+            <div class="answer">$Ra_L = 3.7\times10^8$ (laminar); $\bar h \approx 3.9$ (similarity), 3.9 (eq. 9.27), 5.0 W/m²·K (eq. 9.26); $q \approx 63 + 95 = 158$ W; $\delta \approx 28$ mm</div>
+            <p><em>Comment:</em> eq. 9.27 matches the similarity solution because both are laminar results. Eq. 9.26 runs high in the laminar range. Radiation is larger than convection here. For a window like HW 9.19, write this balance for <em>each</em> side and solve for the glass temperature by iteration.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L2</span> Horizontal plate: top vs. bottom <span class="chip">like 9.39</span></p>
+          <p>A thin, square horizontal plate 0.4 m on a side is held at 80°C in still air at 20°C. Both faces are exposed.</p>
+          <ol type="a">
+            <li>Find $\bar h$ for the top and bottom surfaces.</li>
+            <li>Find the total convection heat loss.</li>
+            <li>The plate is instead chilled to 0°C. Which correlation applies to each face now? Find both $h$ values.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Setup</h4>
+            <p>$L = A_s/P = 0.16/1.6 = 0.1$ m.</p>
+            <p>Properties at $T_f = 323$ K: $\nu = 18.20\times10^{-6}$, $\alpha = 25.9\times10^{-6}$ m²/s, $k = 0.0280$ W/m·K, $Pr = 0.704$, $\beta = 1/323$ K⁻¹.</p>
+            $$Ra_L = \frac{9.8(1/323)(60)(0.1)^3}{(18.20\times10^{-6})(25.9\times10^{-6})} = 3.86\times10^6$$
+            <h4>(a) Top and bottom</h4>
+            <p>Top (hot surface up, $10^4 \lt Ra \lt 10^7$): $\overline{Nu}_L = 0.54Ra_L^{1/4} = 23.9$, so $\bar h_{top} = 23.9(0.028)/0.1 = 6.70$ W/m²·K.</p>
+            <p>Bottom (hot surface down): $\overline{Nu}_L = 0.52Ra_L^{1/5} = 10.8$, so $\bar h_{bot} = 3.02$ W/m²·K.</p>
+            <h4>(b) Total convection</h4>
+            <p>$q = (\bar h_{top} + \bar h_{bot})A\Delta T = (6.70 + 3.02)(0.16)(60) = 93$ W. The top carries about 69% of it.</p>
+            <h4>(c) Chilled plate</h4>
+            <p>Now the <em>bottom</em> is the good surface (cold air sinks away) and the top is the poor one. At $T_f = 283$ K, $Ra_L = 2.37\times10^6$. Bottom: $0.54Ra_L^{1/4}$ gives $\bar h = 5.3$ W/m²·K. Top: $0.52Ra_L^{1/5}$ gives $\bar h = 2.4$ W/m²·K.</p>
+            <div class="answer">(a) $\bar h_{top} = 6.7$, $\bar h_{bot} = 3.0$ W/m²·K; (b) $q \approx 93$ W; (c) the roles swap: bottom ≈ 5.3, top ≈ 2.4 W/m²·K</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L3</span> Hot pipe in a room, then a fan</p>
+          <p>A horizontal, uninsulated hot-water pipe (OD 60 mm, $\varepsilon = 0.9$) has a surface temperature of 70°C in a room whose air and walls are at 20°C.</p>
+          <ol type="a">
+            <li>Find the heat loss per meter by free convection and by radiation.</li>
+            <li>A fan now blows room air across the pipe at 2 m/s. Is free convection still important? Find the new convection loss.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>$T_f = 318$ K: $\nu = 17.70\times10^{-6}$, $\alpha = 25.2\times10^{-6}$ m²/s, $k = 0.0276$ W/m·K, $Pr = 0.704$.</p>
+            <h4>(a) Still air</h4>
+            $$Ra_D = \frac{9.8(1/318)(50)(0.06)^3}{(17.70\times10^{-6})(25.2\times10^{-6})} = 7.46\times10^5$$
+            $$\overline{Nu}_D = \left\{0.60 + \frac{0.387(7.46\times10^5)^{1/6}}{[1 + (0.559/0.704)^{9/16}]^{8/27}}\right\}^2 = 13.4 \Rightarrow \bar h = 6.15\ \text{W/m}^2\text{K}$$
+            <p>Convection: $q'_{conv} = 6.15\pi(0.06)(50) = 58$ W/m</p>
+            <p>Radiation: $q'_{rad} = 0.9(5.67\times10^{-8})\pi(0.06)(343^4 - 293^4) = 62$ W/m</p>
+            <h4>(b) With the fan</h4>
+            <p>$Re_D = 2(0.06)/17.70\times10^{-6} = 6780$ and $Gr_D = Ra_D/Pr = 1.06\times10^6$, so $Gr_D/Re_D^2 = 0.023 \ll 1$. Forced convection dominates.</p>
+            <p>Churchill–Bernstein: $\overline{Nu}_D = 43.2$, giving $\bar h = 19.9$ W/m²·K and $q'_{conv} = 187$ W/m.</p>
+            <div class="answer">(a) $q' \approx 58 + 62 = 120$ W/m; (b) $Gr/Re^2 = 0.02$, so forced convection dominates and the convection loss rises to about 187 W/m (3.2×)</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L4</span> Optimum spacing for a vertical fin array <span class="chip">like 9.9</span></p>
+          <p>A heat sink has vertical rectangular fins, each $H = 100$ mm tall (the flow direction) and protruding $L = 30$ mm from the base. The fins are $t = 1$ mm thick and approximately isothermal at 70°C. The air is quiescent at 20°C, and the base is $W = 300$ mm wide.</p>
+          <ol type="a">
+            <li>Estimate the optimum spacing from the boundary layer thickness ($S_{opt} \approx 2\delta$ at the top of the fin).</li>
+            <li>How many fins fit, and what's the heat rate from the fins? Treat each fin face as an isolated vertical plate.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>$T_f = 318$ K: $\nu = 17.70\times10^{-6}$, $k = 0.0276$, $Pr = 0.704$, $\beta = 1/318$.</p>
+            <h4>(a) Spacing</h4>
+            $$Gr_H = \frac{9.8(1/318)(50)(0.1)^3}{(17.70\times10^{-6})^2} = 4.92\times10^6$$
+            $$\delta(H) \approx 6H\left(\frac{Gr_H}{4}\right)^{-1/4} = \frac{6(0.1)}{(1.23\times10^6)^{1/4}} = 18\ \text{mm} \Rightarrow S_{opt} \approx 36\ \text{mm}$$
+            <h4>(b) Fin count and heat rate</h4>
+            <p>$N = W/(S + t) = 300/37 = 8.1$, so 8 fins.</p>
+            <p>$Ra_H = 3.46\times10^6$. Eq. 9.27 gives $\overline{Nu}_H = 22.8$, so $\bar h = 22.8(0.0276)/0.1 = 6.30$ W/m²·K.</p>
+            $$q = N(2HL)\bar h(T_s - T_\infty) = 8(2)(0.1)(0.03)(6.30)(50) = 15.1\ \text{W}$$
+            <div class="answer">$S_{opt} \approx 36$ mm; 8 fins; $q \approx 15$ W from the fins (base area not included)</div>
+            <p><em>Going further:</em> the channel correlation in Table 9.3, $S_{opt} = 2.71(Ra_S/S^3L)^{-1/4}$, gives a smaller value (about 6 mm here). That's because it accounts for chimney flow between the fins. Use whichever method your professor asks for. HW 9.9 specifies the Fig. 9.4 (boundary layer thickness) approach.</p>
+          </div></details>
+        </div>
+        </div>
 
         <footer>ME 332 · Oregon State University · Personal study notes</footer>
       </div>

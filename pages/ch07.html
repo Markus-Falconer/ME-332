@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ch 7: External Flow · ME 332</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+</head>
+<!-- data-page must match the page's id in assets/js/site.js -->
+<body data-page="ch07">
+  <header class="topbar">
+    <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
+    <div class="spacer"></div>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
+  </header>
+
+  <div class="layout">
+    <nav id="site-nav" class="sidebar"></nav>
+
+    <main>
+      <div class="content">
+        <h1>Ch 7: External Flow</h1>
+        <p class="lead">Forced convection over flat plates, cylinders and spheres: how to choose and use the correlations.</p>
+
+        <p class="jump">Jump to: <a href="#concepts">Concepts</a><a href="#equations">Equations</a><a href="#short">Short questions</a><a href="#long">Long problems</a></p>
+
+        <h2 id="concepts">Key Concepts</h2>
+        <ul>
+          <li><strong>External flow</strong> means the boundary layer grows freely, and outside it there's a free stream at $u_\infty, T_\infty$ with no gradients.</li>
+          <li><strong>Every convection problem follows the same recipe:</strong> pick the geometry → evaluate properties at the right temperature → compute $Re$ (and $Pr$) → pick the correlation for the flow regime → get $\overline{Nu}$ → $\bar h = \overline{Nu}\,k/L$ → $q = \bar h A (T_s - T_\infty)$.</li>
+          <li><strong>Film temperature:</strong> most external-flow correlations use properties at $T_f = (T_s + T_\infty)/2$. The exceptions are Zukauskas (cylinder) and Whitaker (sphere), which use $T_\infty$ plus a surface correction ($Pr_s$ or $\mu_s$).</li>
+          <li><strong>Flat plate transition</strong> happens at $Re_{x,c} = 5\times10^5$. If $Re_L$ is below this, the plate is laminar everywhere. If it's above, you have a <em>mixed</em> boundary layer: laminar up to $x_c$, then turbulent.</li>
+          <li><strong>How things scale on a flat plate:</strong>
+            laminar $\delta \propto x^{1/2}$, $h_x \propto x^{-1/2}$ (so $\bar h_L = 2h_L$);
+            turbulent $\delta \propto x^{4/5}$, $h_x \propto x^{-1/5}$ (so $\bar h_L = 1.25 h_L$).
+            $h$ jumps up sharply at transition.</li>
+          <li><strong>Relative boundary layer thickness</strong> (laminar): $\delta/\delta_t \approx Pr^{1/3}$. For gases ($Pr\approx0.7$) the two are about equal. For oils ($Pr\gg1$) the thermal layer is much thinner.</li>
+          <li><strong>Unheated starting length $\xi$:</strong> the velocity boundary layer starts at $x=0$ but the thermal one starts at $x=\xi$. At a given $x$, the local $h$ is <em>higher</em> than with no starting length, because the thermal layer is thinner. Multiply $\bar h$ by the <em>heated</em> area only.</li>
+          <li><strong>Uniform heat flux</strong> plates have $Nu_x$ 36% higher (laminar) or 4% higher (turbulent) than isothermal plates. Then $T_s(x) = T_\infty + q_s''/h_x$.</li>
+          <li><strong>Cylinder in cross flow:</strong> local $Nu$ is highest at the forward stagnation point ($\theta=0$) and drops as the laminar boundary layer grows. It reaches a minimum near separation ($\theta\approx80^\circ$). At high $Re$, transition to turbulence causes a second rise before separation ($\theta\approx140^\circ$).</li>
+          <li><strong>Sphere:</strong> as $Re\to0$, $\overline{Nu}_D \to 2$. That's pure conduction from a sphere into an infinite still medium.</li>
+          <li><strong>Energy balances with radiation</strong> (roofs, workpieces in furnaces, thermocouples) are common. Convection and radiation can push in opposite directions, and the steady temperature sits between $T_\infty$ and $T_{sur}$.</li>
+          <li>The correlations are only good to about ±20%. Don't sweat the third significant figure.</li>
+        </ul>
+
+        <h2 id="equations">Key Equations</h2>
+        <div class="eq"><div class="label">Dimensionless groups</div>
+          $$Re_L = \frac{u_\infty L}{\nu},\qquad Pr = \frac{\nu}{\alpha},\qquad \overline{Nu}_L = \frac{\bar h L}{k}$$</div>
+        <div class="eq"><div class="label">Flat plate, laminar ($Pr \gtrsim 0.6$), properties at $T_f$</div>
+          $$Nu_x = 0.332\,Re_x^{1/2}Pr^{1/3} \qquad \overline{Nu}_L = 0.664\,Re_L^{1/2}Pr^{1/3} \qquad \delta = 5x\,Re_x^{-1/2}$$</div>
+        <div class="eq"><div class="label">Flat plate, turbulent ($0.6 \lesssim Pr \lesssim 60$)</div>
+          $$Nu_x = 0.0296\,Re_x^{4/5}Pr^{1/3} \qquad \overline{Nu}_L = 0.037\,Re_L^{4/5}Pr^{1/3}\ \ \text{(turbulent from leading edge)}$$</div>
+        <div class="eq"><div class="label">Flat plate, mixed boundary layer ($Re_{x,c}=5\times10^5$)</div>
+          $$\overline{Nu}_L = \left(0.037\,Re_L^{4/5} - 871\right)Pr^{1/3}$$</div>
+        <div class="eq"><div class="label">Unheated starting length $\xi$ (local, then average over heated part; $p=2$ laminar, $p=8$ turbulent)</div>
+          $$Nu_x = \frac{Nu_x|_{\xi=0}}{\left[1-(\xi/x)^{3/4}\right]^{1/3}}\ \text{(lam)}\qquad Nu_x = \frac{Nu_x|_{\xi=0}}{\left[1-(\xi/x)^{9/10}\right]^{1/9}}\ \text{(turb)}$$
+          $$\overline{Nu}_L = \overline{Nu}_L|_{\xi=0}\,\frac{L}{L-\xi}\left[1-(\xi/L)^{(p+1)/(p+2)}\right]^{p/(p+1)}$$</div>
+        <div class="eq"><div class="label">Uniform surface heat flux</div>
+          $$Nu_x = 0.453\,Re_x^{1/2}Pr^{1/3}\ \text{(lam)}\qquad Nu_x = 0.0308\,Re_x^{4/5}Pr^{1/3}\ \text{(turb)}$$</div>
+        <div class="eq"><div class="label">Cylinder: Churchill–Bernstein ($Re_D Pr \gtrsim 0.2$, properties at $T_f$)</div>
+          $$\overline{Nu}_D = 0.3 + \frac{0.62\,Re_D^{1/2}Pr^{1/3}}{\left[1+(0.4/Pr)^{2/3}\right]^{1/4}}\left[1+\left(\frac{Re_D}{282{,}000}\right)^{5/8}\right]^{4/5}$$</div>
+        <div class="eq"><div class="label">Cylinder: Hilpert ($T_f$, Table 7.2) and Zukauskas ($T_\infty$, Table 7.4)</div>
+          $$\overline{Nu}_D = C\,Re_D^m Pr^{1/3} \qquad\qquad \overline{Nu}_D = C\,Re_D^m Pr^n (Pr/Pr_s)^{1/4}$$
+          <table>
+            <tr><th>Hilpert $Re_D$</th><th>C</th><th>m</th></tr>
+            <tr><td>0.4–4</td><td>0.989</td><td>0.330</td></tr>
+            <tr><td>4–40</td><td>0.911</td><td>0.385</td></tr>
+            <tr><td>40–4000</td><td>0.683</td><td>0.466</td></tr>
+            <tr><td>4000–40,000</td><td>0.193</td><td>0.618</td></tr>
+            <tr><td>40,000–400,000</td><td>0.027</td><td>0.805</td></tr>
+          </table></div>
+        <div class="eq"><div class="label">Sphere: Whitaker (properties at $T_\infty$; $3.5 \lesssim Re_D \lesssim 7.6\times10^4$)</div>
+          $$\overline{Nu}_D = 2 + \left(0.4\,Re_D^{1/2} + 0.06\,Re_D^{2/3}\right)Pr^{0.4}\left(\frac{\mu}{\mu_s}\right)^{1/4}$$</div>
+        <div class="eq"><div class="label">Lumped plate or object, initial cooling rate</div>
+          $$\frac{dT}{dt} = -\frac{q_{conv} + q_{rad}}{\rho V c},\qquad q_{rad} = \varepsilon\sigma A\left(T_s^4 - T_{sur}^4\right)$$</div>
+
+        <h2 id="short">Short Questions</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>
+        <div id="short-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S1</span> Laminar scaling</p>
+          <p>On a flat plate with laminar flow, the local coefficient at $x = 0.2$ m is 20 W/m²·K. What is the local $h$ at $x = 0.8$ m (still laminar)? What is $\bar h$ averaged from 0 to 0.8 m?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$h_x \propto x^{-1/2}$, so $h(0.8) = 20\,(0.2/0.8)^{1/2} = 10$ W/m²·K. For laminar flow the average from the leading edge is twice the local value at the end.</p>
+            <div class="answer">$h_{0.8} = 10$ W/m²·K, $\bar h = 20$ W/m²·K</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S2</span> Where does transition happen?</p>
+          <p>Air ($\nu = 1.6\times10^{-5}$ m²/s) flows at 12 m/s over a 1.5 m plate. Where does transition occur? Is this a mixed boundary layer problem?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$x_c = Re_{x,c}\,\nu/u_\infty = (5\times10^5)(1.6\times10^{-5})/12 = 0.667$ m. Since $x_c \lt L$, yes. Use the mixed correlation $\overline{Nu}_L = (0.037Re_L^{4/5}-871)Pr^{1/3}$.</p>
+            <div class="answer">$x_c \approx 0.67$ m, so the boundary layer is mixed</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S3</span> Turbulent average vs. local</p>
+          <p>If the boundary layer is turbulent from the leading edge, how does $\bar h_L$ compare with the local $h_L$ at the trailing edge?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$h_x \propto x^{-1/5}$, so $\bar h_L = \frac{1}{L}\int_0^L h_x\,dx = \frac{5}{4}h_L$. You can also see it as the ratio $0.037/0.0296 = 1.25$.</p>
+            <div class="answer">$\bar h_L = 1.25\,h_L$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S4</span> Velocity effect</p>
+          <p>The free-stream velocity over a plate is doubled. By what factor does $\bar h$ change if the flow is (a) laminar everywhere, (b) turbulent everywhere?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\bar h \propto Re^{1/2}$ (laminar) or $Re^{4/5}$ (turbulent).</p>
+            <div class="answer">(a) $2^{0.5} = 1.41\times$ &nbsp; (b) $2^{0.8} = 1.74\times$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S5</span> Similarity scaling (like HW 6.29)</p>
+          <p>Tests on a bar in cross flow give $\bar h = 60$ W/m²·K at 10 m/s and $\bar h = 90$ W/m²·K at 20 m/s. Assume $\overline{Nu} = C\,Re^m Pr^n$. (a) Find $m$. (b) Estimate $\bar h$ for a geometrically similar bar <em>twice as large</em> at 20 m/s.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>(a) For the same bar and fluid, $\bar h \propto V^m$, so $m = \ln(90/60)/\ln(20/10) = 0.585$.</p>
+            <p>(b) $\bar h = \frac{k}{L}C\left(\frac{VL}{\nu}\right)^m Pr^n \propto V^m L^{m-1}$. At the same $V$, doubling $L$ gives $\bar h = 90\,(2)^{0.585-1} = 90(0.750)$.</p>
+            <div class="answer">$m = 0.585$; $\bar h \approx 67.5$ W/m²·K. Bigger objects have smaller $h$.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S6</span> Thermal vs. velocity boundary layer</p>
+          <p>For laminar flow of water ($Pr = 7$) over a plate, which is thicker, $\delta$ or $\delta_t$, and by roughly how much? What about a liquid metal ($Pr \ll 1$)?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\delta/\delta_t \approx Pr^{1/3} = 7^{1/3} = 1.91$. Momentum diffuses faster than heat in water. For liquid metals $Pr \ll 1$, so $\delta_t \gg \delta$.</p>
+            <div class="answer">Water: $\delta \approx 1.9\,\delta_t$. Liquid metal: thermal layer much thicker.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S7</span> Unheated starting length intuition</p>
+          <p>(a) At a fixed location $x$, does adding an unheated starting length raise or lower the local $h$? (b) Is the average $h$ over a heated strip of length $L-\xi$ higher or lower than for a plate of length $L-\xi$ heated from its own leading edge?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>(a) <strong>Higher.</strong> The thermal boundary layer only starts at $\xi$, so at $x$ it is thinner than it would be if heating started at 0, and the temperature gradient at the wall is steeper.</p>
+            <p>(b) <strong>Lower.</strong> Over the heated strip the velocity boundary layer is already thick (it started at $x=0$), so near-wall velocities are lower than on a fresh plate. Long problem L2 shows this with numbers.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S8</span> Which temperature for properties?</p>
+          <p>For each correlation, where do you evaluate properties: flat plate, Churchill–Bernstein, Hilpert, Zukauskas, Whitaker?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">Flat plate, Churchill–Bernstein, Hilpert: $T_f$. Zukauskas: $T_\infty$ with $Pr_s$ at $T_s$. Whitaker: $T_\infty$ with $\mu_s$ at $T_s$.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S9</span> Cylinder local Nusselt number</p>
+          <p>For a cylinder in cross flow at moderate $Re_D$ (laminar boundary layer), where on the surface is the local $Nu_\theta$ highest, and where is it lowest? What changes at very high $Re_D$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Highest at the forward stagnation point ($\theta = 0$), where the boundary layer is thinnest. It decreases as the layer grows and is lowest near separation ($\theta \approx 80^\circ$). Past separation it rises a bit from mixing in the wake.</p>
+            <p>At high $Re_D$ ($\gtrsim 10^5$), transition to turbulence near $\theta \approx 100^\circ$ produces a second maximum. Separation is delayed to about $140^\circ$, where a second minimum appears.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S10</span> Sphere limit</p>
+          <p>Why does $\overline{Nu}_D \to 2$ for a sphere as $Re_D \to 0$, while a flat plate's $Nu \to 0$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>With no flow, a sphere still loses heat by steady conduction into the infinite surrounding fluid. The conduction resistance $1/(4\pi k r)$ gives $h = k/r = 2k/D$, so $Nu_D = 2$. An infinite plate has no such finite steady conduction solution.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S11</span> Steady-state energy balance with radiation</p>
+          <p>A small object hangs in a 900°C air stream inside a furnace whose walls are at 600°C. Write the steady-state energy balance. Where does the object's temperature end up?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Convection in from the hotter air equals radiation out to the cooler walls:</p>
+            $$\bar h A(T_\infty - T_s) = \varepsilon\sigma A\left(T_s^4 - T_{sur}^4\right)$$
+            <div class="answer">$600^\circ\text{C} \lt T_s \lt 900^\circ\text{C}$. Solve iteratively, because $\bar h$ depends weakly on $T_s$ through $\mu_s$ and the radiation term is $T^4$.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S12</span> Turbulent plate: does length matter?</p>
+          <p>For a plate turbulent over its whole length, how does the total heat rate per unit width $q'$ scale with length $L$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\bar h \propto L^{-1/5}$, so $q' = \bar h L\Delta T \propto L^{4/5}$. Doubling the length gives $2^{0.8} = 1.74\times$ the heat rate, not 2×.</p>
+          </div></details>
+        </div>
+        </div>
+
+        <h2 id="long">Long Problems</h2>
+        <p>Properties come from Incropera Appendix A (Table A.4 for air at 1 atm). The values used are listed in each solution so you can check your table lookup.</p>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#long-list">Show all solutions</button></div>
+        <div id="long-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L1</span> Mixed boundary layer on a flat plate <span class="chip">like 7.20, 7.26</span></p>
+          <p>A flat plate 2 m long (in the flow direction) and 1 m wide is held at $T_s = 60^\circ$C. Air at 20°C and 1 atm flows over the top surface at 15 m/s.</p>
+          <ol type="a">
+            <li>Where does transition occur?</li>
+            <li>Find the average convection coefficient and the heat rate from the top surface.</li>
+            <li>Find the local $h$ just before and just after transition, and at the trailing edge.</li>
+            <li>A trip wire at the leading edge makes the flow turbulent over the whole plate. What is the new heat rate?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>Air at $T_f = (60+20)/2 = 40^\circ$C $= 313$ K: $\nu = 17.20\times10^{-6}$ m²/s, $k = 0.0273$ W/m·K, $Pr = 0.705$.</p>
+            <h4>(a) Transition</h4>
+            <p>$Re_L = \dfrac{(15)(2)}{17.20\times10^{-6}} = 1.74\times10^6 \gt 5\times10^5$, so the boundary layer is mixed.</p>
+            <p>$x_c = \dfrac{(5\times10^5)(17.20\times10^{-6})}{15} = 0.573$ m</p>
+            <h4>(b) Average coefficient and heat rate</h4>
+            $$\overline{Nu}_L = \left[0.037(1.74\times10^6)^{4/5} - 871\right](0.705)^{1/3} = 2467$$
+            $$\bar h = \frac{2467(0.0273)}{2} = 33.7\ \text{W/m}^2\text{K} \qquad q = \bar h A\,\Delta T = 33.7(2\times1)(40) = 2690\ \text{W}$$
+            <h4>(c) Local coefficients</h4>
+            <p>Just before $x_c$ (laminar): $h = \dfrac{k}{x_c}0.332Re_{x,c}^{1/2}Pr^{1/3} = 9.95$ W/m²·K</p>
+            <p>Just after $x_c$ (turbulent): $h = \dfrac{k}{x_c}0.0296Re_{x,c}^{4/5}Pr^{1/3} = 45.5$ W/m²·K, more than a 4× jump.</p>
+            <p>Trailing edge: $h_L = \dfrac{k}{L}0.0296Re_L^{4/5}Pr^{1/3} = 35.4$ W/m²·K</p>
+            <h4>(d) Fully turbulent</h4>
+            $$\overline{Nu}_L = 0.037Re_L^{4/5}Pr^{1/3} = 3242 \Rightarrow \bar h = 44.3\ \text{W/m}^2\text{K},\quad q = 3540\ \text{W}$$
+            <div class="answer">$x_c = 0.57$ m; $\bar h = 33.7$ W/m²·K, $q \approx 2.69$ kW; $h$ jumps from 10 to 45 W/m²·K at transition; fully turbulent $q \approx 3.54$ kW (+31%)</div>
+            <p><em>Comment:</em> HW problems like 7.20 and 7.26 tell you to assume turbulent flow over the whole surface. Then you use the 0.037 form with no −871 term.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L2</span> Unheated starting length <span class="chip">like 7.41</span></p>
+          <p>Air at 25°C flows at 3 m/s over a plate 0.8 m long and 0.5 m wide. The first $\xi = 0.4$ m is unheated ($T_s = T_\infty$). The remaining 0.4 m is held at 75°C.</p>
+          <ol type="a">
+            <li>Find the local $h$ at $x = 0.5$ m and at the trailing edge ($x = 0.8$ m). Compare with the values you'd get with no unheated length.</li>
+            <li>Find the average $h$ over the heated section and the heat rate.</li>
+            <li>Compare with a 0.4 m plate heated from its own leading edge.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>Air at $T_f = 50^\circ$C $= 323$ K: $\nu = 18.20\times10^{-6}$ m²/s, $k = 0.0280$ W/m·K, $Pr = 0.704$.</p>
+            <p>$Re_L = 3(0.8)/18.20\times10^{-6} = 1.32\times10^5 \lt 5\times10^5$, so the flow is laminar everywhere. Note that $x$ is always measured from the <em>leading edge of the plate</em>.</p>
+            <h4>(a) Local coefficients</h4>
+            <p>At $x = 0.5$ m: $Re_x = 8.24\times10^4$, $Nu_x|_{\xi=0} = 0.332Re_x^{1/2}Pr^{1/3} = 84.8$, so $h|_{\xi=0} = 84.8(0.028)/0.5 = 4.75$ W/m²·K.</p>
+            $$h_x = \frac{4.75}{\left[1-(0.4/0.5)^{3/4}\right]^{1/3}} = \frac{4.75}{(0.154)^{1/3}} = 8.86\ \text{W/m}^2\text{K}$$
+            <p>At $x = 0.8$ m: $Re_x = 1.32\times10^5$, $Nu_x|_{\xi=0} = 107.3$, $h|_{\xi=0} = 3.75$ W/m²·K, and $h_x = 3.75/[1-(0.5)^{3/4}]^{1/3} = 5.07$ W/m²·K.</p>
+            <h4>(b) Average over heated section ($p = 2$)</h4>
+            $$\overline{Nu}_L|_{\xi=0} = 0.664Re_L^{1/2}Pr^{1/3} = 214.5$$
+            $$\overline{Nu}_L = 214.5\left(\frac{0.8}{0.4}\right)\left[1-(0.5)^{3/4}\right]^{2/3} = 235 \Rightarrow \bar h = \frac{235(0.028)}{0.8} = 8.22\ \text{W/m}^2\text{K}$$
+            <p>Use the heated area only: $q = \bar h (L-\xi)W\Delta T = 8.22(0.4)(0.5)(50) = 82$ W.</p>
+            <h4>(c) Comparison</h4>
+            <p>A 0.4 m plate heated from its own leading edge gives $\bar h = 10.6$ W/m²·K and $q = 106$ W.</p>
+            <div class="answer">$h(0.5) = 8.9$, $h(0.8) = 5.1$ W/m²·K (1.9× and 1.35× the no-$\xi$ values); $\bar h = 8.2$ W/m²·K, $q \approx 82$ W, about 23% less than a fresh 0.4 m plate</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L3</span> Pipe in cross flow, then insulated <span class="chip">like 7.68</span></p>
+          <p>A 40-mm-diameter pipe with surface temperature 70°C is exposed to a −10°C wind blowing across it at 8 m/s.</p>
+          <ol type="a">
+            <li>Find the heat loss per unit length using Churchill–Bernstein.</li>
+            <li>Repeat with the Hilpert correlation and compare.</li>
+            <li>The pipe is wrapped in 15 mm of foam ($k = 0.026$ W/m·K). Assume the pipe wall stays at 70°C. Find the new heat loss and the outer surface temperature.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Properties</h4>
+            <p>Air at $T_f = (70 + (-10))/2 = 30^\circ$C $= 303$ K: $\nu = 16.19\times10^{-6}$ m²/s, $k = 0.0265$ W/m·K, $Pr = 0.707$.</p>
+            <h4>(a) Churchill–Bernstein</h4>
+            <p>$Re_D = 8(0.04)/16.19\times10^{-6} = 19{,}770$</p>
+            $$\overline{Nu}_D = 0.3 + \frac{0.62(19770)^{1/2}(0.707)^{1/3}}{[1+(0.4/0.707)^{2/3}]^{1/4}}\left[1+\left(\frac{19770}{282000}\right)^{5/8}\right]^{4/5} = 78.6$$
+            $$\bar h = \frac{78.6(0.0265)}{0.04} = 52.1\ \text{W/m}^2\text{K},\qquad q' = \bar h\pi D\,\Delta T = 52.1\pi(0.04)(80) = 524\ \text{W/m}$$
+            <h4>(b) Hilpert</h4>
+            <p>For $Re_D$ between 4000 and 40,000: $C = 0.193$, $m = 0.618$. Then $\overline{Nu}_D = 0.193(19770)^{0.618}(0.707)^{1/3} = 77.7$, giving $\bar h = 51.5$ W/m²·K and $q' = 517$ W/m. That's within about 1%, well inside the ±20% uncertainty.</p>
+            <h4>(c) Insulated</h4>
+            <p>$D_o = 70$ mm. Conduction resistance: $R'_{ins} = \dfrac{\ln(70/40)}{2\pi(0.026)} = 3.43$ m·K/W.</p>
+            <p>The outer surface will be close to $T_\infty$, so evaluate properties at $T_f \approx 264$ K: $\nu = 12.70\times10^{-6}$, $k = 0.0234$, $Pr = 0.716$. Then $Re_D = 8(0.07)/12.70\times10^{-6} = 44{,}100$, Churchill–Bernstein gives $\overline{Nu}_D = 127.6$, and $\bar h = 42.7$ W/m²·K, so $R'_{conv} = 1/(\bar h\pi D_o) = 0.107$ m·K/W.</p>
+            $$q' = \frac{70-(-10)}{3.43 + 0.107} = 22.6\ \text{W/m},\qquad T_{s,o} = -10 + 22.6(0.107) = -7.6^\circ\text{C}$$
+            <p>Check: $T_f = (-7.6-10)/2 = -8.8^\circ$C $\approx 264$ K. ✓</p>
+            <div class="answer">(a) 524 W/m; (b) 517 W/m; (c) 22.6 W/m (a 96% reduction), outer surface −7.6°C</div>
+            <p><em>Comment:</em> once insulated, the foam resistance dominates (3.43 vs. 0.107). That's why the exact value of $h$ barely matters for (c).</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L4</span> Thermocouple radiation error (sphere) <span class="chip">like 7.79</span></p>
+          <p>A thermocouple bead (sphere, $D = 1.0$ mm, $\varepsilon = 0.6$) measures the temperature of air flowing at 5 m/s through a duct. The duct walls are at 400 K and the thermocouple reads 500 K.</p>
+          <ol type="a">
+            <li>What is the true air temperature?</li>
+            <li>Estimate the bead's time constant ($\rho = 8500$ kg/m³, $c = 400$ J/kg·K).</li>
+            <li>Name two ways to reduce the measurement error.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Energy balance on the bead (steady)</h4>
+            <p>Convection from the hotter air equals radiation to the cooler walls:</p>
+            $$\bar h(T_\infty - T_j) = \varepsilon\sigma(T_j^4 - T_w^4) \Rightarrow T_\infty = T_j + \frac{\varepsilon\sigma(T_j^4 - T_w^4)}{\bar h}$$
+            <h4>Properties (Whitaker uses $T_\infty$, which is unknown, so iterate)</h4>
+            <p>Guessing $T_\infty \approx 520$ K gives 504 K after one pass. Re-evaluating at $T_\infty \approx 505$ K: $\nu = 39.4\times10^{-6}$ m²/s, $k = 0.041$ W/m·K, $Pr = 0.684$, $\mu = 271.7\times10^{-7}$ N·s/m². At $T_s = 500$ K, $\mu_s = 270.1\times10^{-7}$ N·s/m².</p>
+            <h4>(a) True air temperature</h4>
+            <p>$Re_D = 5(0.001)/39.4\times10^{-6} = 127$</p>
+            $$\overline{Nu}_D = 2 + \left[0.4(127)^{1/2} + 0.06(127)^{2/3}\right](0.684)^{0.4}\left(\frac{271.7}{270.1}\right)^{1/4} = 7.18$$
+            $$\bar h = \frac{7.18(0.041)}{0.001} = 294\ \text{W/m}^2\text{K}$$
+            $$\varepsilon\sigma(T_j^4 - T_w^4) = 0.6(5.67\times10^{-8})(500^4 - 400^4) = 1255\ \text{W/m}^2$$
+            $$T_\infty = 500 + \frac{1255}{294} = 504.3\ \text{K}$$
+            <h4>(b) Time constant</h4>
+            <p>$\tau = \dfrac{\rho V c}{\bar h A_s} = \dfrac{\rho c D}{6\bar h} = \dfrac{8500(400)(0.001)}{6(294)} = 1.9$ s. Lumped capacitance is fine for a metal bead: $Bi = \bar h(D/6)/k \ll 0.1$.</p>
+            <div class="answer">(a) $T_\infty \approx 504$ K (the reading is about 4 K low); (b) $\tau \approx 1.9$ s; (c) use a radiation shield, a low-emissivity coating, a higher gas velocity, or a smaller bead (all of which raise $\bar h$ or cut radiation)</div>
+          </div></details>
+        </div>
+        </div>
+
+        <footer>ME 332 · Oregon State University · Personal study notes</footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

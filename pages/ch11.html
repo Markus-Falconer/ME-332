@@ -13,9 +13,9 @@
 <body data-page="ch11">
   <header class="topbar">
     <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
-    <a class="brand" href="../index.html">ME <span>332</span> Heat Transfer</a>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
     <div class="spacer"></div>
-    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Light / Dark</button>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
   </header>
 
   <div class="layout">
@@ -24,31 +24,242 @@
     <main>
       <div class="content">
         <h1>Ch 11: Heat Exchangers</h1>
-        <p class="lead">Overall heat transfer coefficient, LMTD, and effectiveness–NTU.</p>
+        <p class="lead">Overall heat transfer coefficient, fouling, the LMTD method for sizing, and the effectiveness–NTU method for rating.</p>
 
-        <h2>Key Concepts</h2>
-        <div class="placeholder">Concept summary coming soon.</div>
+        <p class="jump">Jump to: <a href="#concepts">Concepts</a><a href="#equations">Equations</a><a href="#short">Short questions</a><a href="#long">Long problems</a></p>
 
-        <h2>Key Equations</h2>
-        <!-- Example equation block:
-        <div class="eq">
-          <div class="label">Newton's law of cooling</div>
-          $$q'' = h\,(T_s - T_\infty)$$
+        <h2 id="concepts">Key Concepts</h2>
+        <ul>
+          <li><strong>Types:</strong> concentric tube (parallel flow or counterflow), cross flow (each fluid <em>mixed</em> or <em>unmixed</em>), shell-and-tube (shell passes, tube passes, baffles), and compact exchangers (lots of area per volume, usually finned).</li>
+          <li><strong>Overall coefficient:</strong> $1/UA$ is the sum of every resistance between the two fluids: convection on each side, fouling on each side, and the wall. For a thin wall with equal areas, $U = (1/h_i + 1/h_o)^{-1}$. $U$ is <em>controlled by the smaller $h$</em>, so that's the side to add fins to.</li>
+          <li><strong>Fouling</strong> (scale, rust, deposits) adds resistance $R_f''/A$ on each side. It lowers $U$ and therefore $q$ for given inlet temperatures. You detect it by comparing a measured $U$ (from test data) with the clean or design value.</li>
+          <li><strong>Heat capacity rate</strong> is $C = \dot mc_p$. The fluid with $C_{min}$ has the <em>larger</em> temperature change.</li>
+          <li><strong>Parallel flow:</strong> both fluids enter at the same end, and $T_{c,o}$ can never exceed $T_{h,o}$. <strong>Counterflow:</strong> $T_{c,o}$ can exceed $T_{h,o}$, and it's the most effective arrangement for a given $UA$.</li>
+          <li><strong>LMTD method</strong>, $q = UA\,\Delta T_{lm}$: best for <em>sizing</em>, when the inlet and outlet temperatures are known (or follow from an energy balance) and you need $A$ or $L$. Define $\Delta T_1, \Delta T_2$ correctly for each arrangement. For multipass or cross flow, multiply by a correction factor $F$ applied to the counterflow LMTD.</li>
+          <li><strong>ε–NTU method:</strong> best for <em>rating</em>, when the exchanger ($UA$) and inlet temperatures are known and the outlet temperatures are unknown. $q = \varepsilon C_{min}(T_{h,i} - T_{c,i})$.</li>
+          <li><strong>$q_{max} = C_{min}(T_{h,i} - T_{c,i})$</strong> is what an infinitely long counterflow exchanger would transfer. Only the $C_{min}$ fluid can go through the full temperature difference.</li>
+          <li><strong>Phase change</strong> (condenser or boiler): the fluid's temperature is constant, so $C \to \infty$ and $C_r = 0$. Then $\varepsilon = 1 - e^{-NTU}$ for <em>every</em> arrangement.</li>
+          <li><strong>Diminishing returns:</strong> $\varepsilon$ rises quickly up to $NTU \approx 2$–$3$, then flattens. A bigger exchanger costs more and adds pressure drop for little gain.</li>
+          <li><strong>Counterflow with $C_r = 1$:</strong> $\Delta T$ is the same all along the exchanger, $\varepsilon = NTU/(1 + NTU)$, and the LMTD is just that constant $\Delta T$.</li>
+        </ul>
+
+        <h2 id="equations">Key Equations</h2>
+        <div class="eq"><div class="label">Overall heat transfer coefficient</div>
+          $$\frac{1}{UA} = \frac{1}{(hA)_c} + \frac{R''_{f,c}}{A_c} + R_w + \frac{R''_{f,h}}{A_h} + \frac{1}{(hA)_h},\qquad R_w = \frac{\ln(D_o/D_i)}{2\pi kL}$$
+          $$\text{thin wall, clean: } U = \left(\frac{1}{h_i} + \frac{1}{h_o}\right)^{-1}\qquad \text{fouling from test: } R_f'' = \frac{1}{U_{dirty}} - \frac{1}{U_{clean}}$$</div>
+        <div class="eq"><div class="label">Energy balances</div>
+          $$q = C_h(T_{h,i} - T_{h,o}) = C_c(T_{c,o} - T_{c,i}),\qquad C = \dot mc_p$$</div>
+        <div class="eq"><div class="label">LMTD method</div>
+          $$q = UA\,\Delta T_{lm},\qquad \Delta T_{lm} = \frac{\Delta T_2 - \Delta T_1}{\ln(\Delta T_2/\Delta T_1)}$$
+          <p>Parallel flow: $\Delta T_1 = T_{h,i} - T_{c,i}$, $\Delta T_2 = T_{h,o} - T_{c,o}$.</p>
+          <p>Counterflow: $\Delta T_1 = T_{h,i} - T_{c,o}$, $\Delta T_2 = T_{h,o} - T_{c,i}$.</p>
+          <p>Multipass or cross flow: $\Delta T_{lm} = F\,\Delta T_{lm,CF}$.</p></div>
+        <div class="eq"><div class="label">ε–NTU definitions</div>
+          $$\varepsilon = \frac{q}{q_{max}},\quad q_{max} = C_{min}(T_{h,i} - T_{c,i}),\quad NTU = \frac{UA}{C_{min}},\quad C_r = \frac{C_{min}}{C_{max}}$$</div>
+        <div class="eq"><div class="label">Effectiveness relations (Table 11.3)</div>
+          $$\text{Parallel: } \varepsilon = \frac{1 - \exp[-NTU(1 + C_r)]}{1 + C_r}$$
+          $$\text{Counterflow: } \varepsilon = \frac{1 - \exp[-NTU(1 - C_r)]}{1 - C_r\exp[-NTU(1 - C_r)]}\ (C_r \lt 1),\qquad \varepsilon = \frac{NTU}{1 + NTU}\ (C_r = 1)$$
+          $$\text{Shell-and-tube, 1 shell pass: } \varepsilon_1 = 2\left\{1 + C_r + (1 + C_r^2)^{1/2}\frac{1 + \exp[-NTU(1 + C_r^2)^{1/2}]}{1 - \exp[-NTU(1 + C_r^2)^{1/2}]}\right\}^{-1}$$
+          $$\text{Cross flow, both unmixed: } \varepsilon = 1 - \exp\left[\frac{NTU^{0.22}}{C_r}\left\{\exp(-C_rNTU^{0.78}) - 1\right\}\right]$$
+          $$\text{Any exchanger, } C_r = 0: \varepsilon = 1 - \exp(-NTU)$$</div>
+        <div class="eq"><div class="label">NTU relations (Table 11.4)</div>
+          $$\text{Parallel: } NTU = -\frac{\ln[1 - \varepsilon(1 + C_r)]}{1 + C_r}\qquad \text{Counterflow: } NTU = \frac{1}{C_r - 1}\ln\left(\frac{\varepsilon - 1}{\varepsilon C_r - 1}\right)$$
+          $$\text{1 shell pass: } NTU = -(1 + C_r^2)^{-1/2}\ln\left(\frac{E - 1}{E + 1}\right),\quad E = \frac{2/\varepsilon - (1 + C_r)}{(1 + C_r^2)^{1/2}}\qquad C_r = 0: NTU = -\ln(1 - \varepsilon)$$</div>
+
+        <h2 id="short">Short Questions</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>
+        <div id="short-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S1</span> Outlet temperature limits</p>
+          <p>Can the cold fluid leave hotter than the hot fluid leaves, (a) in parallel flow, (b) in counterflow? Can $T_{c,o}$ ever exceed $T_{h,i}$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">(a) No; the best case is that they approach the same temperature. (b) Yes. $T_{c,o} \gt T_{h,i}$ is never possible (second law).</div>
+          </div></details>
         </div>
-        -->
-        <div class="placeholder">Equations coming soon.</div>
 
-        <h2>Practice Problems</h2>
-        <!-- Example problem with hidden solution:
-        <details class="problem">
-          <summary>Problem 1 — Short title</summary>
-          <p>Problem statement…</p>
-          <div class="solution">
-            <p><strong>Solution:</strong> …</p>
-          </div>
-        </details>
-        -->
-        <div class="placeholder">Practice problems coming soon.</div>
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S2</span> Why $C_{min}$ in $q_{max}$?</p>
+          <p>Why is $q_{max} = C_{min}(T_{h,i} - T_{c,i})$ and not $C_{max}(T_{h,i} - T_{c,i})$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Energy balance: $C_{min}\Delta T_{min\text{-}fluid} = C_{max}\Delta T_{max\text{-}fluid}$. If the $C_{max}$ fluid changed by the full $\Delta T_{max}$, the $C_{min}$ fluid would have to change by <em>more</em> than $\Delta T_{max}$, which is impossible. Only the $C_{min}$ fluid can go through the full difference.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S3</span> Counterflow LMTD</p>
+          <p>Hot oil goes from 150°C to 90°C and water from 30°C to 70°C in counterflow. Find $\Delta T_{lm}$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\Delta T_1 = 150 - 70 = 80$ K and $\Delta T_2 = 90 - 30 = 60$ K, so $\Delta T_{lm} = (80 - 60)/\ln(80/60) = 69.5$ K.</p>
+            <div class="answer">$\Delta T_{lm} = 69.5$ K</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S4</span> Condenser</p>
+          <p>In a steam condenser $NTU = 2$. What is $\varepsilon$, and does the flow arrangement matter?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>The condensing fluid has $C \to \infty$, so $C_r = 0$ and $\varepsilon = 1 - e^{-2} = 0.865$.</p>
+            <div class="answer">$\varepsilon = 0.865$, and the arrangement doesn't matter when $C_r = 0$</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S5</span> Fouling</p>
+          <p>A clean exchanger has $U = 1000$ W/m²·K. After service, the total fouling factor is $R_f'' = 0.0005$ m²·K/W. New $U$?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$1/U = 1/1000 + 0.0005 = 0.0015$</p>
+            <div class="answer">$U = 667$ W/m²·K (a 33% drop)</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S6</span> Controlling resistance</p>
+          <p>A thin-walled tube has water inside ($h_i = 2000$ W/m²·K) and air outside ($h_o = 50$ W/m²·K). Find $U$. Where would you put fins?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$U = (1/2000 + 1/50)^{-1} = 48.8$ W/m²·K, which is almost exactly $h_o$.</p>
+            <div class="answer">$U \approx 49$ W/m²·K; put fins on the <strong>air side</strong></div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S7</span> Counterflow or parallel? <span class="chip">like 11.20</span></p>
+          <p>Hot fluid ($C_h = 2$ kW/K) enters at 100°C. Cold fluid ($C_c = 1$ kW/K) is heated from 20°C to 75°C. Find $T_{h,o}$. Which arrangement must this be?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$q = 1(75 - 20) = 55$ kW, so $T_{h,o} = 100 - 55/2 = 72.5^\circ$C.</p>
+            <div class="answer">$T_{c,o} = 75 \gt T_{h,o} = 72.5^\circ$C, which is impossible in parallel flow. It must be counterflow.</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S8</span> Balanced counterflow</p>
+          <p>A counterflow exchanger has $C_h = C_c$ and $NTU = 3$. Find $\varepsilon$. How does $\Delta T$ vary along the exchanger?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>$\varepsilon = NTU/(1 + NTU) = 0.75$. With equal $C$ the two temperature lines are parallel, so $\Delta T$ is constant along the length.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S9</span> Which method?</p>
+          <p>For each case, pick LMTD or ε–NTU: (a) find the area needed to cool oil from 120°C to 70°C with water at known flow and inlet temperature; (b) find the outlet temperatures of an existing exchanger with known $UA$.</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <div class="answer">(a) LMTD (sizing: all temperatures follow from the energy balance). (b) ε–NTU (rating: outlets unknown, so LMTD would need iteration).</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S10</span> Making it bigger</p>
+          <p>A counterflow exchanger operates at $NTU = 4$ with $C_r = 0.5$. If you double its length, how much does $\varepsilon$ increase?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>At $NTU = 4$: $\varepsilon = (1 - e^{-2})/(1 - 0.5e^{-2}) = 0.927$. At $NTU = 8$: $\varepsilon = (1 - e^{-4})/(1 - 0.5e^{-4}) = 0.991$.</p>
+            <div class="answer">From 0.93 to 0.99: double the size for about 7% more heat transfer</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S11</span> Mixed vs. unmixed</p>
+          <p>In a cross-flow exchanger, what do "mixed" and "unmixed" mean?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p><strong>Unmixed:</strong> the fluid is confined in tubes or fin channels, so its temperature varies across the flow direction as well as along it. <strong>Mixed:</strong> the fluid can move freely across the flow (like air over a bare tube bank), so its temperature is uniform across the flow and only varies along it. Real exchangers fall somewhere in between.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">S12</span> Multipass LMTD</p>
+          <p>How do you apply the LMTD method to a 1-shell-pass, 2-tube-pass exchanger?</p>
+          <details class="reveal"><summary>Show answer</summary><div class="solution">
+            <p>Compute $\Delta T_{lm}$ as if the exchanger were <em>counterflow</em>, then multiply by $F$ from Fig. 11.10, which depends on $P = (t_o - t_i)/(T_i - t_i)$ and $R = (T_i - T_o)/(t_o - t_i)$. So $q = UAF\Delta T_{lm,CF}$, with $F \le 1$.</p>
+          </div></details>
+        </div>
+        </div>
+
+        <h2 id="long">Long Problems</h2>
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#long-list">Show all solutions</button></div>
+        <div id="long-list">
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L1</span> Sizing a concentric tube exchanger (LMTD) <span class="chip">like 11.18a</span></p>
+          <p>Engine oil ($\dot m = 0.3$ kg/s, $c_p = 2130$ J/kg·K) is cooled from 120°C to 70°C by water ($\dot m = 0.4$ kg/s, $c_p = 4179$ J/kg·K) entering at 20°C. The inner tube is thin-walled with $D = 30$ mm, and $U = 300$ W/m²·K.</p>
+          <ol type="a">
+            <li>Find $q$ and the water outlet temperature.</li>
+            <li>Find the required tube length for counterflow.</li>
+            <li>Find the required length for parallel flow.</li>
+            <li>Check (b) with the ε–NTU method.</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>(a) Heat rate and water outlet</h4>
+            <p>$C_h = 0.3(2130) = 639$ W/K and $C_c = 0.4(4179) = 1672$ W/K.</p>
+            <p>$q = C_h(120 - 70) = 31{,}950$ W, so $T_{c,o} = 20 + 31950/1672 = 39.1^\circ$C.</p>
+            <h4>(b) Counterflow</h4>
+            <p>$\Delta T_1 = 120 - 39.1 = 80.9$ K and $\Delta T_2 = 70 - 20 = 50$ K, so $\Delta T_{lm} = 64.2$ K.</p>
+            $$A = \frac{q}{U\Delta T_{lm}} = \frac{31950}{300(64.2)} = 1.66\ \text{m}^2 \Rightarrow L = \frac{A}{\pi D} = \frac{1.66}{\pi(0.03)} = 17.6\ \text{m}$$
+            <h4>(c) Parallel flow</h4>
+            <p>$\Delta T_1 = 120 - 20 = 100$ K and $\Delta T_2 = 70 - 39.1 = 30.9$ K, so $\Delta T_{lm} = 58.8$ K. Then $A = 1.81$ m² and $L = 19.2$ m.</p>
+            <h4>(d) ε–NTU check</h4>
+            <p>$C_{min} = 639$ W/K, $C_r = 0.382$, $q_{max} = 639(100) = 63{,}900$ W, so $\varepsilon = 0.500$.</p>
+            <p>Counterflow NTU relation: $NTU = \dfrac{1}{0.382 - 1}\ln\dfrac{0.5 - 1}{0.5(0.382) - 1} = 0.779$. Then $UA = 0.779(639) = 498$ W/K, so $A = 1.66$ m² ✓</p>
+            <div class="answer">$q = 32.0$ kW, $T_{c,o} = 39.1^\circ$C; counterflow $L = 17.6$ m; parallel $L = 19.2$ m (9% longer for the same duty)</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L2</span> Rating an existing exchanger (ε–NTU) <span class="chip">like 11.17</span></p>
+          <p>An exchanger has $A = 8$ m² and $U = 450$ W/m²·K. Hot water enters at 90°C and 0.5 kg/s. Cold water enters at 15°C and 0.8 kg/s. Use $c_p = 4190$ J/kg·K for both. Find $q$ and both outlet temperatures for (a) counterflow, (b) parallel flow.</p>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>Setup</h4>
+            <p>$C_h = 2095$ W/K ($= C_{min}$) and $C_c = 3352$ W/K, so $C_r = 0.625$.</p>
+            <p>$NTU = 450(8)/2095 = 1.718$ and $q_{max} = 2095(75) = 157.1$ kW.</p>
+            <h4>(a) Counterflow</h4>
+            $$\varepsilon = \frac{1 - e^{-1.718(0.375)}}{1 - 0.625e^{-1.718(0.375)}} = 0.707 \Rightarrow q = 111\ \text{kW}$$
+            <p>$T_{h,o} = 90 - 111{,}100/2095 = 37.0^\circ$C and $T_{c,o} = 15 + 111{,}100/3352 = 48.1^\circ$C.</p>
+            <h4>(b) Parallel flow</h4>
+            $$\varepsilon = \frac{1 - e^{-1.718(1.625)}}{1.625} = 0.578 \Rightarrow q = 90.8\ \text{kW}$$
+            <p>$T_{h,o} = 46.7^\circ$C and $T_{c,o} = 42.1^\circ$C.</p>
+            <div class="answer">Counterflow: 111 kW, outlets 37.0 / 48.1°C. Parallel: 90.8 kW, outlets 46.7 / 42.1°C. Same hardware, 22% more heat in counterflow.</div>
+            <p><em>Comment:</em> in counterflow $T_{c,o} = 48.1 \gt T_{h,o} = 37.0^\circ$C, which only counterflow allows.</p>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L3</span> Has it fouled? <span class="chip">like 11.18b, 11.24</span></p>
+          <p>A counterflow exchanger with $A = 4$ m² was designed for $U = 120$ W/m²·K. In a test, hot oil ($\dot m = 0.25$ kg/s, $c_p = 2200$ J/kg·K) is cooled from 130°C to 80°C by water ($\dot m = 0.30$ kg/s, $c_p = 4180$ J/kg·K) entering at 20°C.</p>
+          <ol type="a">
+            <li>Find the actual $U$ from the test data. Has fouling occurred?</li>
+            <li>Find the fouling factor.</li>
+            <li>What would the oil outlet temperature be if the exchanger were clean?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>(a) Actual $U$</h4>
+            <p>$C_h = 550$ W/K and $C_c = 1254$ W/K. $q = 550(50) = 27.5$ kW, so $T_{c,o} = 20 + 27500/1254 = 41.9^\circ$C.</p>
+            <p>$\Delta T_1 = 130 - 41.9 = 88.1$ K and $\Delta T_2 = 80 - 20 = 60$ K, so $\Delta T_{lm} = 73.1$ K.</p>
+            $$U_{test} = \frac{q}{A\Delta T_{lm}} = \frac{27500}{4(73.1)} = 94.0\ \text{W/m}^2\text{K} \lt 120$$
+            <h4>(b) Fouling factor</h4>
+            $$R_f'' = \frac{1}{94.0} - \frac{1}{120} = 2.3\times10^{-3}\ \text{m}^2\text{K/W}$$
+            <h4>(c) Clean exchanger</h4>
+            <p>$NTU = 120(4)/550 = 0.873$ and $C_r = 0.439$. The counterflow relation gives $\varepsilon = 0.530$, so $q = 0.530(550)(110) = 32.0$ kW and $T_{h,o} = 130 - 32000/550 = 71.7^\circ$C.</p>
+            <div class="answer">$U = 94$ vs. 120 W/m²·K, so yes, it has fouled; $R_f'' \approx 0.0023$ m²·K/W; the clean oil outlet would be about 72°C instead of 80°C</div>
+          </div></details>
+        </div>
+
+        <div class="problem">
+          <p class="q-title"><span class="qnum">L4</span> Cross-flow radiator, both fluids unmixed <span class="chip">like 11.39</span></p>
+          <p>A car radiator (cross flow, both fluids unmixed) has $UA = 1500$ W/K. Coolant ($\dot m = 0.5$ kg/s, $c_p = 4200$ J/kg·K) enters at 95°C. Air ($\dot m = 1.2$ kg/s, $c_p = 1007$ J/kg·K) enters at 25°C.</p>
+          <ol type="a">
+            <li>Find $q$ and both outlet temperatures.</li>
+            <li>What $UA$ would be needed to reject 60 kW with the same flows and inlets?</li>
+          </ol>
+          <details class="reveal"><summary>Show solution</summary><div class="solution">
+            <h4>(a) Heat rate and outlets</h4>
+            <p>$C_w = 2100$ W/K and $C_a = 1208$ W/K ($= C_{min}$), so $C_r = 0.575$ and $NTU = 1500/1208 = 1.24$.</p>
+            $$\varepsilon = 1 - \exp\left[\frac{(1.24)^{0.22}}{0.575}\left\{\exp\left(-0.575(1.24)^{0.78}\right) - 1\right\}\right] = 0.594$$
+            <p>$q = 0.594(1208)(95 - 25) = 50.2$ kW</p>
+            <p>$T_{w,o} = 95 - 50200/2100 = 71.1^\circ$C and $T_{a,o} = 25 + 50200/1208 = 66.6^\circ$C.</p>
+            <h4>(b) $UA$ for 60 kW</h4>
+            <p>$\varepsilon = 60000/(1208 \times 70) = 0.709$. Equation 11.32 can't be solved for NTU directly, so iterate or read Fig. 11.14. This gives $NTU \approx 1.92$, so $UA \approx 2320$ W/K.</p>
+            <div class="answer">(a) $q = 50$ kW, coolant out at 71°C, air out at 67°C; (b) $UA \approx 2300$ W/K, about 55% more for 20% more heat</div>
+          </div></details>
+        </div>
+        </div>
 
         <footer>ME 332 · Oregon State University · Personal study notes</footer>
       </div>
