@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practice Exam 2 · ME 332</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+</head>
+<!-- data-page must match the page's id in assets/js/site.js -->
+<body data-page="practice2">
+  <header class="topbar">
+    <button id="menu-toggle" class="icon-btn" aria-label="Menu">☰</button>
+    <a class="brand" href="../index.html">ME <span>332</span><span class="brand-sub"> Heat Transfer</span></a>
+    <div class="spacer"></div>
+    <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">Dark mode</button>
+  </header>
+
+  <div class="layout">
+    <nav id="site-nav" class="sidebar"></nav>
+
+    <main>
+      <div class="content">
+        <h1>Practice Exam 2: Full Breakdown</h1>
+        <p class="lead">The professor's practice exam, with a plan, a hint and a step-by-step symbolic and numeric solution for every part. Work it timed first, then open one part at a time.</p>
+
+        <p class="jump">Jump to: <a href="#overview">Overview</a><a href="#p1">Problem 1</a><a href="#p2">Problem 2</a><a href="#p3">Problem 3</a><a href="#p4">Problem 4</a><a href="#key">Answer key</a><a href="#takeaways">Takeaways</a></p>
+
+        <div class="callout">
+          <strong>How to practice with this page</strong>
+          <ol>
+            <li>Set a timer for about 110 minutes (Exam 1's length) and use only the <a href="equations.html">Exam 2 equation sheet</a> and a calculator.</li>
+            <li>Write the symbolic answer before plugging in numbers. The professor's tips say numeric answers are worth a fraction of the points, and 1(d) is full credit for symbolic alone.</li>
+            <li>When you're stuck, open the <em>Hint</em> before the solution. Each part has its own solution, so you can check (a) before doing (b).</li>
+            <li>Score yourself with the <a href="#key">answer key</a>, then read the <a href="#takeaways">takeaways</a>.</li>
+          </ol>
+        </div>
+
+        <h2 id="overview">Exam Overview</h2>
+        <table>
+          <tr><th>Problem</th><th>Points</th><th>What it tests</th><th>Sheet pages</th><th>Time budget</th></tr>
+          <tr><td><a href="#p1">1</a></td><td>42</td><td>Concentric-tube exchanger: energy balance, turbulent tube $h$, laminar annulus $h$, $1/UA$ with fouling and LMTD to find $L$, entry lengths</td><td>7, 8, 10</td><td>~45 min</td></tr>
+          <tr><td><a href="#p2">2</a></td><td>15</td><td>ε–NTU rating of a balanced counterflow exchanger ($C_r = 1$)</td><td>10</td><td>~15 min</td></tr>
+          <tr><td><a href="#p3">3</a></td><td>25</td><td>Flat plate with internal generation: laminar vs. mixed, effect of orientation, fully turbulent scaling</td><td>5, 6</td><td>~25 min</td></tr>
+          <tr><td><a href="#p4">4</a></td><td>18</td><td>Constant-$T_s$ tube: laminar limit, back out $\bar h$ from measured temperatures, then $k_f$ from $Nu = 3.66$</td><td>7, 8</td><td>~20 min</td></tr>
+        </table>
+        <p>Every problem has the same backbone: <strong>check the regime → pick the correlation → get $\bar h$ → use it in an energy balance</strong>. All fluid properties are given, so there are no table lookups. The $Re$ check changes the answer in every single problem.</p>
+
+        <h3>Fluid properties (given for Problem 1)</h3>
+        <table>
+          <tr><th>Property</th><th>Water</th><th>Oil</th></tr>
+          <tr><td>$\dot m$ (kg/s)</td><td>0.5</td><td>1.0</td></tr>
+          <tr><td>$\rho$ (kg/m³)</td><td>1000</td><td>850</td></tr>
+          <tr><td>$c_p$ (J/kg·K)</td><td>4180</td><td>2000</td></tr>
+          <tr><td>$\mu$ (N·s/m²)</td><td>$7.5\times10^{-4}$</td><td>$4\times10^{-2}$</td></tr>
+          <tr><td>$k$ (W/m·K)</td><td>0.62</td><td>0.14</td></tr>
+          <tr><td>$Pr$</td><td>5.06</td><td>571</td></tr>
+        </table>
+
+        <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#problems">Show all solutions</button></div>
+        <div id="problems">
+
+        <!-- ===================== PROBLEM 1 ===================== -->
+        <h2 id="p1">Problem 1: Concentric-Tube Heat Exchanger (42 pts)</h2>
+        <div class="problem">
+          <p>Consider a counterflow heat exchanger with concentric pipes. Water enters on the inside with a temperature of 20°C and leaves at 50°C. Oil enters at 100°C. The inner pipe has a diameter of 4 cm. The wall between the two pipes is 0.25 cm thick aluminum ($k = 200$ W/m·K). The diameter of the outer pipe is 9 cm. Assume constant surface temperature for Nusselt correlations. For all parts, solve symbolically and numerically. For each part you may assume variables solved in previous parts are known. If using turbulent Nusselt correlations, use $n = 0.4$.</p>
+
+          <figure class="figure">
+            <svg viewBox="0 0 470 200" role="img" aria-label="Cross-section: water inside a 4 cm pipe, a 0.25 cm aluminum wall, oil in the annulus out to 9 cm, insulated outside">
+              <circle cx="100" cy="100" r="96" fill="none" stroke="#9aa1a9" stroke-width="6" stroke-dasharray="5 4"/>
+              <circle cx="100" cy="100" r="90" fill="#f6c9b3" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="100" cy="100" r="22.5" fill="#6b7280"/>
+              <circle cx="100" cy="100" r="20" fill="#8ab8e6" stroke="currentColor" stroke-width="0.8"/>
+              <line x1="168" y1="32" x2="217" y2="24" class="stroke" stroke-width="1"/>
+              <text x="221" y="28">Insulated outer surface</text>
+              <line x1="160" y1="66" x2="217" y2="66" class="stroke" stroke-width="1"/>
+              <text x="221" y="70">Oil in annulus, out to D₃ = 9 cm</text>
+              <line x1="122" y1="98" x2="217" y2="108" class="stroke" stroke-width="1"/>
+              <text x="221" y="112">Al wall 0.25 cm → D₂ = 4.5 cm OD</text>
+              <line x1="107" y1="112" x2="217" y2="150" class="stroke" stroke-width="1"/>
+              <text x="221" y="154">Water inside, D₁ = 4 cm ID</text>
+            </svg>
+            <figcaption>Cross-section (to scale). Counterflow: water heats from 20 to 50°C, oil enters at 100°C. The annulus inner diameter is the inner pipe's <em>outside</em> diameter, $D_2 = 4 + 2(0.25) = 4.5$ cm.</figcaption>
+          </figure>
+
+          <p><strong>Given for part (c):</strong> laminar, fully developed annulus with the outer surface insulated, $Nu_i = h_iD_h/k$ and $D_h = D_o - D_i$:</p>
+          <table>
+            <tr><th>$D_i/D_o$</th><td>0</td><td>0.05</td><td>0.10</td><td>0.25</td><td>0.50</td><td>≈1.00</td></tr>
+            <tr><th>$Nu_i$</th><td>—</td><td>17.46</td><td>11.56</td><td>7.37</td><td>5.74</td><td>4.86</td></tr>
+          </table>
+
+          <div class="callout">
+            <strong>Before you start: name the three diameters</strong>
+            $D_1 = 0.04$ m (inner pipe ID, water side), $D_2 = D_1 + 2t = 0.045$ m (inner pipe OD, oil side), $D_3 = 0.09$ m (outer pipe ID). Writing these down first prevents the most common error on this problem. Note that $D_2/D_3 = 0.50$ lands exactly on a table entry, which confirms the geometry.
+          </div>
+
+          <!-- (a) -->
+          <div class="part">
+            <p><strong>(a) 5 pts.</strong> What is the exit temperature of the oil?</p>
+            <details class="hint"><summary>Hint</summary><div>All four water numbers are known. Whatever heat the water gains, the oil loses.</div></details>
+            <details class="reveal"><summary>Show solution (a)</summary><div class="solution">
+              <h4>Approach</h4>
+              <p>Energy balance on both streams (sheet p. 10). Steady state, insulated outside, so no heat is lost to the surroundings.</p>
+              <h4>Symbolic</h4>
+              $$q = \dot m_wc_{p,w}(T_{w,o} - T_{w,i}) = \dot m_{oil}c_{p,oil}(T_{oil,i} - T_{oil,o})\ \Rightarrow\ T_{oil,o} = T_{oil,i} - \frac{\dot m_wc_{p,w}(T_{w,o} - T_{w,i})}{\dot m_{oil}c_{p,oil}}$$
+              <h4>Numbers</h4>
+              $$q = 0.5(4180)(50 - 20) = 62{,}700\ \text{W},\qquad T_{oil,o} = 100 - \frac{62{,}700}{1.0(2000)} = 100 - 31.35$$
+              <div class="answer">$T_{oil,o} = 68.65^\circ$C ≈ 68.7°C (with $q = 62.7$ kW, which you'll reuse in part d)</div>
+              <div class="check">$C_{oil} = 2000$ W/K is smaller than $C_w = 2090$ W/K, so the oil should change temperature more (31.4 K vs. 30 K). ✓ The oil leaves above the water's inlet temperature, as it must.</div>
+            </div></details>
+          </div>
+
+          <!-- (b) -->
+          <div class="part">
+            <p><strong>(b) 8 pts.</strong> Determine the heat transfer coefficient of the water inside the pipe. Assume the flow is fully developed.</p>
+            <details class="hint"><summary>Hint</summary><div>Find $Re_D$ first. It decides between $Nu = 3.66$ and Dittus–Boelter. You're given mass flow, not velocity.</div></details>
+            <details class="reveal"><summary>Show solution (b)</summary><div class="solution">
+              <h4>Approach</h4>
+              <p>Circular tube, so $Re_D = 4\dot m/(\pi D\mu)$ (from $\dot m = \rho u_m\pi D^2/4$). Check the regime, then use the matching fully developed correlation (sheet p. 8).</p>
+              <h4>Regime</h4>
+              $$Re_D = \frac{4\dot m_w}{\pi D_1\mu_w} = \frac{4(0.5)}{\pi(0.04)(7.5\times10^{-4})} = 21{,}200\ \gt 2300\ \Rightarrow\ \text{turbulent}$$
+              <p>It's also above $10^4$, so Dittus–Boelter is in its range. Use $n = 0.4$ as the problem says (the water is being heated anyway).</p>
+              <h4>Symbolic</h4>
+              $$h_w = \frac{k_w}{D_1}\,0.023\left(\frac{4\dot m_w}{\pi D_1\mu_w}\right)^{4/5}Pr_w^{0.4}$$
+              <h4>Numbers</h4>
+              $$Nu_D = 0.023(21{,}221)^{0.8}(5.06)^{0.4} = 0.023(2893)(1.913) = 127.3,\qquad h_w = \frac{127.3(0.62)}{0.04}$$
+              <div class="answer">$Re_D = 21{,}200$ (turbulent), $Nu_D = 127$, $h_w \approx 1970$ W/m²·K</div>
+              <div class="check">Forced convection of a liquid: 100–20,000 W/m²·K. ✓</div>
+            </div></details>
+          </div>
+
+          <!-- (c) -->
+          <div class="part">
+            <p><strong>(c) 9 pts.</strong> Determine the heat transfer coefficient of the oil in the outside pipe. Assume the flow is fully developed and the pipe is insulated on the outside. If the flow is laminar, use the correlation above. If it is turbulent, use the correlations for flow in a pipe.</p>
+            <details class="hint"><summary>Hint</summary><div>Use $D_h = D_3 - D_2$ and $A_c = \frac{\pi}{4}(D_3^2 - D_2^2)$ (sheet p. 10). The shortcut $4\dot m/(\pi D\mu)$ only works for a circular cross-section, so build $Re$ from $u_m = \dot m/(\rho A_c)$.</div></details>
+            <details class="reveal"><summary>Show solution (c)</summary><div class="solution">
+              <h4>Geometry</h4>
+              $$D_h = D_3 - D_2 = 0.09 - 0.045 = 0.045\ \text{m}$$
+              $$A_c = \frac{\pi}{4}(D_3^2 - D_2^2) = \frac{\pi}{4}(0.0081 - 0.002025) = 4.771\times10^{-3}\ \text{m}^2$$
+              <h4>Regime</h4>
+              $$u_m = \frac{\dot m_{oil}}{\rho_{oil}A_c} = \frac{1.0}{850(4.771\times10^{-3})} = 0.247\ \text{m/s}$$
+              $$Re_{D_h} = \frac{\rho_{oil}u_mD_h}{\mu_{oil}} = \frac{\dot m_{oil}D_h}{A_c\mu_{oil}} = \frac{1.0(0.045)}{(4.771\times10^{-3})(0.04)} = 236$$
+              <p>$236 \lt 2300$: laminar. So use the annulus table with $D_i/D_o = D_2/D_3 = 0.045/0.09 = 0.50$, giving $Nu_i = 5.74$.</p>
+              <h4>Symbolic</h4>
+              $$h_{oil} = \frac{Nu_i\,k_{oil}}{D_3 - D_2},\qquad Nu_i = f\!\left(\frac{D_2}{D_3}\right)\ \text{from the table}$$
+              <h4>Numbers</h4>
+              $$h_{oil} = \frac{5.74(0.14)}{0.045}$$
+              <div class="answer">$Re_{D_h} = 236$ (laminar), $Nu_i = 5.74$, $h_{oil} \approx 17.9$ W/m²·K</div>
+              <div class="trap">Using $D_i = 4$ cm (forgetting the wall) gives $D_h = 5$ cm and $D_i/D_o = 0.44$, which isn't in the table. Using $4\dot m/(\pi D_h\mu)$ gives $Re = 707$, which is wrong because the annulus isn't a circle. Both are still laminar here, but the method loses points.</div>
+              <div class="check">$h_{oil}$ is about 110 times smaller than $h_w$. Expect the oil side to dominate $1/UA$ in part (d).</div>
+            </div></details>
+          </div>
+
+          <!-- (d) -->
+          <div class="part">
+            <p><strong>(d) 13 pts.</strong> What is the length $L$ of the heat exchanger? Assume a fouling resistance on the outside pipe of $R''_o = 0.0001$ m²·K/W but no fouling on the inside pipe. (Hint: solve for $UA$.) Full points for symbolic, 1 pt extra credit for numerical.</p>
+            <details class="hint"><summary>Hint</summary><div>Two routes to $UA$ have to agree: $UA = q/\Delta T_{lm}$ from the temperatures, and $1/UA$ = the sum of resistances. Every resistance has $L$ in its denominator, so pull out $1/L$ and solve.</div></details>
+            <details class="reveal"><summary>Show solution (d)</summary><div class="solution">
+              <h4>Step 1: LMTD for counterflow</h4>
+              <p>At the end where oil enters, water leaves; at the other end, oil leaves and water enters.</p>
+              $$\Delta T_1 = T_{oil,i} - T_{w,o} = 100 - 50 = 50\ \text{K},\qquad \Delta T_2 = T_{oil,o} - T_{w,i} = 68.65 - 20 = 48.65\ \text{K}$$
+              $$\Delta T_{lm} = \frac{\Delta T_1 - \Delta T_2}{\ln(\Delta T_1/\Delta T_2)} = \frac{1.35}{\ln(50/48.65)} = 49.32\ \text{K}$$
+              <h4>Step 2: $UA$ from the rate equation</h4>
+              $$UA = \frac{q}{\Delta T_{lm}} = \frac{62{,}700}{49.32} = 1271\ \text{W/K}$$
+              <h4>Step 3: write $1/UA$ for this geometry (sheet p. 10, concentric tube)</h4>
+              <p>Water touches $A_w = \pi D_1L$. The oil and the fouling layer are on the outside of the inner pipe, $A_{oil} = \pi D_2L$. The wall is a cylinder from $D_1$ to $D_2$.</p>
+              $$\frac{1}{UA} = \frac{1}{h_w\pi D_1L} + \frac{\ln(D_2/D_1)}{2\pi k_{Al}L} + \frac{R''_o}{\pi D_2L} + \frac{1}{h_{oil}\pi D_2L}$$
+              <h4>Step 4: solve for $L$ (the symbolic answer)</h4>
+              $$L = \frac{q}{\Delta T_{lm}}\left[\frac{1}{h_w\pi D_1} + \frac{\ln(D_2/D_1)}{2\pi k_{Al}} + \frac{R''_o}{\pi D_2} + \frac{1}{h_{oil}\pi D_2}\right]$$
+              <p>with $q$ from (a), $\Delta T_{lm}$ from step 1, $h_w$ from (b) and $h_{oil}$ from (c).</p>
+              <h4>Numbers: resistance per unit length (m·K/W)</h4>
+              <table>
+                <tr><th>Term</th><th>Expression</th><th>Value</th><th>Share</th></tr>
+                <tr><td>Water convection</td><td>$1/(h_w\pi D_1)$</td><td>$4.03\times10^{-3}$</td><td>1.0%</td></tr>
+                <tr><td>Aluminum wall</td><td>$\ln(1.125)/(2\pi\cdot200)$</td><td>$9.37\times10^{-5}$</td><td>0.02%</td></tr>
+                <tr><td>Fouling (oil side)</td><td>$R''_o/(\pi D_2)$</td><td>$7.07\times10^{-4}$</td><td>0.2%</td></tr>
+                <tr><td>Oil convection</td><td>$1/(h_{oil}\pi D_2)$</td><td>$0.396$</td><td>98.8%</td></tr>
+                <tr><th>Sum</th><td></td><th>$0.401$</th><td></td></tr>
+              </table>
+              $$L = 1271(0.401)$$
+              <div class="answer">$L \approx 510$ m ($\Delta T_{lm} = 49.3$ K, $UA = 1271$ W/K)</div>
+              <div class="check">510 m is long, and the table shows why: the laminar oil carries 99% of the resistance. Removing the fouling or changing the wall material would barely matter. To shorten the exchanger you'd improve the oil side (fins, or a geometry that makes the oil turbulent). Saying this in one sentence is a cheap way to show understanding.</div>
+              <div class="trap">The fouling term divides by the oil-side area ($\pi D_2L$), not the water side. The wall uses $\ln(D_2/D_1)$, and the ratio of radii equals the ratio of diameters. Because $\Delta T_1 \approx \Delta T_2$ here, the LMTD is nearly the arithmetic mean, but write the LMTD formula anyway.</div>
+            </div></details>
+          </div>
+
+          <!-- (e) -->
+          <div class="part">
+            <p><strong>(e) 7 pts.</strong> We assumed the flow is fully developed. Determine the hydrodynamic and thermal entrance lengths ($x_{fd}$ and $x_{fd,t}$) for the water and the oil.</p>
+            <details class="hint"><summary>Hint</summary><div>Laminar and turbulent use different formulas (sheet p. 8). For the annulus, $D_h$ replaces $D$. Then compare each length with the $L$ you found in (d).</div></details>
+            <details class="reveal"><summary>Show solution (e)</summary><div class="solution">
+              <h4>Water (turbulent)</h4>
+              $$x_{fd} \approx x_{fd,t} \approx 10D_1 = 10(0.04) = 0.4\ \text{m}$$
+              <h4>Oil (laminar, $Re_{D_h} = 236$, $Pr = 571$)</h4>
+              $$x_{fd} = 0.05Re_{D_h}D_h = 0.05(236)(0.045) = 0.53\ \text{m}$$
+              $$x_{fd,t} = 0.05Re_{D_h}Pr\,D_h = 0.53(571) = 303\ \text{m}$$
+              <div class="answer">Water: $x_{fd} \approx x_{fd,t} \approx 0.4$ m. Oil: $x_{fd} \approx 0.53$ m, $x_{fd,t} \approx 303$ m.</div>
+              <div class="check">Compare with $L \approx 510$ m. The water and the oil's velocity profile are fully developed almost immediately. ✓ But the oil's thermal entry length is about 60% of the exchanger, so "fully developed" is <strong>not</strong> a good assumption for the oil. In the entry region $h$ is higher than the fully developed value, so the real exchanger would be shorter than 510 m: the estimate is conservative. The question is fishing for exactly this comparison.</div>
+            </div></details>
+          </div>
+        </div>
+
+        <!-- ===================== PROBLEM 2 ===================== -->
+        <h2 id="p2">Problem 2: Balanced Counterflow Exchanger (15 pts)</h2>
+        <div class="problem">
+          <p>Consider a counterflow heat exchanger with $UA = 1000$ W/K. Water flows in both streams with a mass flow rate of 0.1 kg/s and $c_p = 4180$ J/kg·K. On the cold side the water enters at 10°C. On the hot side it enters at 70°C.</p>
+          <p class="sheet-ref">Tests: ε–NTU rating (outlets unknown, so not LMTD) and the $C_r = 1$ special case. Sheet p. 10.</p>
+
+          <!-- (a) -->
+          <div class="part">
+            <p><strong>(a) 8 pts.</strong> What is the effectiveness of the system?</p>
+            <details class="hint"><summary>Hint</summary><div>Compute $C_h$ and $C_c$. When they're equal, the general counterflow ε formula turns into 0/0. Use its limit, or think about what happens to $T_h - T_c$ along the exchanger.</div></details>
+            <details class="reveal"><summary>Show solution (a)</summary><div class="solution">
+              <h4>Capacity rates and NTU</h4>
+              $$C_h = C_c = \dot mc_p = 0.1(4180) = 418\ \text{W/K}\ \Rightarrow\ C_{min} = C_{max} = 418,\quad C_r = 1$$
+              $$NTU = \frac{UA}{C_{min}} = \frac{1000}{418} = 2.39$$
+              <h4>Effectiveness for counterflow with $C_r = 1$</h4>
+              $$\varepsilon = \frac{NTU}{1 + NTU} = \frac{2.39}{3.39}$$
+              <h4>Why (if the table isn't given)</h4>
+              <p>With equal capacity rates, both streams change temperature by the same amount, so $\Delta T = T_h - T_c$ is the same everywhere. At the hot end, $\Delta T = T_{h,i} - T_{c,o}$. Then $q = UA\,\Delta T = C(T_{c,o} - T_{c,i})$. Solving:</p>
+              $$\varepsilon = \frac{q}{C(T_{h,i} - T_{c,i})} = \frac{UA}{C + UA} = \frac{NTU}{1 + NTU}$$
+              <div class="answer">$NTU = 2.39$, $C_r = 1$, $\varepsilon \approx 0.705$</div>
+              <div class="trap">Plugging $C_r = 1$ into $\varepsilon = \dfrac{1 - e^{-NTU(1 - C_r)}}{1 - C_re^{-NTU(1 - C_r)}}$ gives 0/0. Don't stop there or approximate with $C_r = 0.99$; use the limit.</div>
+            </div></details>
+          </div>
+
+          <!-- (b) -->
+          <div class="part">
+            <p><strong>(b) 7 pts.</strong> What are the exit temperatures of the two streams?</p>
+            <details class="hint"><summary>Hint</summary><div>$q = \varepsilon q_{max}$, then an energy balance on each stream.</div></details>
+            <details class="reveal"><summary>Show solution (b)</summary><div class="solution">
+              <h4>Symbolic</h4>
+              $$q = \varepsilon C_{min}(T_{h,i} - T_{c,i}),\qquad T_{c,o} = T_{c,i} + \frac{q}{C_c},\qquad T_{h,o} = T_{h,i} - \frac{q}{C_h}$$
+              <h4>Numbers</h4>
+              $$q = 0.705(418)(70 - 10) = 17{,}690\ \text{W},\qquad \frac{q}{C} = \frac{17{,}690}{418} = 42.3\ \text{K}$$
+              <div class="answer">$T_{c,o} \approx 52.3^\circ$C, $T_{h,o} \approx 27.7^\circ$C ($q \approx 17.7$ kW)</div>
+              <div class="check">$\Delta T$ at the hot end is $70 - 52.3 = 17.7$ K and at the cold end $27.7 - 10 = 17.7$ K: constant, as it should be for $C_r = 1$. And $q = UA\,\Delta T = 1000(17.7) = 17.7$ kW. ✓ The cold outlet is hotter than the hot outlet, which is fine (only possible in counterflow).</div>
+            </div></details>
+          </div>
+        </div>
+
+        <!-- ===================== PROBLEM 3 ===================== -->
+        <h2 id="p3">Problem 3: Heated Plate, Two Orientations (25 pts)</h2>
+        <div class="problem">
+          <p>Air at $T_\infty = 300$ K blows over a hot flat plate at 5 m/s. The plate is 4 m by 2 m. There is energy generation within the plate of 6000 W/m³, and the plate is 0.1 m thick. The plate is insulated on the bottom, so heat is only lost by convection from the top. Assume the plate surface is at a constant temperature.</p>
+          <p>For the air: $k = 0.03$ W/m·K, $Pr = 0.7$, $\mu = 2.08\times10^{-5}$ N·s/m², $\rho = 0.995$ kg/m³. Assume $Re_{x,c} = 5\times10^5$.</p>
+          <p class="sheet-ref">Tests: laminar vs. mixed flat-plate correlations (sheet pp. 5–6), a surface energy balance with generation, and how $\bar h$ scales with plate length.</p>
+
+          <div class="callout">
+            <strong>Setup that covers both (a) and (b)</strong>
+            Steady state with an insulated bottom: everything generated leaves through the top by convection.
+            $$\dot q(LWt) = \bar h(LW)(T_s - T_\infty)\ \Rightarrow\ T_s = T_\infty + \frac{\dot qt}{\bar h},\qquad q'' = \dot qt = 6000(0.1) = 600\ \text{W/m}^2$$
+            The area and $q''$ are the same in both orientations (total $q = 4.8$ kW). Only $\bar h$ changes, because $L$ in $Re_L$ and $Nu_L$ is the length <em>along the flow</em>.
+          </div>
+
+          <!-- (a) -->
+          <div class="part">
+            <p><strong>(a) 10 pts.</strong> What is the surface temperature if the long side is aligned with the wind ($L = 4$ m)?</p>
+            <details class="hint"><summary>Hint</summary><div>Compute $Re_L$ and compare with $5\times10^5$. Above it, the boundary layer is laminar at the front and turbulent at the back: that's the "$-871$" correlation.</div></details>
+            <details class="reveal"><summary>Show solution (a)</summary><div class="solution">
+              <h4>Regime</h4>
+              $$Re_L = \frac{\rho u_\infty L}{\mu} = \frac{0.995(5)(4)}{2.08\times10^{-5}} = 9.57\times10^5\ \gt 5\times10^5\ \Rightarrow\ \text{mixed}$$
+              <p>Transition happens at $x_c = Re_{x,c}\mu/(\rho u_\infty) = 2.09$ m, so roughly the back half of the plate is turbulent.</p>
+              <h4>Symbolic</h4>
+              $$T_s = T_\infty + \frac{\dot qt\,L}{k\left(0.037Re_L^{4/5} - 871\right)Pr^{1/3}}$$
+              <h4>Numbers</h4>
+              $$\overline{Nu}_L = \left[0.037(9.57\times10^5)^{0.8} - 871\right](0.7)^{1/3} = (2253 - 871)(0.888) = 1227$$
+              $$\bar h = \frac{1227(0.03)}{4} = 9.21\ \text{W/m}^2\text{K},\qquad T_s = 300 + \frac{600}{9.21} = 300 + 65.2$$
+              <div class="answer">$Re_L = 9.57\times10^5$ (mixed), $\bar h \approx 9.2$ W/m²·K, $T_s \approx 365$ K (92°C)</div>
+            </div></details>
+          </div>
+
+          <!-- (b) -->
+          <div class="part">
+            <p><strong>(b) 10 pts.</strong> What is the surface temperature if the short side is aligned with the wind ($L = 2$ m)?</p>
+            <details class="hint"><summary>Hint</summary><div>Same steps, new $Re_L$. Look closely at how it compares with $5\times10^5$.</div></details>
+            <details class="reveal"><summary>Show solution (b)</summary><div class="solution">
+              <h4>Regime</h4>
+              $$Re_L = \frac{0.995(5)(2)}{2.08\times10^{-5}} = 4.78\times10^5\ \lt 5\times10^5\ \Rightarrow\ \text{laminar over the whole plate}$$
+              <h4>Symbolic</h4>
+              $$T_s = T_\infty + \frac{\dot qt\,L}{k\left(0.664Re_L^{1/2}Pr^{1/3}\right)}$$
+              <h4>Numbers</h4>
+              $$\overline{Nu}_L = 0.664(4.78\times10^5)^{1/2}(0.7)^{1/3} = 0.664(691.6)(0.888) = 408$$
+              $$\bar h = \frac{408(0.03)}{2} = 6.12\ \text{W/m}^2\text{K},\qquad T_s = 300 + \frac{600}{6.12} = 300 + 98.1$$
+              <div class="answer">$Re_L = 4.78\times10^5$ (laminar), $\bar h \approx 6.1$ W/m²·K, $T_s \approx 398$ K (125°C)</div>
+              <div class="trap">$4.78\times10^5$ is close to $5\times10^5$, but it's below it, so the plate is laminar. Using the mixed correlation here would give $\overline{Nu} = 376$: the wrong correlation and a wrong answer.</div>
+              <div class="check">The long orientation runs about 33 K cooler. It wins only because it's long enough to become turbulent over its back half, where $h$ is much higher. Film temperatures are $(365 + 300)/2 \approx 333$ K and $(398 + 300)/2 \approx 349$ K; the given properties (air at about 350 K) are a reasonable fit, and since they're given, no iteration is needed.</div>
+            </div></details>
+          </div>
+
+          <!-- (c) -->
+          <div class="part">
+            <p><strong>(c) 5 pts.</strong> Suppose a trip wire at the front of the plate makes the flow turbulent over the whole plate. Which orientation would you expect to have the higher average heat transfer coefficient (and lower surface temperature), and why?</p>
+            <details class="hint"><summary>Hint</summary><div>Write $\bar h$ from the fully turbulent correlation and see how it depends on $L$ alone.</div></details>
+            <details class="reveal"><summary>Show solution (c)</summary><div class="solution">
+              <h4>Scaling argument</h4>
+              $$\bar h = \frac{k}{L}\,0.037\left(\frac{\rho u_\infty L}{\mu}\right)^{4/5}Pr^{1/3} \propto \frac{L^{4/5}}{L} = L^{-1/5}$$
+              <p>So the shorter flow length gives the higher $\bar h$: $\bar h_{2\text{ m}}/\bar h_{4\text{ m}} = 2^{1/5} = 1.15$.</p>
+              <h4>Physical reason</h4>
+              <p>The boundary layer thickens with distance from the leading edge, and a thicker layer means a smaller local $h$ ($h_x \propto x^{-1/5}$ when turbulent). A plate that's short in the flow direction never grows a thick boundary layer, so its average $h$ is higher.</p>
+              <h4>Numbers (not required)</h4>
+              <p>$L = 2$ m: $\bar h = 17.2$ W/m²·K, $T_s = 335$ K. $L = 4$ m: $\bar h = 15.0$ W/m²·K, $T_s = 340$ K.</p>
+              <div class="answer">Short side with the wind ($L = 2$ m): about 15% higher $\bar h$ and a lower $T_s$, because $\bar h \propto L^{-1/5}$ when the boundary layer is turbulent everywhere</div>
+              <div class="check">This reverses (a)–(b). Without the trip wire the long side won only because it reached transition. Once both are fully turbulent (or both fully laminar, $\bar h \propto L^{-1/2}$), shorter always wins. For full credit, name the orientation, give the scaling, and add one sentence on boundary layer growth.</div>
+            </div></details>
+          </div>
+        </div>
+
+        <!-- ===================== PROBLEM 4 ===================== -->
+        <h2 id="p4">Problem 4: Measuring a Fluid's Thermal Conductivity (18 pts)</h2>
+        <div class="problem">
+          <p>A fluid flows through a pipe whose walls are at a constant, known temperature. Your task is to determine the fluid's thermal conductivity.</p>
+          <table>
+            <tr><th>Parameter</th><th>Variable</th><th>Value</th></tr>
+            <tr><td>Tube length between A and B</td><td>$L$</td><td>2.5 m</td></tr>
+            <tr><td>Tube inner diameter</td><td>$D$</td><td>0.02 m</td></tr>
+            <tr><td>Fluid density</td><td>$\rho$</td><td>900 kg/m³</td></tr>
+            <tr><td>Fluid specific heat</td><td>$c_p$</td><td>2000 J/kg·K</td></tr>
+            <tr><td>Fluid viscosity</td><td>$\mu$</td><td>0.01 N·s/m²</td></tr>
+            <tr><td>Bulk temperature at the inlet</td><td>$T_b(0)$</td><td>15°C</td></tr>
+            <tr><td>Bulk temperature at the outlet</td><td>$T_b(L)$</td><td>45°C</td></tr>
+            <tr><td>Wall surface temperature</td><td>$T_{wall}$</td><td>100°C</td></tr>
+          </table>
+          <p class="sheet-ref">Tests: the laminar limit, backing $\bar h$ out of the constant-$T_s$ exponential (sheet p. 7), and the fact that fully developed laminar $Nu$ is a constant (sheet p. 8). Note that $k_f$ is the unknown, so you can't compute $Pr$ or $Nu$ from properties.</p>
+
+          <!-- (a) -->
+          <div class="part">
+            <p><strong>(a) 3 pts.</strong> What is the maximum velocity for which the flow is still laminar?</p>
+            <details class="hint"><summary>Hint</summary><div>Set $Re_D$ equal to the critical value on the sheet.</div></details>
+            <details class="reveal"><summary>Show solution (a)</summary><div class="solution">
+              $$Re_D = \frac{\rho u_mD}{\mu} = 2300\ \Rightarrow\ u_{max} = \frac{2300\mu}{\rho D} = \frac{2300(0.01)}{900(0.02)}$$
+              <div class="answer">$u_{max} \approx 1.28$ m/s</div>
+            </div></details>
+          </div>
+
+          <!-- (b) -->
+          <div class="part">
+            <p><strong>(b) 8 pts.</strong> To make sure the flow is laminar, you use 25% of the velocity from (a). At this velocity the outlet temperature is 45°C. Determine the average heat transfer coefficient $\bar h$. (If you didn't get (a), assume 1.2 m/s.)</p>
+            <details class="hint"><summary>Hint</summary><div>Constant wall temperature means the exponential $T_m(x)$ relation. You know both ends, so the only unknown in it is $\bar h$. Take the log.</div></details>
+            <details class="reveal"><summary>Show solution (b)</summary><div class="solution">
+              <h4>Flow</h4>
+              $$u_m = 0.25(1.278) = 0.319\ \text{m/s}\ \ (Re_D = 575)$$
+              $$\dot m = \rho u_m\frac{\pi D^2}{4} = 900(0.319)\frac{\pi(0.02)^2}{4} = 0.0903\ \text{kg/s}$$
+              <h4>Symbolic</h4>
+              $$\frac{T_s - T_b(L)}{T_s - T_b(0)} = \exp\left(-\frac{\pi DL\bar h}{\dot mc_p}\right)$$
+              $$\bar h = \frac{\dot mc_p}{\pi DL}\ln\frac{T_s - T_b(0)}{T_s - T_b(L)} = \frac{\rho u_mc_pD}{4L}\ln\frac{T_s - T_b(0)}{T_s - T_b(L)}$$
+              <h4>Numbers</h4>
+              $$\bar h = \frac{0.0903(2000)}{\pi(0.02)(2.5)}\ln\frac{100 - 15}{100 - 45} = 1150\ln(1.545) = 1150(0.4353)$$
+              <h4>Same answer by the LMTD route</h4>
+              $$q = \dot mc_p\Delta T_b = 0.0903(2000)(30) = 5419\ \text{W}$$
+              $$\Delta T_{lm} = \frac{85 - 55}{\ln(85/55)} = 68.9\ \text{K},\quad \bar h = \frac{q}{\pi DL\,\Delta T_{lm}} = 501$$
+              <div class="answer">$\bar h \approx 501$ W/m²·K (with the 1.2 m/s fallback: $u_m = 0.30$ m/s, $\bar h \approx 470$ W/m²·K)</div>
+              <div class="trap">Using the arithmetic-mean $\Delta T$ (70 K) gives 493 W/m²·K. It's close here, but it's the wrong method and graders take points for it.</div>
+            </div></details>
+          </div>
+
+          <!-- (c) -->
+          <div class="part">
+            <p><strong>(c) 7 pts.</strong> Determine the fluid's thermal conductivity $k_f$. Assume the flow is fully developed, so $h$ is the same the whole way along the pipe and equals $\bar h$. (Hint: remember that it is laminar.)</p>
+            <details class="hint"><summary>Hint</summary><div>Laminar + fully developed + constant wall temperature: what is $Nu_D$? It doesn't depend on $Re$ or $Pr$, which is exactly why this works without knowing $k_f$ first.</div></details>
+            <details class="reveal"><summary>Show solution (c)</summary><div class="solution">
+              <h4>Symbolic</h4>
+              $$Nu_D = \frac{\bar hD}{k_f} = 3.66\ \Rightarrow\ k_f = \frac{\bar hD}{3.66}$$
+              <h4>Numbers</h4>
+              $$k_f = \frac{501(0.02)}{3.66}$$
+              <div class="answer">$k_f \approx 2.74$ W/m·K (fallback: 2.57 W/m·K)</div>
+              <div class="check">$Re_D = 575 \lt 2300$, so laminar is confirmed. The resulting $Pr = \mu c_p/k_f = 7.3$ is a plausible liquid value.</div>
+              <p class="sheet-ref"><em>Going further (not needed for the exam):</em> with this $k_f$, $x_{fd,t} = 0.05Re_DPr\,D \approx 4.2$ m, longer than the 2.5 m tube. So the flow isn't really thermally developed, and the true $h$ is above $3.66k/D$. Using the thermal-entry correlation from the sheet instead gives $k_f \approx 1.7$ W/m·K. The problem tells you to assume fully developed, so 2.74 is the expected answer, but a one-line remark like this shows you checked the assumption.</p>
+            </div></details>
+          </div>
+        </div>
+
+        </div><!-- /problems -->
+
+        <h2 id="key">Answer Key</h2>
+        <table>
+          <tr><th>Part</th><th>Answer</th></tr>
+          <tr><td>1(a)</td><td>$q = 62.7$ kW, $T_{oil,o} = 68.7^\circ$C</td></tr>
+          <tr><td>1(b)</td><td>$Re_D = 21{,}200$ (turbulent), $Nu_D = 127$, $h_w \approx 1970$ W/m²·K</td></tr>
+          <tr><td>1(c)</td><td>$D_h = 0.045$ m, $Re_{D_h} = 236$ (laminar), $Nu_i = 5.74$, $h_{oil} \approx 17.9$ W/m²·K</td></tr>
+          <tr><td>1(d)</td><td>$\Delta T_{lm} = 49.3$ K, $UA = 1271$ W/K, $L \approx 510$ m</td></tr>
+          <tr><td>1(e)</td><td>Water $\approx 0.4$ m (both); oil $x_{fd} \approx 0.53$ m, $x_{fd,t} \approx 303$ m</td></tr>
+          <tr><td>2(a)</td><td>$C_r = 1$, $NTU = 2.39$, $\varepsilon = 0.705$</td></tr>
+          <tr><td>2(b)</td><td>$q = 17.7$ kW, $T_{c,o} = 52.3^\circ$C, $T_{h,o} = 27.7^\circ$C</td></tr>
+          <tr><td>3(a)</td><td>$Re_L = 9.57\times10^5$ (mixed), $\bar h = 9.2$ W/m²·K, $T_s \approx 365$ K</td></tr>
+          <tr><td>3(b)</td><td>$Re_L = 4.78\times10^5$ (laminar), $\bar h = 6.1$ W/m²·K, $T_s \approx 398$ K</td></tr>
+          <tr><td>3(c)</td><td>Short side with the wind; $\bar h \propto L^{-1/5}$, about 15% higher</td></tr>
+          <tr><td>4(a)</td><td>$u_{max} = 1.28$ m/s</td></tr>
+          <tr><td>4(b)</td><td>$\bar h \approx 501$ W/m²·K (470 with 1.2 m/s)</td></tr>
+          <tr><td>4(c)</td><td>$k_f \approx 2.74$ W/m·K (2.57 with 1.2 m/s)</td></tr>
+        </table>
+
+        <h2 id="takeaways">Takeaways for the Real Exam</h2>
+        <ol>
+          <li><strong>Regime check first, every time.</strong> This exam has five $Re$ checks, and each one changed the correlation: turbulent water vs. laminar oil, mixed vs. laminar plate, and the 2300 limit itself.</li>
+          <li><strong>Annulus bookkeeping:</strong> $D_i$ is the inner pipe's outside diameter. Use $Re = \dot mD_h/(A_c\mu)$ and $Nu = hD_h/k$. Each fluid's area in $1/UA$ is the surface it actually touches.</li>
+          <li><strong>Look at which resistance dominates.</strong> One weak side (laminar oil, gas) sets $UA$. A table of resistance shares takes one minute and is a strong "explain" answer.</li>
+          <li><strong>Balanced counterflow ($C_r = 1$):</strong> $\varepsilon = NTU/(1 + NTU)$ and $\Delta T$ is constant along the exchanger. The general formula is 0/0.</li>
+          <li><strong>How $\bar h$ scales with $L$:</strong> laminar $L^{-1/2}$, turbulent $L^{-1/5}$. Shorter is better unless the longer plate gets to trip into turbulence.</li>
+          <li><strong>Backing $\bar h$ out of data:</strong> constant-$T_s$ exponential or LMTD, never the arithmetic mean. Fully developed laminar $Nu$ is a constant, which is what lets you get $k_f$.</li>
+          <li><strong>"We assumed X" questions</strong> want a comparison: entry length vs. tube length, film temperature vs. property temperature, $Re$ vs. the critical value.</li>
+          <li><strong>Symbolic first.</strong> 1(d) gives full credit for the symbolic $L$ alone. Carry symbols through and plug in numbers once at the end.</li>
+        </ol>
+
+        <footer>ME 332 · Oregon State University · Personal study notes</footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

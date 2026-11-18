@@ -52,5 +52,6 @@ The sidebar and home page pick it up automatically.
 | Page | Contents |
 | --- | --- |
 | `midterm.html` | HW problem map, solving checklist, common mistakes, practice midterm (12 short + 6 long) |
-| `equations.html` | "Which correlation?" table and all Ch 7–11 equations (printable) |
+| `practice-exam2.html` | Professor's Practice Exam 2: overview, hints, step-by-step solutions, answer key, takeaways |
+| `equations.html` | Mirrors the Exam 2 equation sheet: what changed, sheet typos, what's not on it, "which correlation?" table (printable) |
 | `ch07.html` – `ch11.html` | Concepts, key equations, 12 short questions, 4 long worked problems each |

@@ -23,83 +23,218 @@
 
     <main>
       <div class="content">
-        <h1>Equation Sheet</h1>
-        <p class="lead">Ch 7–11 correlations on one page, plus the basics from the class equation sheet that these problems keep using. Prints cleanly.</p>
+        <h1>Equation Sheet (Exam 2)</h1>
+        <p class="lead">The professor's Exam 2 sheet, section by section and in the same order, with a one-line "when to use it" for each box. Typos on the sheet are corrected here and listed below so they don't trip you up in the exam.</p>
 
-        <p class="jump">Jump to: <a href="#pick">Which correlation?</a><a href="#basics">Basics</a><a href="#ch7">Ch 7</a><a href="#ch8">Ch 8</a><a href="#ch9">Ch 9</a><a href="#ch11">Ch 11</a></p>
+        <p class="jump">Jump to: <a href="#changes">What changed</a><a href="#typos">Sheet typos</a><a href="#missing">Not on the sheet</a><a href="#pick">Which correlation?</a><a href="#general">Conduction &amp; transient</a><a href="#convection">Convection basics</a><a href="#plate">Flat plate</a><a href="#internal">Internal flow</a><a href="#free">Free convection</a><a href="#hx">Heat exchangers</a><a href="#rad">Radiation</a></p>
         <div class="toolbar"><button class="icon-btn" onclick="window.print()">Print this sheet</button></div>
 
-        <h2 id="pick">Which Correlation Do I Use?</h2>
+        <h2 id="changes">What Changed Since the Exam 1 Sheet</h2>
+        <div class="callout">
+          <strong>Added (pages 4–10 are new)</strong>
+          <ul>
+            <li>All of convection: dimensionless numbers, boundary layers and Chilton–Colburn, flat plate (constant $T_s$ and constant $q''$), unheated starting length, flow around objects, internal flow, free convection, mixed convection.</li>
+            <li>Heat exchangers: $1/UA$ with fouling and fins, the concentric-tube form, annulus $D_h$ and $A_c$, LMTD and ε–NTU definitions.</li>
+            <li>Finned surface resistance $R_{conv,o} = 1/(\eta_ohA_t)$.</li>
+          </ul>
+          <strong>Removed</strong>
+          <ul>
+            <li>The heat diffusion equation (Cartesian, cylindrical and spherical).</li>
+            <li>2-D conduction: shape factors and the finite-difference approximations, including the transient (time-step) form.</li>
+            <li>One-term transient solutions for the infinite cylinder and sphere (only the plane wall is left).</li>
+            <li>The lumped-capacitance solution for constant $h$ with generation or applied flux (the $a$, $b$ form).</li>
+          </ul>
+          If any of the removed material shows up on Exam 2 you'd need it from memory, but the practice exam doesn't use any of it.
+        </div>
+
+        <h2 id="typos">Typos on the Sheet</h2>
+        <div class="callout warn">
+          <strong>Where the printed sheet is wrong (correct versions are used everywhere on this site)</strong>
+          <ul>
+            <li><strong>Laminar skin friction (p. 5):</strong> printed $C_{f,x} = 0.664Re_x^{1/2}$ and $\bar C_f = 1.328Re_x^{1/2}$. The exponent is <strong>$-1/2$</strong>: friction drops as the boundary layer grows.</li>
+            <li><strong>Turbulent boundary layer thickness (p. 5):</strong> printed $\delta = 0.37xRe_x^{1/5}$. It's $0.37xRe_x^{-1/5}$.</li>
+            <li><strong>Turbulent unheated starting length (p. 6):</strong> printed with the laminar exponents. The textbook form is $Nu_x = Nu_x|_{\xi=0}\big/[1 - (\xi/x)^{9/10}]^{1/9}$.</li>
+            <li><strong>Mean temperature with an external fluid (p. 7):</strong> printed identical to the constant-$T_s$ line. It should read $\dfrac{T_\infty - T_m(x)}{T_\infty - T_{m,i}} = \exp\left(-\dfrac{\bar UA_s}{\dot mc_p}\right)$, with $T_\infty$ in place of $T_s$ and $\bar UA_s$ in place of $\bar hPx$.</li>
+            <li><strong>Heat exchanger energy balance (p. 10):</strong> printed $\dot m_hc_{p,c}(T_{c,o} - T_{c,i})$. The cold side is $\dot m_cc_{p,c}(T_{c,o} - T_{c,i})$.</li>
+            <li><strong>Lumped total heat (p. 3):</strong> printed $(\rho Vc_p)(T_i - T_\infty[1 - \exp(t/\tau)])$. It's $Q = (\rho Vc_p)(T_i - T_\infty)[1 - \exp(-t/\tau)]$.</li>
+            <li><strong>Semi-infinite, constant flux (p. 4):</strong> the $q_s''(t)$ line under the constant-flux case is a copy of the constant-$T_s$ one. With constant flux, $q_s''$ is just the applied $q_o''$.</li>
+            <li><strong>$g(Pr)$ (p. 9):</strong> printed $1.328Pr$; the textbook has $1.238Pr$. The difference in $\overline{Nu}$ is under 2%, so either is fine.</li>
+            <li><strong>Energy conservation (p. 1):</strong> printed $\dot E_{gen} + \dot E_{in} + \dot E_{out}$. Read it as $\dot E_{in} - \dot E_{out} + \dot E_{gen}$.</li>
+          </ul>
+          If one of these matters for a problem, write the version you're using and a short note. Graders give credit for a stated, correct equation.
+        </div>
+
+        <h2 id="missing">Not on the Sheet: Know These or Expect Them Given</h2>
+        <div class="callout">
+          <strong>You need these and they aren't printed</strong>
+          <ul>
+            <li>$\sigma = 5.67\times10^{-8}$ W/m²·K⁴ and $g = 9.81$ m/s².</li>
+            <li><strong>Property temperature:</strong> film temperature $T_f = (T_s + T_\infty)/2$ for external flow and free convection (and $\beta = 1/T_f$ in kelvin). Mean temperature $\bar T_m = (T_{m,i} + T_{m,o})/2$ for internal flow.</li>
+            <li><strong>Circular tube Reynolds number from mass flow:</strong> $Re_D = 4\dot m/(\pi D\mu)$ (from $\dot m = \rho u_mA_c$). For an annulus, use $Re = \dot mD_h/(A_c\mu)$, not the circular-tube shortcut.</li>
+            <li><strong>Uniform $q_s''$ in a tube:</strong> $T_m(x) = T_{m,i} + \dfrac{q_s''P}{\dot mc_p}x$ and $T_s = T_m + q_s''/h$. Derive from $\dot mc_p\,dT_m = q_s''P\,dx$.</li>
+            <li><strong>LMTD end differences:</strong> counterflow $\Delta T_1 = T_{h,i} - T_{c,o}$, $\Delta T_2 = T_{h,o} - T_{c,i}$; parallel flow $\Delta T_1 = T_{h,i} - T_{c,i}$, $\Delta T_2 = T_{h,o} - T_{c,o}$. The sheet only says "each side".</li>
+            <li><strong>Counterflow with $C_r = 1$:</strong> the general ε formula is 0/0. Use $\varepsilon = NTU/(1 + NTU)$, or the fact that $\Delta T$ is constant along the exchanger.</li>
+          </ul>
+          <strong>Provided if needed ("see tables" / "other correlations provided as necessary")</strong>
+          <ul>
+            <li>$C$, $m$, $n$ for cylinders and other objects in cross flow (Hilpert, Zukauskas).</li>
+            <li>ε–NTU relations for specific arrangements. Copies are at the <a href="#eps-ref">bottom of the heat exchanger section</a>.</li>
+            <li>Annulus and noncircular duct $Nu$ tables (the practice exam supplied the annulus table).</li>
+            <li>Churchill–Bernstein, Churchill–Chu, Gnielinski, horizontal plate and cylinder free-convection correlations. They're on the chapter pages for HW, but the exam sheet doesn't have them.</li>
+          </ul>
+        </div>
+
+        <h2 id="pick">Which Correlation Do I Use? (sheet correlations)</h2>
         <table>
-          <tr><th>Situation</th><th>Check</th><th>Use</th><th>Properties at</th></tr>
-          <tr><td>Flat plate, parallel flow</td><td>$Re_L \lt 5\times10^5$</td><td>$0.664Re_L^{1/2}Pr^{1/3}$</td><td>$T_f$</td></tr>
-          <tr><td></td><td>$Re_L \gt 5\times10^5$</td><td>$(0.037Re_L^{4/5} - 871)Pr^{1/3}$</td><td>$T_f$</td></tr>
-          <tr><td></td><td>"assume turbulent"</td><td>$0.037Re_L^{4/5}Pr^{1/3}$</td><td>$T_f$</td></tr>
-          <tr><td>Plate with unheated start</td><td>laminar or turbulent</td><td>Eq. 7.42/7.43 (local), 7.44 (average)</td><td>$T_f$</td></tr>
-          <tr><td>Cylinder in cross flow</td><td>$Re_DPr \gtrsim 0.2$</td><td>Churchill–Bernstein (or Hilpert)</td><td>$T_f$</td></tr>
-          <tr><td>Sphere</td><td>$3.5 \lesssim Re_D \lesssim 7.6\times10^4$</td><td>Whitaker</td><td>$T_\infty$, $\mu_s$ at $T_s$</td></tr>
-          <tr><td>Tube, laminar, fully developed</td><td>$Re_D \lt 2300$, $L \gg x_{fd,t}$</td><td>$Nu = 4.36$ ($q''$) or $3.66$ ($T_s$)</td><td>$\bar T_m$</td></tr>
-          <tr><td>Tube, laminar, thermal entry</td><td>$x_{fd,t} = 0.05Re_DPr\,D \gtrsim L$</td><td>Hausen (8.57)</td><td>$\bar T_m$</td></tr>
-          <tr><td>Tube, turbulent</td><td>$Re_D \gtrsim 10^4$, $L/D \gt 10$</td><td>Dittus–Boelter ($n = 0.4$ heat, $0.3$ cool)</td><td>$\bar T_m$</td></tr>
-          <tr><td></td><td>$3000 \lesssim Re_D \lesssim 10^4$</td><td>Gnielinski</td><td>$\bar T_m$</td></tr>
-          <tr><td>Annulus or noncircular duct</td><td>—</td><td>$D_h = 4A_c/P$; Table 8.1/8.2 if laminar</td><td>$\bar T_m$</td></tr>
-          <tr><td>Vertical plate, free</td><td>$Ra_L \lesssim 10^9$</td><td>Eq. 9.27 (or similarity)</td><td>$T_f$</td></tr>
-          <tr><td></td><td>any $Ra_L$</td><td>Churchill–Chu 9.26</td><td>$T_f$</td></tr>
-          <tr><td>Horizontal plate, free</td><td>hot up / cold down</td><td>$0.54Ra^{1/4}$ or $0.15Ra^{1/3}$, $L = A_s/P$</td><td>$T_f$</td></tr>
-          <tr><td></td><td>hot down / cold up</td><td>$0.52Ra^{1/5}$, $L = A_s/P$</td><td>$T_f$</td></tr>
-          <tr><td>Horizontal cylinder, free</td><td>$Ra_D \lesssim 10^{12}$</td><td>Churchill–Chu 9.34</td><td>$T_f$</td></tr>
-          <tr><td>Heat exchanger: size it</td><td>temperatures known</td><td>LMTD ($\times F$ if multipass)</td><td>—</td></tr>
-          <tr><td>Heat exchanger: rate it</td><td>outlets unknown</td><td>ε–NTU</td><td>—</td></tr>
+          <tr><th>Situation</th><th>Check</th><th>Use</th><th>Sheet</th></tr>
+          <tr><td>Flat plate, constant $T_s$</td><td>$Re_L \lt 5\times10^5$</td><td>$\overline{Nu}_L = 0.664Re_L^{1/2}Pr^{1/3}$</td><td>p. 5</td></tr>
+          <tr><td></td><td>$Re_L \gt 5\times10^5$</td><td>$\overline{Nu}_L = (0.037Re_L^{4/5} - 871)Pr^{1/3}$</td><td>p. 6</td></tr>
+          <tr><td></td><td>"fully turbulent", trip wire</td><td>$\overline{Nu}_L = 0.037Re_L^{4/5}Pr^{1/3}$</td><td>p. 6</td></tr>
+          <tr><td>Flat plate, constant $q''$</td><td>local</td><td>$0.453Re_x^{1/2}Pr^{1/3}$ (lam), $0.0308Re_x^{4/5}Pr^{1/3}$ (turb)</td><td>p. 6</td></tr>
+          <tr><td></td><td>average</td><td>$0.680Re_L^{1/2}Pr^{1/3}$ (lam); turbulent uses the constant-$T_s$ forms</td><td>p. 6</td></tr>
+          <tr><td>Plate with unheated start $\xi$</td><td>$x$ from leading edge</td><td>local and average USL corrections, $p = 2$ or $8$</td><td>p. 6</td></tr>
+          <tr><td>Cylinder, sphere, other objects</td><td>$Re$ range in table</td><td>$\overline{Nu} = CRe^mPr^n$ (table given)</td><td>p. 7</td></tr>
+          <tr><td>Tube, laminar, fully developed</td><td>$Re_D \lt 2300$, $L \gg x_{fd,t}$</td><td>$Nu_D = 3.66$ ($T_s$) or $4.36$ ($q''$)</td><td>p. 8</td></tr>
+          <tr><td>Tube, laminar, thermal entry</td><td>velocity developed, $x_{fd,t} \gtrsim L$</td><td>$3.66 + \dfrac{0.0668(D/L)Re_DPr}{1 + 0.04[(D/L)Re_DPr]^{2/3}}$</td><td>p. 8</td></tr>
+          <tr><td>Tube, laminar, both developing</td><td>$x_{fd}$ and $x_{fd,t}$ both $\gtrsim L$</td><td>$1.86\left(\dfrac{Re_DPr}{L/D}\right)^{1/3}\left(\dfrac{\mu}{\mu_s}\right)^{0.14}$</td><td>p. 8</td></tr>
+          <tr><td>Tube, turbulent</td><td>$Re_D \gt 2300$ (ideally $\gtrsim 10^4$), $L/D \gt 10$</td><td>$0.023Re_D^{4/5}Pr^n$, $n = 0.4$ heating, $0.3$ cooling</td><td>p. 8</td></tr>
+          <tr><td>Annulus, noncircular duct</td><td>—</td><td>$D_h = 4A_c/P$ (annulus $D_o - D_i$); laminar: table given</td><td>pp. 7, 10</td></tr>
+          <tr><td>Vertical plate, free</td><td>$Ra_L \lt 10^9$</td><td>$0.59Ra_L^{1/4}$ or $\tfrac43(Gr_L/4)^{1/4}g(Pr)$</td><td>p. 9</td></tr>
+          <tr><td></td><td>$Ra_L \gt 10^9$</td><td>$0.1Ra_L^{1/3}$</td><td>p. 9</td></tr>
+          <tr><td>Forced + free</td><td>$Gr_L/Re_L^2 \approx 1$</td><td>$Nu^3 = Nu_F^3 \pm Nu_N^3$</td><td>p. 9</td></tr>
+          <tr><td>Heat exchanger: size it</td><td>all four temperatures known</td><td>$q = UA\Delta T_{lm}$</td><td>p. 10</td></tr>
+          <tr><td>Heat exchanger: rate it</td><td>outlets unknown, $UA$ known</td><td>ε–NTU</td><td>p. 10</td></tr>
         </table>
+        <p class="sheet-ref">Properties: $T_f$ for every external and free-convection row, $\bar T_m$ for tubes and exchangers (not printed on the sheet).</p>
 
-        <h2 id="basics">Basics (from the class sheet)</h2>
-        <div class="eq"><div class="label">Convection, radiation, resistances</div>
-          $$q = hA(T_s - T_\infty),\qquad q = \varepsilon\sigma A(T_s^4 - T_{sur}^4) = h_rA(T_s - T_{sur}),\qquad h_r = \varepsilon\sigma(T_s + T_{sur})(T_s^2 + T_{sur}^2)$$
-          $$R_{conv} = \frac{1}{hA},\quad R_{plane} = \frac{L}{kA},\quad R_{cyl} = \frac{\ln(r_o/r_i)}{2\pi kL},\quad q = \frac{T_H - T_C}{\sum R},\quad \sigma = 5.67\times10^{-8}\ \text{W/m}^2\text{K}^4$$</div>
-        <div class="eq"><div class="label">Lumped capacitance ($Bi = hL_c/k \lt 0.1$, $L_c = V/A_s$)</div>
-          $$\frac{T - T_\infty}{T_i - T_\infty} = \exp\left(-\frac{hA_s}{\rho Vc}t\right),\qquad \tau = \frac{\rho Vc}{hA_s},\qquad \rho Vc\frac{dT}{dt} = q_s''A_{s,h} + \dot E_g - hA_s(T - T_\infty) - \varepsilon\sigma A_s(T^4 - T_{sur}^4)$$</div>
+        <h2 id="general">General, Conduction and Transient (pp. 1–4)</h2>
+        <div class="eq"><div class="label">Energy conservation and definitions <span class="chip on">p. 1</span></div>
+          $$\frac{dE}{dt} = \dot E_{in} - \dot E_{out} + \dot E_{gen},\qquad q''= \frac{q}{A},\qquad \dot q = \frac{q_{gen}}{V},\qquad \alpha = \frac{k}{\rho c_p}$$</div>
+        <div class="eq"><div class="label">Fourier's law and 1-D walls (no generation) <span class="chip on">pp. 1–2</span></div>
+          $$q = -kA\frac{dT}{dx},\qquad q_{plane} = \frac{kA(T_H - T_C)}{L}$$
+          $$q_{cyl} = \frac{2\pi kL(T_{s,1} - T_{s,2})}{\ln(r_2/r_1)},\qquad q_{sph} = \frac{4\pi k(T_{s,1} - T_{s,2})}{1/r_1 - 1/r_2}$$
+          $$\text{Plane wall: } T(x) = C_1x + C_2\ \ (\text{no gen}),\qquad T(x) = -\frac{\dot q}{2k}x^2 + C_1x + C_2\ \ (\text{with gen})$$</div>
+        <div class="eq"><div class="label">Thermal resistances <span class="chip on">p. 2</span></div>
+          $$R_{plane} = \frac{L}{kA},\quad R_{cyl} = \frac{\ln(r_o/r_i)}{2\pi kL},\quad R_{sph} = \frac{1}{4\pi k}\left(\frac{1}{r_1} - \frac{1}{r_2}\right)$$
+          $$R_{conv} = \frac{1}{hA},\quad R_{conv,o} = \frac{1}{\eta_ohA_t},\quad R_{rad} = \frac{1}{h_rA},\quad R_{tc} = \frac{R''_{tc}}{A}$$
+          $$\text{Series: } R_{eq} = \sum R\qquad \text{Parallel: } \frac{1}{R_{eq}} = \sum\frac{1}{R_i}\qquad q = \frac{T_H - T_C}{\sum R}$$
+          <p class="note">Exam 2 use: the wall term in $1/UA$, and any problem where a pipe or duct also loses heat through insulation or to an outside flow.</p></div>
+        <div class="eq"><div class="label">Fins <span class="chip on">pp. 2–3</span></div>
+          $$\epsilon_f = \frac{q_f}{hA_{c,b}\theta_b},\qquad \eta_f = \frac{q_f}{hA_f\theta_b},\qquad \eta_o = \frac{q_t}{hA_t\theta_b} = 1 - \frac{NA_f}{NA_f + A_b}(1 - \eta_f)$$
+          <p class="note">Exam 2 use: finned heat exchanger surfaces enter $1/UA$ as $1/(\eta_ohA)$. Check: $\eta_f \le \eta_o \le 1$.</p></div>
+        <div class="eq"><div class="label">Lumped capacitance ($Bi = hL_c/k \lt 0.1$, $L_c = V/A_s$) <span class="chip on">p. 3</span></div>
+          $$\frac{T - T_\infty}{T_i - T_\infty} = \exp\left[-\left(\frac{hA_s}{\rho Vc_p}\right)t\right],\qquad \tau_t = \frac{\rho Vc_p}{hA_s}$$
+          $$t = -\frac{\rho Vc_p}{hA_s}\ln\frac{T - T_\infty}{T_i - T_\infty},\qquad Q = (\rho Vc_p)(T_i - T_\infty)\left[1 - \exp(-t/\tau_t)\right]$$
+          $$q_s''A_{s,h} + \dot E_g - hA_{s,c}(T - T_\infty) - \epsilon\sigma A_{s,r}(T^4 - T_{sur}^4) = \rho Vc_p\frac{dT}{dt}$$
+          <p class="note">Exam 2 use: get $h$ from a correlation (flat plate, cylinder, free convection), then plug it in here. Use the <strong>solid's</strong> $\rho$, $c_p$, $k$.</p></div>
+        <div class="eq"><div class="label">Plane wall, one-term solution ($Fo \gt 0.2$; half-thickness $L$, or full thickness if insulated at $x = 0$) <span class="chip on">p. 4</span></div>
+          $$\theta^* = C_1\exp(-\zeta_1^2Fo)\cos(\zeta_1x^*),\quad \theta_o^* = C_1\exp(-\zeta_1^2Fo),\quad Fo = \frac{\alpha t}{L^2}$$
+          $$\frac{Q}{Q_o} = 1 - \frac{\sin\zeta_1}{\zeta_1}\theta_o^*,\quad Q_o = \rho Vc_p(T_i - T_\infty)$$</div>
+        <div class="eq"><div class="label">Semi-infinite solid <span class="chip on">p. 4</span></div>
+          $$\text{Constant } T_s: \frac{T - T_s}{T_i - T_s} = \operatorname{erf}\left(\frac{x}{2\sqrt{\alpha t}}\right),\quad q_s''(t) = \frac{k(T_s - T_i)}{\sqrt{\pi\alpha t}}$$
+          $$\text{Constant } q_o'': T - T_i = \frac{2q_o''(\alpha t/\pi)^{1/2}}{k}\exp\left(\frac{-x^2}{4\alpha t}\right) - \frac{q_o''x}{k}\operatorname{erfc}\left(\frac{x}{2\sqrt{\alpha t}}\right)$$
+          $$\text{Surface convection: } \frac{T - T_i}{T_\infty - T_i} = \operatorname{erfc}\left(\frac{x}{2\sqrt{\alpha t}}\right) - \exp\left(\frac{hx}{k} + \frac{h^2\alpha t}{k^2}\right)\operatorname{erfc}\left(\frac{x}{2\sqrt{\alpha t}} + \frac{h\sqrt{\alpha t}}{k}\right)$$</div>
 
-        <h2 id="ch7">Ch 7: External Flow</h2>
-        <div class="eq"><div class="label">Flat plate (properties at $T_f$, $Re_{x,c} = 5\times10^5$)</div>
-          $$\text{Lam: } Nu_x = 0.332Re_x^{1/2}Pr^{1/3},\ \ \overline{Nu}_L = 0.664Re_L^{1/2}Pr^{1/3},\ \ \delta = 5xRe_x^{-1/2},\ \ \delta/\delta_t \approx Pr^{1/3}$$
-          $$\text{Turb: } Nu_x = 0.0296Re_x^{4/5}Pr^{1/3},\ \ \overline{Nu}_L = 0.037Re_L^{4/5}Pr^{1/3}\qquad \text{Mixed: } \overline{Nu}_L = (0.037Re_L^{4/5} - 871)Pr^{1/3}$$
-          $$\text{Uniform } q_s'': Nu_x = 0.453Re_x^{1/2}Pr^{1/3}\ (\text{lam}),\ \ 0.0308Re_x^{4/5}Pr^{1/3}\ (\text{turb})$$</div>
-        <div class="eq"><div class="label">Unheated starting length</div>
-          $$Nu_x = \frac{Nu_x|_{\xi=0}}{[1 - (\xi/x)^{3/4}]^{1/3}}\ (\text{lam}),\qquad Nu_x = \frac{Nu_x|_{\xi=0}}{[1 - (\xi/x)^{9/10}]^{1/9}}\ (\text{turb})$$
-          $$\overline{Nu}_L = \overline{Nu}_L|_{\xi=0}\frac{L}{L - \xi}[1 - (\xi/L)^{(p+1)/(p+2)}]^{p/(p+1)},\quad p = 2\ (\text{lam}),\ 8\ (\text{turb}),\quad q = \bar h(L - \xi)W\Delta T$$</div>
-        <div class="eq"><div class="label">Cylinder and sphere</div>
-          $$\overline{Nu}_D = 0.3 + \frac{0.62Re_D^{1/2}Pr^{1/3}}{[1 + (0.4/Pr)^{2/3}]^{1/4}}\left[1 + \left(\frac{Re_D}{282{,}000}\right)^{5/8}\right]^{4/5}\qquad \overline{Nu}_D = CRe_D^mPr^{1/3}\ (\text{Hilpert})$$
-          $$\overline{Nu}_D = 2 + (0.4Re_D^{1/2} + 0.06Re_D^{2/3})Pr^{0.4}(\mu/\mu_s)^{1/4}\ (\text{sphere})$$</div>
+        <h2 id="convection">Convection Basics (pp. 4–5)</h2>
+        <div class="eq"><div class="label">Newton's law of cooling <span class="chip on">p. 4</span></div>
+          $$q = \bar hA(T_s - T_\infty),\qquad q'' = h(T_s - T_\infty)$$</div>
+        <div class="eq"><div class="label">Dimensionless numbers <span class="chip on">p. 5</span></div>
+          $$Re = \frac{\rho vL_s}{\mu},\qquad Nu = \frac{hL_s}{k_f},\qquad Pr = \frac{\nu}{\alpha},\qquad St = \frac{Nu}{Re\,Pr}$$
+          <p class="note">$k_f$ is the <strong>fluid's</strong> conductivity. Mixing it up with the solid's $k$ (the one in $Bi$) is the classic mistake.</p></div>
+        <div class="eq"><div class="label">Boundary layer definitions and Chilton–Colburn analogy <span class="chip on">p. 5</span></div>
+          $$C_f = \frac{2\tau_s}{\rho u_\infty^2},\qquad \tau_s = \mu\frac{\partial u}{\partial y}\Big|_{y=0},\qquad h = \frac{-k_f\,\partial T/\partial y|_{y=0}}{T_s - T_\infty},\qquad \frac{C_f}{2} = St\,Pr^{2/3} \equiv j_H$$
+          <p class="note">Use the analogy to get $h$ from a measured drag or friction force (or the reverse).</p></div>
 
-        <h2 id="ch8">Ch 8: Internal Flow</h2>
-        <div class="eq"><div class="label">Flow and entry lengths</div>
-          $$Re_D = \frac{4\dot m}{\pi D\mu}\ (\text{lam} \lt 2300),\quad x_{fd,h} \approx 0.05Re_DD,\quad x_{fd,t} \approx 0.05Re_DPr\,D,\quad \text{turb: } \approx 10D,\quad D_h = \frac{4A_c}{P}$$</div>
-        <div class="eq"><div class="label">Energy balance and surface conditions</div>
-          $$q = \dot mc_p(T_{m,o} - T_{m,i})\qquad \text{uniform } q_s'': T_m(x) = T_{m,i} + \frac{q_s''P}{\dot mc_p}x,\ \ T_s = T_m + \frac{q_s''}{h}$$
-          $$\text{uniform } T_s: \frac{T_s - T_{m,o}}{T_s - T_{m,i}} = e^{-\bar hPL/\dot mc_p},\ \ q = \bar hA_s\Delta T_{lm}\qquad \text{external fluid: } \frac{T_\infty - T_{m,o}}{T_\infty - T_{m,i}} = e^{-\bar UA_s/\dot mc_p}$$</div>
-        <div class="eq"><div class="label">Correlations</div>
-          $$Nu_D = 4.36\ (q''),\ \ 3.66\ (T_s)\qquad \overline{Nu}_D = 3.66 + \frac{0.0668Gz_D}{1 + 0.04Gz_D^{2/3}},\ \ Gz_D = \frac{D}{L}Re_DPr$$
-          $$Nu_D = 0.023Re_D^{4/5}Pr^n\qquad Nu_D = \frac{(f/8)(Re_D - 1000)Pr}{1 + 12.7(f/8)^{1/2}(Pr^{2/3} - 1)},\ \ f = (0.790\ln Re_D - 1.64)^{-2}$$</div>
+        <h2 id="plate">Flat Plate (pp. 5–6)</h2>
+        <div class="eq"><div class="label">Plate definitions <span class="chip on">p. 5</span></div>
+          $$Re_x = \frac{\rho u_\infty x}{\mu},\qquad Nu_x = \frac{h_xx}{k_f},\qquad \overline{Nu}_L = \frac{\bar h_LL}{k_f},\qquad Re_{x,c} = 5\times10^5$$</div>
+        <div class="eq"><div class="label">Laminar, constant $T_s$ ($Pr \ge 0.6$) <span class="chip on">p. 5</span></div>
+          $$\delta = \frac{5x}{\sqrt{Re_x}},\quad C_{f,x} = 0.664Re_x^{-1/2},\quad \bar C_f = 1.328Re_L^{-1/2}$$
+          $$Nu_x = 0.332Re_x^{1/2}Pr^{1/3},\quad \overline{Nu}_L = 0.664Re_L^{1/2}Pr^{1/3}$$
+          <p class="note">$\bar h_L = 2h_L$ (the average is twice the trailing-edge value).</p></div>
+        <div class="eq"><div class="label">Turbulent, constant $T_s$ ($0.6 \le Pr \le 60$) <span class="chip on">pp. 5–6</span></div>
+          $$\delta = 0.37xRe_x^{-1/5},\qquad C_{f,x} = 0.0592Re_x^{-1/5}\ (Re_x \le 10^7),\qquad Nu_x = 0.0296Re_x^{4/5}Pr^{1/3}$$
+          $$\text{Mixed } (Re_{x,c} = 5\times10^5): \overline{Nu}_L = \left(0.037Re_L^{4/5} - 871\right)Pr^{1/3},\qquad \bar C_{f,L} = 0.074Re_L^{-1/5} - \frac{1742}{Re_L}$$
+          $$\text{Fully turbulent: } \overline{Nu}_L = 0.037Re_L^{4/5}Pr^{1/3},\qquad \bar C_{f,L} = 0.074Re_L^{-1/5}\qquad (5\times10^5 \le Re_L \le 10^8)$$
+          <p class="note">"Fully turbulent" (trip wire at the leading edge) drops the $-871$. Fully turbulent $\bar h \propto L^{-1/5}$, so a shorter plate (in the flow direction) has the higher $\bar h$.</p></div>
+        <div class="eq"><div class="label">Constant surface heat flux <span class="chip on">p. 6</span></div>
+          $$q'' = h_x(T_{s,x} - T_\infty),\qquad q = q''A = \bar h(\bar T_s - T_\infty)$$
+          $$Nu_x = 0.453Re_x^{1/2}Pr^{1/3}\ (\text{lam}),\qquad Nu_x = 0.0308Re_x^{4/5}Pr^{1/3}\ (\text{turb})$$
+          $$\overline{Nu}_L = 0.680Re_L^{1/2}Pr^{1/3}\ (\text{lam})$$
+          <p class="note">Turbulent average: use the constant-$T_s$ correlations. The hottest point is at the trailing edge (where $h_x$ is smallest).</p></div>
+        <div class="eq"><div class="label">Unheated starting length $\xi$ ($x$ measured from the leading edge) <span class="chip on">p. 6</span></div>
+          $$Nu_x = \frac{Nu_x|_{\xi=0}}{\left[1 - (\xi/x)^{3/4}\right]^{1/3}}\ (\text{lam}),\qquad Nu_x = \frac{Nu_x|_{\xi=0}}{\left[1 - (\xi/x)^{9/10}\right]^{1/9}}\ (\text{turb})$$
+          $$\overline{Nu}_L = \overline{Nu}_L|_{\xi=0}\frac{L}{L - \xi}\left[1 - (\xi/L)^{(p+1)/(p+2)}\right]^{p/(p+1)},\qquad p = 2\ (\text{lam}),\ 8\ (\text{turb})$$
+          <p class="note">Apply $\bar h$ to the heated area only: $q = \bar h(L - \xi)W(T_s - T_\infty)$.</p></div>
+        <div class="eq"><div class="label">Flow around objects <span class="chip on">p. 7</span></div>
+          $$\overline{Nu}_L = CRe_L^mPr^n\qquad \text{(}C, m, n\text{ and the length scale come from a table on the exam)}$$
+          <p class="note">For a cylinder at fixed velocity, $\bar h \propto D^{m-1}$ and $q' \propto D^m$.</p></div>
 
-        <h2 id="ch9">Ch 9: Free Convection</h2>
-        <div class="eq"><div class="label">Groups ($\beta = 1/T_f$ in K, transition $Ra \approx 10^9$)</div>
-          $$Gr_L = \frac{g\beta\Delta TL^3}{\nu^2},\quad Ra_L = \frac{g\beta\Delta TL^3}{\nu\alpha},\quad \text{mixed if } Gr/Re^2 \approx 1$$
-          $$\overline{Nu}_L = \tfrac{4}{3}(Gr_L/4)^{1/4}g(Pr),\ \ g(Pr) = \frac{0.75Pr^{1/2}}{(0.609 + 1.221Pr^{1/2} + 1.238Pr)^{1/4}},\ \ \delta \approx 6x(Gr_x/4)^{-1/4}$$</div>
-        <div class="eq"><div class="label">Correlations</div>
-          $$\text{Vertical: } \overline{Nu}_L = \left\{0.825 + \frac{0.387Ra_L^{1/6}}{[1 + (0.492/Pr)^{9/16}]^{8/27}}\right\}^2,\qquad \overline{Nu}_L = 0.68 + \frac{0.670Ra_L^{1/4}}{[1 + (0.492/Pr)^{9/16}]^{4/9}}\ (Ra \lesssim 10^9)$$
-          $$\text{Horizontal } (L = A_s/P): 0.54Ra^{1/4}\ (10^4\text{–}10^7),\ \ 0.15Ra^{1/3}\ (10^7\text{–}10^{11})\ \text{[hot up]};\ \ 0.52Ra^{1/5}\ \text{[hot down]}$$
-          $$\text{Cylinder: } \overline{Nu}_D = \left\{0.60 + \frac{0.387Ra_D^{1/6}}{[1 + (0.559/Pr)^{9/16}]^{8/27}}\right\}^2\qquad \text{Sphere: } 2 + \frac{0.589Ra_D^{1/4}}{[1 + (0.469/Pr)^{9/16}]^{4/9}}$$
-          $$\text{Fin spacing: } S_{opt} \approx 2\delta(L)\quad \text{or}\quad S_{opt} = 2.71(Ra_S/S^3L)^{-1/4}$$</div>
+        <h2 id="internal">Internal Flow (pp. 7–8)</h2>
+        <div class="eq"><div class="label">Definitions and energy balance <span class="chip on">p. 7</span></div>
+          $$D_h = \frac{4A_c}{P},\qquad Nu_D = \frac{hD}{k_f},\qquad \dot m = \rho u_mA_c,\qquad q = \dot mc_p(T_{m,o} - T_{m,i}),\qquad q'' = h(T_s - T_m)$$</div>
+        <div class="eq"><div class="label">Constant surface temperature <span class="chip on">p. 7</span></div>
+          $$T_m(x) = T_s - (T_s - T_{m,i})\exp\left(-\frac{Px}{\dot mc_p}\bar h\right),$$
+          $$q = \bar hA_s\Delta T_{lm},\qquad \Delta T_{lm} = \frac{\Delta T_1 - \Delta T_2}{\ln(\Delta T_1/\Delta T_2)},\qquad \Delta T_1 = T_s - T_{m,i},\ \Delta T_2 = T_s - T_{m,o}$$
+          <p class="note">Solving backwards for $\bar h$ from measured temperatures: $\bar h = \dfrac{\dot mc_p}{PL}\ln\dfrac{T_s - T_{m,i}}{T_s - T_{m,o}}$.</p></div>
+        <div class="eq"><div class="label">External fluid at $T_\infty$ instead of a fixed wall (corrected) <span class="chip on">p. 7</span></div>
+          $$\frac{T_\infty - T_m(x)}{T_\infty - T_{m,i}} = \exp\left(-\frac{\bar UA_s}{\dot mc_p}\right),\qquad \frac{1}{\bar UA_s} = R_{tot} = \frac{1}{\bar h_iA_i} + R_{wall} + R_{ins} + \frac{1}{\bar h_oA_o}$$</div>
+        <div class="eq"><div class="label">Uniform surface heat flux <span class="chip off">not on sheet</span></div>
+          $$T_m(x) = T_{m,i} + \frac{q_s''P}{\dot mc_p}x,\qquad T_s(x) = T_m(x) + \frac{q_s''}{h}$$</div>
+        <div class="eq"><div class="label">Laminar ($Re_D \lt 2300$) <span class="chip on">p. 8</span></div>
+          $$Re_D = \frac{\rho u_mD}{\mu} = \frac{u_mD}{\nu} \left(= \frac{4\dot m}{\pi D\mu}\ \text{circular}\right),\qquad \frac{x_{fd}}{D} = 0.05Re_D,\qquad \frac{x_{fd,t}}{D} = 0.05Re_DPr$$
+          $$\text{Fully developed: } Nu_D = 4.36\ (\text{constant } q''),\qquad Nu_D = 3.66\ (\text{constant } T_s)$$
+          $$\text{Both developing: } \overline{Nu}_D = 1.86\left(\frac{Re_DPr}{L/D}\right)^{1/3}\left(\frac{\mu}{\mu_s}\right)^{0.14}$$
+          $$\text{Thermal entry only: } \overline{Nu}_D = 3.66 + \frac{0.0668(D/L)Re_DPr}{1 + 0.04[(D/L)Re_DPr]^{2/3}}$$
+          <p class="note">Fully developed laminar $h = Nu\,k/D$ doesn't depend on flow rate. That's how a measured $\bar h$ gives you $k_f$ (practice exam P4).</p></div>
+        <div class="eq"><div class="label">Turbulent <span class="chip on">p. 8</span></div>
+          $$\frac{x_{fd}}{D} \approx \frac{x_{fd,t}}{D} \approx 10,\qquad Nu_D = 0.023Re_D^{4/5}Pr^n,\quad n = 0.4\ \text{fluid heating},\ 0.3\ \text{fluid cooling}$$
+          <p class="note">Noncircular: use $D_h$ in both $Re$ and $Nu$. Read the problem: the practice exam said "use $n = 0.4$" for everything.</p></div>
+        <div class="eq"><div class="label">Annulus, laminar fully developed, outer wall insulated <span class="chip off">table given on exam</span></div>
+          <table>
+            <tr><th>$D_i/D_o$</th><td>0.05</td><td>0.10</td><td>0.25</td><td>0.50</td><td>≈1.00</td></tr>
+            <tr><th>$Nu_i = h_iD_h/k$</th><td>17.46</td><td>11.56</td><td>7.37</td><td>5.74</td><td>4.86</td></tr>
+          </table>
+          <p class="note">$D_i$ is the <strong>outside</strong> diameter of the inner pipe (inner ID + 2 × wall thickness).</p></div>
 
-        <h2 id="ch11">Ch 11: Heat Exchangers</h2>
-        <div class="eq"><div class="label">$U$, energy balance, LMTD</div>
-          $$\frac{1}{UA} = \frac{1}{(hA)_c} + \frac{R''_{f,c}}{A_c} + R_w + \frac{R''_{f,h}}{A_h} + \frac{1}{(hA)_h},\qquad q = C_h(T_{h,i} - T_{h,o}) = C_c(T_{c,o} - T_{c,i})$$
-          $$q = UAF\Delta T_{lm},\quad \Delta T_{lm} = \frac{\Delta T_2 - \Delta T_1}{\ln(\Delta T_2/\Delta T_1)},\quad \text{CF: } \Delta T_1 = T_{h,i} - T_{c,o},\ \Delta T_2 = T_{h,o} - T_{c,i};\ \ \text{PF: inlets/outlets}$$</div>
-        <div class="eq"><div class="label">ε–NTU</div>
-          $$\varepsilon = \frac{q}{C_{min}(T_{h,i} - T_{c,i})},\quad NTU = \frac{UA}{C_{min}},\quad C_r = \frac{C_{min}}{C_{max}}$$
-          $$\text{PF: } \varepsilon = \frac{1 - e^{-NTU(1 + C_r)}}{1 + C_r}\qquad \text{CF: } \varepsilon = \frac{1 - e^{-NTU(1 - C_r)}}{1 - C_re^{-NTU(1 - C_r)}}\ \ (C_r = 1: \tfrac{NTU}{1 + NTU})\qquad C_r = 0: \varepsilon = 1 - e^{-NTU}$$
-          $$\text{Cross, both unmixed: } \varepsilon = 1 - \exp\left[\frac{NTU^{0.22}}{C_r}(e^{-C_rNTU^{0.78}} - 1)\right]$$
-          $$\text{1 shell pass: } NTU = -(1 + C_r^2)^{-1/2}\ln\frac{E - 1}{E + 1},\ \ E = \frac{2/\varepsilon - (1 + C_r)}{(1 + C_r^2)^{1/2}}\qquad \text{CF: } NTU = \frac{1}{C_r - 1}\ln\frac{\varepsilon - 1}{\varepsilon C_r - 1}$$</div>
+        <h2 id="free">Free and Mixed Convection (p. 9)</h2>
+        <div class="eq"><div class="label">Groups ($\beta = 1/T$ for ideal gases, in kelvin) <span class="chip on">p. 9</span></div>
+          $$Gr_L = \frac{g\beta(T_s - T_\infty)L^3}{\nu^2},\qquad Ra_L = Gr_LPr = \frac{g\beta(T_s - T_\infty)L^3}{\nu\alpha},\qquad Ra_{x,c} \approx 10^9$$</div>
+        <div class="eq"><div class="label">Vertical plate <span class="chip on">p. 9</span></div>
+          $$\text{Similarity (laminar): } Nu_x = \left(\frac{Gr_x}{4}\right)^{1/4}g(Pr),\quad \overline{Nu}_L = \frac43\left(\frac{Gr_L}{4}\right)^{1/4}g(Pr)$$
+          $$g(Pr) = \frac{0.75Pr^{1/2}}{(0.609 + 1.221Pr^{1/2} + 1.238Pr)^{1/4}}$$
+          $$\text{Empirical: } \overline{Nu}_L = CRa_L^n:\quad \text{laminar } C = 0.59,\ n = \tfrac14;\quad \text{turbulent } C = 0.1,\ n = \tfrac13$$
+          <p class="note">Turbulent: $\overline{Nu} \propto L$, so $\bar h$ doesn't depend on height. Other geometries: "provided as necessary".</p></div>
+        <div class="eq"><div class="label">Combined free and forced <span class="chip on">p. 9</span></div>
+          $$\frac{Gr_L}{Re_L^2} \ll 1:\ \text{forced}\qquad \frac{Gr_L}{Re_L^2} \gg 1:\ \text{free}\qquad \frac{Gr_L}{Re_L^2} \approx 1:\ Nu^3 = Nu_F^3 \pm Nu_N^3$$
+          <p class="note">$+$ when buoyancy and the forced flow go the same way (assisting), $-$ when opposed.</p></div>
+
+        <h2 id="hx">Heat Exchangers (pp. 9–10)</h2>
+        <div class="eq"><div class="label">Overall coefficient <span class="chip on">pp. 9–10</span></div>
+          $$\frac{1}{UA} = \frac{1}{U_hA_h} = \frac{1}{U_cA_c} = R_{eq},\qquad \text{clean, no fins: } \frac{1}{UA} = \frac{1}{(hA)_c} + R_{wall} + \frac{1}{(hA)_h}$$
+          $$\text{Fouling and fins: } \frac{1}{UA} = \frac{1}{(\eta_ohA)_c} + \frac{R''_{f,c}}{\eta_oA_c} + R_{wall} + \frac{R''_{f,h}}{\eta_oA_h} + \frac{1}{(\eta_ohA)_h}$$
+          $$\text{Concentric tube: } \frac{1}{UA} = \frac{1}{h_cA_c} + \frac{R''_{f,c}}{A_c} + \frac{\ln(r_o/r_i)}{2\pi kL} + \frac{R''_{f,h}}{A_h} + \frac{1}{h_hA_h}$$
+          <p class="note">Each $A$ is the area that fluid touches: $\pi D_{inner}L$ for the fluid in the inner pipe, $\pi D_{outer}L$ for the annulus side of that same wall. Since every term has $1/L$, solving for $L$ is one division.</p></div>
+        <div class="eq"><div class="label">Annulus geometry <span class="chip on">p. 10</span></div>
+          $$D_h = D_o - D_i,\qquad A_c = \frac{\pi D_o^2}{4} - \frac{\pi D_i^2}{4}$$</div>
+        <div class="eq"><div class="label">Energy balances and LMTD (corrected subscript) <span class="chip on">p. 10</span></div>
+          $$q = \dot m_hc_{p,h}(T_{h,i} - T_{h,o}) = \dot m_cc_{p,c}(T_{c,o} - T_{c,i}),\qquad q = UA\Delta T_{lm},\qquad \Delta T_{lm} = \frac{\Delta T_1 - \Delta T_2}{\ln(\Delta T_1/\Delta T_2)}$$
+          <p class="note">Counterflow: $\Delta T_1 = T_{h,i} - T_{c,o}$, $\Delta T_2 = T_{h,o} - T_{c,i}$. Parallel: $\Delta T_1 = T_{h,i} - T_{c,i}$, $\Delta T_2 = T_{h,o} - T_{c,o}$. Condensing or boiling side: that fluid is at constant temperature.</p></div>
+        <div class="eq"><div class="label">ε–NTU <span class="chip on">p. 10</span></div>
+          $$C = \dot mc_p,\quad q_{max} = C_{min}(T_{h,i} - T_{c,i}),\quad \varepsilon = \frac{q}{q_{max}},$$
+          $$NTU = \frac{UA}{C_{min}},\quad C_r = \frac{C_{min}}{C_{max}},\quad \varepsilon = f(NTU, C_r)$$</div>
+        <div class="eq" id="eps-ref"><div class="label">ε–NTU relations ("see tables": expect them provided) <span class="chip off">not on sheet</span></div>
+          $$\text{Parallel: } \varepsilon = \frac{1 - \exp[-NTU(1 + C_r)]}{1 + C_r}$$
+          $$\text{Counterflow: } \varepsilon = \frac{1 - \exp[-NTU(1 - C_r)]}{1 - C_r\exp[-NTU(1 - C_r)]}\ (C_r \lt 1)$$
+          $$\text{Counterflow, } C_r = 1: \varepsilon = \frac{NTU}{1 + NTU}\qquad \text{Any type, } C_r = 0: \varepsilon = 1 - e^{-NTU}$$
+          $$\text{Counterflow: } NTU = \frac{1}{C_r - 1}\ln\left(\frac{\varepsilon - 1}{\varepsilon C_r - 1}\right),\qquad NTU = \frac{\varepsilon}{1 - \varepsilon}\ (C_r = 1)$$
+          <p class="note">Shell-and-tube and cross-flow relations are on the <a href="ch11.html#equations">Ch 11 page</a>.</p></div>
+
+        <h2 id="rad">Radiation (p. 10)</h2>
+        <div class="eq"><div class="label">Small surface in large surroundings <span class="chip on">p. 10</span></div>
+          $$q = \epsilon\sigma A(T_s^4 - T_{sur}^4) = h_rA(T_s - T_{sur}),$$
+          $$h_r = \epsilon\sigma(T_s^2 + T_{sur}^2)(T_s + T_{sur}),\qquad \sigma = 5.67\times10^{-8}\ \text{W/m}^2\text{K}^4$$
+          <p class="note">Kelvin only. In air near room temperature, $h_r \approx 5$–$7$ W/m²·K, the same size as free convection.</p></div>
 
         <footer>ME 332 · Oregon State University · Personal study notes</footer>
       </div>

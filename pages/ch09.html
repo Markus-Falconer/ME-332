@@ -44,24 +44,32 @@
         </ul>
 
         <h2 id="equations">Key Equations</h2>
-        <div class="eq"><div class="label">Dimensionless groups ($\beta = 1/T_f$ for an ideal gas)</div>
+        <div class="callout"><strong>Exam 2 sheet tags</strong>The <a href="equations.html">Exam 2 sheet</a> only covers the <em>vertical plate</em> (similarity solution and $\overline{Nu} = CRa^n$) and mixed convection. It says "other correlations provided as necessary", so Churchill–Chu, horizontal plates and cylinders would be handed to you. Learn <em>when</em> to use each one (and that horizontal plates use $L = A_s/P$), not the constants.</div>
+        <div class="eq"><div class="label">Dimensionless groups ($\beta = 1/T_f$ for an ideal gas) <span class="chip on">sheet p. 9</span></div>
           $$Gr_L = \frac{g\beta(T_s - T_\infty)L^3}{\nu^2},\qquad Ra_L = Gr_L Pr = \frac{g\beta(T_s - T_\infty)L^3}{\nu\alpha}$$</div>
-        <div class="eq"><div class="label">Similarity solution, laminar vertical plate</div>
-          $$Nu_x = \left(\frac{Gr_x}{4}\right)^{1/4}g(Pr),\quad \overline{Nu}_L = \frac{4}{3}\left(\frac{Gr_L}{4}\right)^{1/4}g(Pr),\quad g(Pr) = \frac{0.75Pr^{1/2}}{(0.609 + 1.221Pr^{1/2} + 1.238Pr)^{1/4}}$$
+        <div class="eq"><div class="label">Similarity solution, laminar vertical plate <span class="chip on">sheet p. 9</span></div>
+          <p class="note">The sheet prints $1.328Pr$ in $g(Pr)$; the textbook has $1.238Pr$. It changes $\overline{Nu}$ by under 2%.</p>
+          $$Nu_x = \left(\frac{Gr_x}{4}\right)^{1/4}g(Pr),\quad \overline{Nu}_L = \frac{4}{3}\left(\frac{Gr_L}{4}\right)^{1/4}g(Pr)$$
+          $$g(Pr) = \frac{0.75Pr^{1/2}}{(0.609 + 1.221Pr^{1/2} + 1.238Pr)^{1/4}}$$
           $$\delta \approx 6x\left(\frac{Gr_x}{4}\right)^{-1/4}$$</div>
-        <div class="eq"><div class="label">Vertical plate: Churchill–Chu (all $Ra_L$), and the more accurate laminar form ($Ra_L \lesssim 10^9$)</div>
+        <div class="eq"><div class="label">Vertical plate, simple empirical form (the one on your sheet) <span class="chip on">sheet p. 9</span></div>
+          $$\overline{Nu}_L = C\,Ra_L^n$$
+          $$\text{laminar } (Ra_L \lesssim 10^9): C = 0.59,\ n = \tfrac14\qquad \text{turbulent } (Ra_L \gtrsim 10^9): C = 0.1,\ n = \tfrac13$$
+          <p class="note">On the exam, use this unless a different correlation is given. It agrees with Churchill–Chu to within the usual ±20%.</p></div>
+        <div class="eq"><div class="label">Vertical plate: Churchill–Chu (all $Ra_L$), and the more accurate laminar form ($Ra_L \lesssim 10^9$) <span class="chip off">not on sheet</span></div>
           $$\overline{Nu}_L = \left\{0.825 + \frac{0.387Ra_L^{1/6}}{[1 + (0.492/Pr)^{9/16}]^{8/27}}\right\}^2 \qquad \overline{Nu}_L = 0.68 + \frac{0.670Ra_L^{1/4}}{[1 + (0.492/Pr)^{9/16}]^{4/9}}$$</div>
-        <div class="eq"><div class="label">Horizontal plates ($L = A_s/P$)</div>
+        <div class="eq"><div class="label">Horizontal plates ($L = A_s/P$) <span class="chip off">not on sheet</span></div>
           <p>Upper surface of a hot plate, or lower surface of a cold plate:</p>
           $$\overline{Nu}_L = 0.54Ra_L^{1/4}\ (10^4 \lesssim Ra_L \lesssim 10^7),\qquad \overline{Nu}_L = 0.15Ra_L^{1/3}\ (10^7 \lesssim Ra_L \lesssim 10^{11})$$
           <p>Lower surface of a hot plate, or upper surface of a cold plate:</p>
           $$\overline{Nu}_L = 0.52Ra_L^{1/5}\ (10^4 \lesssim Ra_L \lesssim 10^9)$$</div>
-        <div class="eq"><div class="label">Long horizontal cylinder (Churchill–Chu, $Ra_D \lesssim 10^{12}$) and sphere ($Ra_D \lesssim 10^{11}$, $Pr \gtrsim 0.7$)</div>
+        <div class="eq"><div class="label">Long horizontal cylinder (Churchill–Chu, $Ra_D \lesssim 10^{12}$) and sphere ($Ra_D \lesssim 10^{11}$, $Pr \gtrsim 0.7$) <span class="chip off">not on sheet</span></div>
           $$\overline{Nu}_D = \left\{0.60 + \frac{0.387Ra_D^{1/6}}{[1 + (0.559/Pr)^{9/16}]^{8/27}}\right\}^2 \qquad \overline{Nu}_D = 2 + \frac{0.589Ra_D^{1/4}}{[1 + (0.469/Pr)^{9/16}]^{4/9}}$$</div>
-        <div class="eq"><div class="label">Vertical parallel plates, symmetric isothermal (Table 9.3)</div>
+        <div class="eq"><div class="label">Vertical parallel plates, symmetric isothermal (Table 9.3) <span class="chip off">not on sheet</span></div>
           $$S_{opt} = 2.71\left(\frac{Ra_S}{S^3L}\right)^{-1/4}\qquad \text{quick estimate: } S_{opt} \approx 2\delta(L)$$</div>
-        <div class="eq"><div class="label">Mixed convection check</div>
-          $$\frac{Gr_L}{Re_L^2} \ll 1:\ \text{forced}\qquad \frac{Gr_L}{Re_L^2} \gg 1:\ \text{free}\qquad \frac{Gr_L}{Re_L^2} \approx 1:\ \text{mixed}$$</div>
+        <div class="eq"><div class="label">Mixed convection check <span class="chip on">sheet p. 9</span></div>
+          $$\frac{Gr_L}{Re_L^2} \ll 1:\ \text{forced}\qquad \frac{Gr_L}{Re_L^2} \gg 1:\ \text{free}\qquad \frac{Gr_L}{Re_L^2} \approx 1:\ \text{mixed}$$
+          $$\text{Mixed: } Nu^n = Nu_F^n \pm Nu_N^n,\quad n = 3\quad (+\text{ assisting},\ -\text{ opposing})$$</div>
 
         <h2 id="short">Short Questions</h2>
         <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>

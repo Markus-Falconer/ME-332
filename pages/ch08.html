@@ -44,24 +44,30 @@
         </ul>
 
         <h2 id="equations">Key Equations</h2>
-        <div class="eq"><div class="label">Flow</div>
+        <div class="callout"><strong>Exam 2 sheet tags</strong>Green tags are printed on the <a href="equations.html">Exam 2 sheet</a>. The sheet's only turbulent tube correlation is Dittus–Boelter, so use that on the exam (Gnielinski is a HW tool). It also has the Sieder–Tate form for simultaneously developing laminar flow, added below.</div>
+        <div class="eq"><div class="label">Flow <span class="chip on">sheet p. 7</span></div>
           $$Re_D = \frac{\rho u_m D}{\mu} = \frac{4\dot m}{\pi D\mu},\qquad \dot m = \rho u_m A_c,\qquad D_h = \frac{4A_c}{P}$$</div>
-        <div class="eq"><div class="label">Overall energy balance (any surface condition)</div>
+        <div class="eq"><div class="label">Overall energy balance (any surface condition) <span class="chip on">sheet p. 7</span></div>
           $$q = \dot m c_p (T_{m,o} - T_{m,i}),\qquad \frac{dT_m}{dx} = \frac{q_s''(x)P}{\dot m c_p}$$</div>
-        <div class="eq"><div class="label">Uniform surface heat flux</div>
+        <div class="eq"><div class="label">Uniform surface heat flux <span class="chip off">not on sheet</span> <span class="chip off">derive from the energy balance</span></div>
           $$T_m(x) = T_{m,i} + \frac{q_s''P}{\dot m c_p}x,\qquad q = q_s''PL,\qquad T_s(x) = T_m(x) + \frac{q_s''}{h}$$</div>
-        <div class="eq"><div class="label">Uniform surface temperature</div>
+        <div class="eq"><div class="label">Uniform surface temperature <span class="chip on">sheet p. 7</span></div>
           $$\frac{T_s - T_{m,o}}{T_s - T_{m,i}} = \exp\left(-\frac{PL\bar h}{\dot m c_p}\right),\qquad q = \bar h A_s \Delta T_{lm},\qquad \Delta T_{lm} = \frac{\Delta T_o - \Delta T_i}{\ln(\Delta T_o/\Delta T_i)}$$</div>
-        <div class="eq"><div class="label">External fluid at $T_\infty$</div>
+        <div class="eq"><div class="label">External fluid at $T_\infty$ <span class="chip on">sheet p. 7 (misprinted)</span></div>
+          <p class="note">The sheet repeats the constant-$T_s$ formula here. Replace $T_s \to T_\infty$ and $\bar hPx \to \bar UA_s$.</p>
           $$\frac{T_\infty - T_{m,o}}{T_\infty - T_{m,i}} = \exp\left(-\frac{\bar U A_s}{\dot m c_p}\right) = \exp\left(-\frac{1}{\dot m c_p R_{tot}}\right),\qquad q = \frac{\Delta T_{lm}}{R_{tot}}$$</div>
-        <div class="eq"><div class="label">Laminar, fully developed (circular tube)</div>
+        <div class="eq"><div class="label">Laminar, fully developed (circular tube) <span class="chip on">sheet p. 8</span></div>
           $$Nu_D = 4.36\ (\text{uniform } q_s'') \qquad Nu_D = 3.66\ (\text{uniform } T_s) \qquad f = 64/Re_D$$</div>
-        <div class="eq"><div class="label">Laminar thermal entry, uniform $T_s$ (Hausen; also combined entry if $Pr \gtrsim 5$)</div>
+        <div class="eq"><div class="label">Laminar thermal entry, uniform $T_s$ (Hausen; also combined entry if $Pr \gtrsim 5$) <span class="chip on">sheet p. 8</span></div>
           $$\overline{Nu}_D = 3.66 + \frac{0.0668\,Gz_D}{1 + 0.04\,Gz_D^{2/3}},\qquad Gz_D = \frac{D}{L}Re_D Pr$$</div>
-        <div class="eq"><div class="label">Turbulent, fully developed (properties at $\bar T_m$)</div>
+        <div class="eq"><div class="label">Laminar, simultaneously developing, uniform $T_s$ (Sieder–Tate) <span class="chip on">sheet p. 8</span></div>
+          $$\overline{Nu}_D = 1.86\left(\frac{Re_D Pr}{L/D}\right)^{1/3}\left(\frac{\mu}{\mu_s}\right)^{0.14}$$
+          <p class="note">Use when neither the velocity nor the temperature profile is developed ($x_{fd}$ and $x_{fd,t}$ both comparable to $L$). $\mu_s$ is evaluated at the wall temperature.</p></div>
+        <div class="eq"><div class="label">Turbulent, fully developed (properties at $\bar T_m$) <span class="chip on">Dittus–Boelter on sheet p. 8</span> <span class="chip off">Gnielinski not on sheet</span></div>
           $$Nu_D = 0.023Re_D^{4/5}Pr^n\quad (n = 0.4 \text{ heating},\ 0.3 \text{ cooling};\ Re_D \gtrsim 10^4)$$
           $$Nu_D = \frac{(f/8)(Re_D - 1000)Pr}{1 + 12.7(f/8)^{1/2}(Pr^{2/3}-1)},\quad f = (0.790\ln Re_D - 1.64)^{-2}\quad (3000 \lesssim Re_D \lesssim 5\times10^6)$$</div>
-        <div class="eq"><div class="label">Annulus, laminar fully developed, one surface insulated (Table 8.2)</div>
+        <div class="eq"><div class="label">Annulus, laminar fully developed, one surface insulated (Table 8.2) <span class="chip off">table given on exam</span></div>
+          <p class="note">$D_h = D_o - D_i$ and $A_c = \pi(D_o^2 - D_i^2)/4$ are on sheet p. 10. $D_i$ is the inner pipe's <strong>outside</strong> diameter.</p>
           <table>
             <tr><th>$D_i/D_o$</th><td>0.05</td><td>0.10</td><td>0.25</td><td>0.50</td><td>≈1.00</td></tr>
             <tr><th>$Nu_i$</th><td>17.46</td><td>11.56</td><td>7.37</td><td>5.74</td><td>4.86</td></tr>

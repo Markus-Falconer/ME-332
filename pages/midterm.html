@@ -29,6 +29,11 @@
         <p class="jump">Jump to: <a href="#map">HW problem map</a><a href="#method">Solving checklist</a><a href="#mistakes">Common mistakes</a><a href="#partA">Practice exam: short</a><a href="#partB">Practice exam: long</a></p>
 
         <div class="callout">
+          <strong>New: the professor's practice exam and Exam 2 sheet</strong>
+          Work the <a href="practice-exam2.html">professor's Practice Exam 2</a> first: it's the best signal of what the real exam looks like (concentric-tube exchanger, ε–NTU, flat plate orientation, backing out $k_f$ from tube data). The <a href="equations.html">equation sheet page</a> now matches the Exam 2 sheet, including its typos and what it leaves out.
+        </div>
+
+        <div class="callout">
           <strong>How to use this page</strong>
           Your professor said the HW problems from Chapters 7, 8, 9 and 11 are what matters. The problem map below sorts every assigned problem by the <em>method</em> it tests and links to practice problems that use the same method with new numbers. Work the practice midterm under time pressure first, then check the solutions.
         </div>
@@ -68,9 +73,9 @@
         <ol>
           <li><strong>Sketch</strong> it and write Known / Find. Label every temperature.</li>
           <li><strong>Classify:</strong> external or internal? Forced or free? Which geometry? Plates, cylinders and spheres are Ch 7; tubes and ducts are Ch 8; buoyancy is Ch 9; two fluids are Ch 11.</li>
-          <li><strong>Property temperature:</strong> $T_f$ for external flow and free convection, $\bar T_m$ for internal flow, $T_\infty$ for Zukauskas and Whitaker. Guess if it's unknown.</li>
+          <li><strong>Property temperature</strong> (not on the sheet, so memorize it): $T_f$ for external flow and free convection, $\bar T_m$ for internal flow, $T_\infty$ for Zukauskas and Whitaker. Guess if it's unknown. If the problem gives you properties, just use them.</li>
           <li><strong>Compute the regime number:</strong> $Re$ (compare with $5\times10^5$ for a plate, 2300 for a tube) or $Ra$ (compare with $10^9$ for a vertical plate).</li>
-          <li><strong>Pick the correlation</strong> and check its validity limits. Get $\overline{Nu}$, then $\bar h = \overline{Nu}\,k/L_c$. Use the right characteristic length ($L$, $D$, $D_h$, $A_s/P$).</li>
+          <li><strong>Pick the correlation</strong> from the <a href="equations.html#pick">sheet's list</a> and check its validity limits. Get $\overline{Nu}$, then $\bar h = \overline{Nu}\,k/L_c$. Use the right characteristic length ($L$, $D$, $D_h$, $A_s/P$).</li>
           <li><strong>Energy balance:</strong> $q = \bar hA\Delta T$, plus radiation if a surface is exposed. Use $q = \dot mc_p\Delta T_m$ with the exponential or LMTD for tubes. Use LMTD or ε–NTU for exchangers.</li>
           <li><strong>Check:</strong> go back and test the assumed temperature, the regime, and whether the answer makes physical sense ($T_{c,o} \lt T_{h,i}$, $\varepsilon \le 1$, $h$ in the expected range).</li>
         </ol>
@@ -98,6 +103,10 @@
           <li>Horizontal plates: $L = A_s/P$, not the side length.</li>
           <li>Leaving radiation out when a surface sees large surroundings (it's often as big as free convection).</li>
           <li>Getting $Re_D = 4\dot m/(\pi D\mu)$ wrong for an annulus. There you use $\dot mD_h/(A_c\mu)$.</li>
+          <li>Annulus $D_i$ is the inner pipe's <em>outside</em> diameter: inner ID + 2 × wall thickness.</li>
+          <li>Counterflow with $C_h = C_c$: the general ε formula is 0/0. Use $\varepsilon = NTU/(1 + NTU)$.</li>
+          <li>"Trip wire" or "fully turbulent" plate: drop the $-871$.</li>
+          <li>Using the sheet's misprints: laminar $C_f \propto Re^{-1/2}$ (not $+1/2$), and the external-fluid $T_m(x)$ needs $T_\infty$ and $\bar UA_s$. See the <a href="equations.html#typos">full list</a>.</li>
         </ul>
 
         <h2 id="partA">Practice Midterm, Part A: Short Questions</h2>
@@ -333,6 +342,7 @@
             <p>Check property temperatures: $\bar T_c = (15 + 44)/2 \approx 30^\circ$C ✓ and $\bar T_h = (80 + 61)/2 \approx 70^\circ$C ✓</p>
             <div class="answer">$h_c \approx 1800$, $h_h \approx 1430$, $U \approx 800$ W/m²·K; counterflow: $q = 12.2$ kW, cold out at 44.2°C, hot out at 60.6°C; parallel: $q = 11.4$ kW, cold out at 42.2°C, hot out at 61.9°C</div>
             <p><em>Comment:</em> at $NTU \approx 0.7$ the two arrangements are close (7% apart). The counterflow advantage grows with NTU.</p>
+            <p><em>Exam note:</em> Gnielinski isn't on the Exam 2 sheet. With the sheet's Dittus–Boelter ($n = 0.4$ for the heated cold stream, $0.3$ for the cooled hot stream) you'd get $h_c \approx 1840$, $h_h \approx 1330$, $U \approx 770$ W/m²·K and $UA \approx 290$ W/K, about 3% lower. That's well within correlation accuracy, so on the exam use Dittus–Boelter and note that $Re \lt 10^4$ is at the edge of its range.</p>
           </div></details>
         </div>
 

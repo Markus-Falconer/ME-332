@@ -5,8 +5,10 @@
 const PAGES = [
   { id: "midterm",   title: "Midterm Prep",            file: "midterm.html", tag: "Exam",
     blurb: "HW problem map, solving checklist, and a full practice midterm across Ch 7, 8, 9 and 11." },
-  { id: "equations", title: "Equation Sheet",          file: "equations.html", tag: "Reference",
-    blurb: "Every correlation for Ch 7–11, plus a 'which correlation do I use?' table." },
+  { id: "practice2", title: "Practice Exam 2",         file: "practice-exam2.html", tag: "Exam",
+    blurb: "The professor's practice exam with hints and full symbolic + numeric solutions for every part." },
+  { id: "equations", title: "Equation Sheet (Exam 2)", file: "equations.html", tag: "Reference",
+    blurb: "Mirrors the Exam 2 sheet: every equation, its typos corrected, and what's not on it." },
   { id: "ch07",      title: "Ch 7: External Flow",     file: "ch07.html", tag: "Chapter",
     blurb: "Flat plates, unheated starting length, cylinders and spheres in cross flow." },
   { id: "ch08",      title: "Ch 8: Internal Flow",     file: "ch08.html", tag: "Chapter",

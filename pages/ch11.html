@@ -44,27 +44,34 @@
         </ul>
 
         <h2 id="equations">Key Equations</h2>
-        <div class="eq"><div class="label">Overall heat transfer coefficient</div>
+        <div class="callout"><strong>Exam 2 sheet tags</strong>The <a href="equations.html">Exam 2 sheet</a> has the $1/UA$ forms, the energy balance, the LMTD formula and the ε–NTU definitions. The ε(NTU) relations are "see tables", so expect them provided. Two things it leaves out that you should know cold: which end differences go in the LMTD for counterflow vs. parallel flow, and $\varepsilon = NTU/(1 + NTU)$ for counterflow with $C_r = 1$.</div>
+        <div class="eq"><div class="label">Overall heat transfer coefficient <span class="chip on">sheet p. 9–10</span></div>
           $$\frac{1}{UA} = \frac{1}{(hA)_c} + \frac{R''_{f,c}}{A_c} + R_w + \frac{R''_{f,h}}{A_h} + \frac{1}{(hA)_h},\qquad R_w = \frac{\ln(D_o/D_i)}{2\pi kL}$$
-          $$\text{thin wall, clean: } U = \left(\frac{1}{h_i} + \frac{1}{h_o}\right)^{-1}\qquad \text{fouling from test: } R_f'' = \frac{1}{U_{dirty}} - \frac{1}{U_{clean}}$$</div>
-        <div class="eq"><div class="label">Energy balances</div>
-          $$q = C_h(T_{h,i} - T_{h,o}) = C_c(T_{c,o} - T_{c,i}),\qquad C = \dot mc_p$$</div>
-        <div class="eq"><div class="label">LMTD method</div>
+          $$\text{thin wall, clean: } U = \left(\frac{1}{h_i} + \frac{1}{h_o}\right)^{-1}\qquad \text{fouling from test: } R_f'' = \frac{1}{U_{dirty}} - \frac{1}{U_{clean}}$$
+          $$\text{Concentric tube (sheet form): } \frac{1}{UA} = \frac{1}{h_cA_c} + \frac{R''_{f,c}}{A_c} + \frac{\ln(r_o/r_i)}{2\pi kL} + \frac{R''_{f,h}}{A_h} + \frac{1}{h_hA_h}$$
+          $$\text{Annulus: } D_h = D_o - D_i,\qquad A_c = \tfrac{\pi}{4}(D_o^2 - D_i^2)$$
+          $$\text{With fins: } \frac{1}{UA} = \frac{1}{(\eta_ohA)_c} + \frac{R''_{f,c}}{\eta_oA_c} + R_{wall} + \frac{R''_{f,h}}{\eta_oA_h} + \frac{1}{(\eta_ohA)_h}$$</div>
+        <div class="eq"><div class="label">Energy balances <span class="chip on">sheet p. 10</span></div>
+          $$q = C_h(T_{h,i} - T_{h,o}) = C_c(T_{c,o} - T_{c,i}),\qquad C = \dot mc_p$$
+          <p class="note">The sheet's energy balance has a typo: the cold side is $\dot m_cc_{p,c}(T_{c,o} - T_{c,i})$, not $\dot m_hc_{p,c}$.</p></div>
+        <div class="eq"><div class="label">LMTD method <span class="chip on">formula on sheet p. 10</span> <span class="chip off">end differences not on sheet</span></div>
           $$q = UA\,\Delta T_{lm},\qquad \Delta T_{lm} = \frac{\Delta T_2 - \Delta T_1}{\ln(\Delta T_2/\Delta T_1)}$$
           <p>Parallel flow: $\Delta T_1 = T_{h,i} - T_{c,i}$, $\Delta T_2 = T_{h,o} - T_{c,o}$.</p>
           <p>Counterflow: $\Delta T_1 = T_{h,i} - T_{c,o}$, $\Delta T_2 = T_{h,o} - T_{c,i}$.</p>
           <p>Multipass or cross flow: $\Delta T_{lm} = F\,\Delta T_{lm,CF}$.</p></div>
-        <div class="eq"><div class="label">ε–NTU definitions</div>
+        <div class="eq"><div class="label">ε–NTU definitions <span class="chip on">sheet p. 10</span></div>
           $$\varepsilon = \frac{q}{q_{max}},\quad q_{max} = C_{min}(T_{h,i} - T_{c,i}),\quad NTU = \frac{UA}{C_{min}},\quad C_r = \frac{C_{min}}{C_{max}}$$</div>
-        <div class="eq"><div class="label">Effectiveness relations (Table 11.3)</div>
+        <div class="eq"><div class="label">Effectiveness relations (Table 11.3) <span class="chip off">"see tables": expect them given</span></div>
           $$\text{Parallel: } \varepsilon = \frac{1 - \exp[-NTU(1 + C_r)]}{1 + C_r}$$
           $$\text{Counterflow: } \varepsilon = \frac{1 - \exp[-NTU(1 - C_r)]}{1 - C_r\exp[-NTU(1 - C_r)]}\ (C_r \lt 1),\qquad \varepsilon = \frac{NTU}{1 + NTU}\ (C_r = 1)$$
           $$\text{Shell-and-tube, 1 shell pass: } \varepsilon_1 = 2\left\{1 + C_r + (1 + C_r^2)^{1/2}\frac{1 + \exp[-NTU(1 + C_r^2)^{1/2}]}{1 - \exp[-NTU(1 + C_r^2)^{1/2}]}\right\}^{-1}$$
           $$\text{Cross flow, both unmixed: } \varepsilon = 1 - \exp\left[\frac{NTU^{0.22}}{C_r}\left\{\exp(-C_rNTU^{0.78}) - 1\right\}\right]$$
           $$\text{Any exchanger, } C_r = 0: \varepsilon = 1 - \exp(-NTU)$$</div>
-        <div class="eq"><div class="label">NTU relations (Table 11.4)</div>
-          $$\text{Parallel: } NTU = -\frac{\ln[1 - \varepsilon(1 + C_r)]}{1 + C_r}\qquad \text{Counterflow: } NTU = \frac{1}{C_r - 1}\ln\left(\frac{\varepsilon - 1}{\varepsilon C_r - 1}\right)$$
-          $$\text{1 shell pass: } NTU = -(1 + C_r^2)^{-1/2}\ln\left(\frac{E - 1}{E + 1}\right),\quad E = \frac{2/\varepsilon - (1 + C_r)}{(1 + C_r^2)^{1/2}}\qquad C_r = 0: NTU = -\ln(1 - \varepsilon)$$</div>
+        <div class="eq"><div class="label">NTU relations (Table 11.4) <span class="chip off">"see tables": expect them given</span></div>
+          $$\text{Parallel: } NTU = -\frac{\ln[1 - \varepsilon(1 + C_r)]}{1 + C_r}$$
+          $$\text{Counterflow: } NTU = \frac{1}{C_r - 1}\ln\left(\frac{\varepsilon - 1}{\varepsilon C_r - 1}\right)$$
+          $$\text{1 shell pass: } NTU = -(1 + C_r^2)^{-1/2}\ln\left(\frac{E - 1}{E + 1}\right),\quad E = \frac{2/\varepsilon - (1 + C_r)}{(1 + C_r^2)^{1/2}}$$
+          $$C_r = 0: NTU = -\ln(1 - \varepsilon)$$</div>
 
         <h2 id="short">Short Questions</h2>
         <div class="toolbar"><button class="icon-btn toggle-all" data-scope="#short-list">Show all answers</button></div>

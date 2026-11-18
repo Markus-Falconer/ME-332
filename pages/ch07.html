@@ -48,22 +48,31 @@
         </ul>
 
         <h2 id="equations">Key Equations</h2>
-        <div class="eq"><div class="label">Dimensionless groups</div>
+        <div class="callout"><strong>Exam 2 sheet tags</strong>Green tags mark equations printed on the <a href="equations.html">Exam 2 sheet</a> (with page). Dashed tags are not on it: the sheet says cylinder and sphere constants come from "tables" and other correlations are "provided as necessary", so Churchill–Bernstein and Whitaker are HW tools, not things to memorize.</div>
+        <div class="eq"><div class="label">Dimensionless groups <span class="chip on">sheet p. 5</span></div>
           $$Re_L = \frac{u_\infty L}{\nu},\qquad Pr = \frac{\nu}{\alpha},\qquad \overline{Nu}_L = \frac{\bar h L}{k}$$</div>
-        <div class="eq"><div class="label">Flat plate, laminar ($Pr \gtrsim 0.6$), properties at $T_f$</div>
-          $$Nu_x = 0.332\,Re_x^{1/2}Pr^{1/3} \qquad \overline{Nu}_L = 0.664\,Re_L^{1/2}Pr^{1/3} \qquad \delta = 5x\,Re_x^{-1/2}$$</div>
-        <div class="eq"><div class="label">Flat plate, turbulent ($0.6 \lesssim Pr \lesssim 60$)</div>
-          $$Nu_x = 0.0296\,Re_x^{4/5}Pr^{1/3} \qquad \overline{Nu}_L = 0.037\,Re_L^{4/5}Pr^{1/3}\ \ \text{(turbulent from leading edge)}$$</div>
-        <div class="eq"><div class="label">Flat plate, mixed boundary layer ($Re_{x,c}=5\times10^5$)</div>
-          $$\overline{Nu}_L = \left(0.037\,Re_L^{4/5} - 871\right)Pr^{1/3}$$</div>
-        <div class="eq"><div class="label">Unheated starting length $\xi$ (local, then average over heated part; $p=2$ laminar, $p=8$ turbulent)</div>
+        <div class="eq"><div class="label">Chilton–Colburn (Reynolds) analogy <span class="chip on">sheet p. 5</span></div>
+          $$\frac{C_f}{2} = St\,Pr^{2/3} \equiv j_H,\qquad St = \frac{Nu}{Re\,Pr},\qquad C_f = \frac{2\tau_s}{\rho u_\infty^2}$$
+          <p class="note">Turns a measured drag force into $\bar h$, or the reverse.</p></div>
+        <div class="eq"><div class="label">Flat plate, laminar ($Pr \gtrsim 0.6$), properties at $T_f$ <span class="chip on">sheet p. 5</span></div>
+          $$Nu_x = 0.332\,Re_x^{1/2}Pr^{1/3} \qquad \overline{Nu}_L = 0.664\,Re_L^{1/2}Pr^{1/3} \qquad \delta = 5x\,Re_x^{-1/2}$$
+          $$C_{f,x} = 0.664\,Re_x^{-1/2}\qquad \bar C_{f} = 1.328\,Re_L^{-1/2}\quad \text{(the sheet drops the minus signs)}$$</div>
+        <div class="eq"><div class="label">Flat plate, turbulent ($0.6 \lesssim Pr \lesssim 60$) <span class="chip on">sheet p. 5–6</span></div>
+          $$Nu_x = 0.0296\,Re_x^{4/5}Pr^{1/3} \qquad \overline{Nu}_L = 0.037\,Re_L^{4/5}Pr^{1/3}\ \ \text{(turbulent from leading edge)}$$
+          $$\delta = 0.37\,x\,Re_x^{-1/5}\qquad C_{f,x} = 0.0592\,Re_x^{-1/5}\qquad \bar C_{f,L} = 0.074\,Re_L^{-1/5}$$</div>
+        <div class="eq"><div class="label">Flat plate, mixed boundary layer ($Re_{x,c}=5\times10^5$) <span class="chip on">sheet p. 6</span></div>
+          $$\overline{Nu}_L = \left(0.037\,Re_L^{4/5} - 871\right)Pr^{1/3}\qquad \bar C_{f,L} = 0.074\,Re_L^{-1/5} - \frac{1742}{Re_L}$$</div>
+        <div class="eq"><div class="label">Unheated starting length $\xi$ (local, then average over heated part; $p=2$ laminar, $p=8$ turbulent) <span class="chip on">sheet p. 6</span></div>
+          <p class="note">The sheet prints the turbulent local form with the laminar exponents; the version below is the textbook one.</p>
           $$Nu_x = \frac{Nu_x|_{\xi=0}}{\left[1-(\xi/x)^{3/4}\right]^{1/3}}\ \text{(lam)}\qquad Nu_x = \frac{Nu_x|_{\xi=0}}{\left[1-(\xi/x)^{9/10}\right]^{1/9}}\ \text{(turb)}$$
           $$\overline{Nu}_L = \overline{Nu}_L|_{\xi=0}\,\frac{L}{L-\xi}\left[1-(\xi/L)^{(p+1)/(p+2)}\right]^{p/(p+1)}$$</div>
-        <div class="eq"><div class="label">Uniform surface heat flux</div>
-          $$Nu_x = 0.453\,Re_x^{1/2}Pr^{1/3}\ \text{(lam)}\qquad Nu_x = 0.0308\,Re_x^{4/5}Pr^{1/3}\ \text{(turb)}$$</div>
-        <div class="eq"><div class="label">Cylinder: Churchill–Bernstein ($Re_D Pr \gtrsim 0.2$, properties at $T_f$)</div>
+        <div class="eq"><div class="label">Uniform surface heat flux <span class="chip on">sheet p. 6</span></div>
+          $$Nu_x = 0.453\,Re_x^{1/2}Pr^{1/3}\ \text{(lam)}\qquad Nu_x = 0.0308\,Re_x^{4/5}Pr^{1/3}\ \text{(turb)}$$
+          $$\overline{Nu}_L = 0.680\,Re_L^{1/2}Pr^{1/3}\ \text{(lam)}$$
+          <p class="note">Turbulent average: use the constant-$T_s$ correlations.</p></div>
+        <div class="eq"><div class="label">Cylinder: Churchill–Bernstein ($Re_D Pr \gtrsim 0.2$, properties at $T_f$) <span class="chip off">not on sheet</span></div>
           $$\overline{Nu}_D = 0.3 + \frac{0.62\,Re_D^{1/2}Pr^{1/3}}{\left[1+(0.4/Pr)^{2/3}\right]^{1/4}}\left[1+\left(\frac{Re_D}{282{,}000}\right)^{5/8}\right]^{4/5}$$</div>
-        <div class="eq"><div class="label">Cylinder: Hilpert ($T_f$, Table 7.2) and Zukauskas ($T_\infty$, Table 7.4)</div>
+        <div class="eq"><div class="label">Cylinder: Hilpert ($T_f$, Table 7.2) and Zukauskas ($T_\infty$, Table 7.4) <span class="chip on">form on sheet p. 7, table given</span></div>
           $$\overline{Nu}_D = C\,Re_D^m Pr^{1/3} \qquad\qquad \overline{Nu}_D = C\,Re_D^m Pr^n (Pr/Pr_s)^{1/4}$$
           <table>
             <tr><th>Hilpert $Re_D$</th><th>C</th><th>m</th></tr>
@@ -73,9 +82,9 @@
             <tr><td>4000–40,000</td><td>0.193</td><td>0.618</td></tr>
             <tr><td>40,000–400,000</td><td>0.027</td><td>0.805</td></tr>
           </table></div>
-        <div class="eq"><div class="label">Sphere: Whitaker (properties at $T_\infty$; $3.5 \lesssim Re_D \lesssim 7.6\times10^4$)</div>
+        <div class="eq"><div class="label">Sphere: Whitaker (properties at $T_\infty$; $3.5 \lesssim Re_D \lesssim 7.6\times10^4$) <span class="chip off">not on sheet</span></div>
           $$\overline{Nu}_D = 2 + \left(0.4\,Re_D^{1/2} + 0.06\,Re_D^{2/3}\right)Pr^{0.4}\left(\frac{\mu}{\mu_s}\right)^{1/4}$$</div>
-        <div class="eq"><div class="label">Lumped plate or object, initial cooling rate</div>
+        <div class="eq"><div class="label">Lumped plate or object, initial cooling rate <span class="chip on">sheet p. 3</span></div>
           $$\frac{dT}{dt} = -\frac{q_{conv} + q_{rad}}{\rho V c},\qquad q_{rad} = \varepsilon\sigma A\left(T_s^4 - T_{sur}^4\right)$$</div>
 
         <h2 id="short">Short Questions</h2>
